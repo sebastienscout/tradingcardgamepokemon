@@ -1,0 +1,25 @@
+//
+   Created by Alexis on 08/06/2016
+extends layout
+block title
+    title JCC pokémon
+block content
+
+    title JCC Pokémon
+    h1 JCC Pokémon
+
+    h2 Connexion
+
+    div
+        form(action='/signup',method='post')
+            div(data-role='fieldcontain')
+                fieldset(data-role='controlgroup')
+                    label(for='pseudo') Pseudo
+                        input(id='pseudo',type='text',value='',placeholder='Tape ton pseudo',name='pseudo')
+            div#passworddiv(data-role='fieldcontain')
+                fieldset(data-role='controlgroup')
+                    label(for='password') Mot de passe
+                        input(id='password',type='password',value='',placeholder='Tape ton mot de passe',name='password')
+            div(data-role='fieldcontain')
+                button(type='submit',value='Valider',data-transition='fade', data-theme='c') Valider
+            a(href='/inscription') Pas encore de compte ? Inscrivez-vous maintenant
