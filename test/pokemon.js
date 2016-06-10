@@ -103,7 +103,7 @@ describe('Board', function () {
     expect(board.attacker().hand().length).to.equal(7);
     expect(board.defender().hand().length).to.equal(7);
 
-/*    console.log('===== ATTACKER =====');
+  console.log('===== ATTACKER =====');
     board.attacker().hand().forEach(function (card) {
       if (card.card_type() === core.CardType.POKEMON) {
         console.log(card.name() + ' ' + card.stage());
@@ -120,7 +120,7 @@ describe('Board', function () {
         console.log('ENERGY ' + card.type());
       }
     });
-    console.log(' => ' + board.defender().isValidInitialHand()); */
+    console.log(' => ' + board.defender().isValidInitialHand());
 
   });
 

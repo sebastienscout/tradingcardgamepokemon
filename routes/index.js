@@ -4,13 +4,12 @@ var core = require('../core');
 var fs = require('fs');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  var pikachu_card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/XY/42.json', 'utf8'));
-  var pikachu = new core.Pokemon(pikachu_card);
-
-  console.log(pikachu.to_object());
-
-  res.render('index', { card: pikachu.to_object() });
+router.get('/:id/:id2', function(req, res, next) {
+  console.log(card1);
+  var fileCard = '../data/XY/XY/42.json';
+  var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
+  var cardPokemon = new core.Pokemon(cardJson);
+  res.render('jeu', { card: cardPokemon.to_object() });
 });
 
 module.exports = router;

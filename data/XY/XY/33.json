@@ -25,7 +25,13 @@
       "value": 2
     }
   },
-  "resistance": null,
+  "resistance": {
+    "type" : "",
+    "value": {
+      "operator" :"",
+      "value" : ""
+    }
+  },
   "retreat_cost": 1,
   "expansion": {
     "name": "XY",

@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('OpenPokemon:server');
 var http = require('http');
-
 /**
  * Get port from environment and store in Express.
  */
@@ -20,7 +19,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+var io = require('socket.io').listen(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -29,6 +28,30 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+var nbClient = 0;
+var tab = ["42","33"];
+var tabClient = ["",""];
+io.sockets.on('connection', function (socket, pseudo) {
+  nbClient++;
+  console.log("Nb Client: " );
+  console.log(nbClient);
+
+    if (nbClient < 2) {
+      socket.emit('message', 'Vous êtes bien connecté !');
+
+      socket.on('petit_nouveau', function (pseudo) {
+        socket.pseudo = pseudo;
+      });
+    }
+
+  socket.on('message', function (message) {
+
+    console.log(socket.pseudo + ' me parle ! Il me dit : ' + message);
+  });
+  socket.on('disconnect', function(){
+    nbClient--;
+  });
+});
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -87,4 +110,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log("test");
 }

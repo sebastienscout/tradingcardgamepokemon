@@ -6,7 +6,7 @@ block content
   h1= card.name
 
   div#cardContent
-    img(src="images/cards/pokemon/XY/XY/42.png")
+    img(src="images/cards/pokemon/XY/"+card.expansion.name+"/"+card.card_number+".png")
 
   div#cardDetail
     h1 #{card.name}
@@ -49,9 +49,15 @@ block content
         h3 Coût de Retraite
         - for (var x = 0; x < card.retreat_cost; x++)
           div.icoColorless
+
       div#cardInfo
+        input(type="button",value="Embeter le serveur", id="poke")
         div#xy
         |  #{card.expansion.name}
         div#cardNumber
         | #{card.card_number}/#{card.expansion.number} #{card.rarity}
         img#xyLogo(src="/images/icons/xy1-expansion-symbol.png")
+
+      script(src="http://localhost:3000/socket.io/socket.io.js")
+      script(src="//code.jquery.com/jquery-1.11.0.min.js")
+      script(src="js/client.js")
