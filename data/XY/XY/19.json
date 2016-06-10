@@ -5,8 +5,8 @@
   "life_point": 110,
   "abilities": [],
   "attacks": [ ],
-  "weakness": null,
-  "resistance": null,
+  "weakness": {     "type": "",     "value": {       "operator": "",       "value": 0     }   },
+  "resistance": {     "type": "",     "value": {}   },
   "retreat_cost": 2,
   "expansion": {
     "name": "XY",
