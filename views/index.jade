@@ -18,6 +18,23 @@ block content
           div.icoLightning
         if card.type == 'COLORLESS'
           div.icoColorless
+        if card.type == 'WATER'
+            div.icoWater
+        if card.type == 'PLANT'
+          div.icoPlant
+        if card.type == 'FIRE'
+          div.icoFire
+        if card.type == 'DARKNESS'
+           div.icoDarkness
+        if card.type == 'FAIRY'
+          div.icoFairy
+        if card.type == 'PSYCHIC'
+          div.icoPsychic
+        if card.type == 'METAL'
+          div.icoMetal
+        if card.type == 'FIGHTING'
+          div.icoMain
+
     each attack in card.attacks
       div.attack
         h2
@@ -36,6 +53,21 @@ block content
             div.icoMain
           if card.weakness.energy == 'METAL'
             div.icoMetal
+          if card.weakness.energy == 'WATER'
+            div.icoWater
+          if card.weakness.energy == 'PLANT'
+            div.icoPlant
+          if card.weakness.energy == 'FIRE'
+            div.icoFire
+          if card.weakness.energy == 'DARKNESS'
+            div.icoDarkness
+          if card.weakness.energy == 'FAIRY'
+            div.icoFairy
+          if card.weakness.energy == 'PSYCHIC'
+            div.icoPsychic
+          if card.weakness.energy == 'LIGHTNING'
+            div.icoLightning
+
           span #{card.weakness.value.operator}#{card.weakness.value.value}
       div.property
         h3 Résistance
@@ -44,6 +76,21 @@ block content
             div.icoMain
           if card.resistance.energy == 'METAL'
             div.icoMetal
+          if card.resistance.energy == 'WATER'
+            div.icoWater
+          if card.resistance.energy == 'PLANT'
+            div.icoPlant
+          if card.resistance.energy == 'FIRE'
+            div.icoFire
+          if card.resistance.energy == 'DARKNESS'
+            div.icoDarkness
+          if card.resistance.energy == 'FAIRY'
+            div.icoFairy
+          if card.resistance.energy == 'PSYCHIC'
+            div.icoPsychic
+          if card.resistance.energy == 'LIGHTNING'
+            div.icoLightning
+
           span #{card.resistance.value.operator}#{card.resistance.value.value}
       div.property
         h3 Coût de Retraite
