@@ -4,21 +4,52 @@
 extends layout
 block title
     title Jeu
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/maingame.css')
 block content
     div#board
         div#board-opponent
             div.cards
-                div.cards-active
-                div.cards-bench
                 div.cards-hand
-            div.reverse-cards
-                div.rewards
+                    - var n = 0
+                    ul
+                        while n < 7
+                            li
+                                img(src="images/board/back.png")
+                            - n++
+                div.cards-bench
+                    - var n = 0
+                    ul
+                        while n < 3
+                            li
+                                img(src="images/board/back.png")
+                            - n++
+                div.cards-active
+                    img(src="images/cards/pokemon/XY/XY/24.png", class="interaction hvr-grow")
+            div.numbered-cards
                 div.deck
+                div.rewards
         div#board-player
             div.cards
                 div.cards-active
+                    img(src="images/cards/pokemon/XY/XY/33.png", class="interaction hvr-grow")
                 div.cards-bench
+                    - var n = 0
+                    ul
+                        while n < 2
+                            li.hvr-grow
+                                img(src="images/cards/pokemon/XY/XY/"+(n+1)+".png", class="interaction")
+                            - n++
                 div.cards-hand
-            div.reverse-cards
+                    - var n = 0
+                    ul
+                        while n < 7
+                            li
+                                img(src="images/cards/pokemon/XY/XY/" + (n + 5) + ".png", class="interaction")
+                            - n++
+            div.numbered-cards
                 div.rewards
                 div.deck
+        div#zoomed-card
+            img(src="images/cards/pokemon/XY/XY/42.png", class="interaction")
+    script(src="js/jeu.js")
