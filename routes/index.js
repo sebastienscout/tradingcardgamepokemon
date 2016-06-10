@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
   var cardPokemon = new core.Pokemon(cardJson);
   console.log(cardPokemon.to_object());
-  res.render('jeu', { card: cardPokemon.to_object() });
+  res.render('index', { card: cardPokemon.to_object() });
 });
 
 module.exports = router;
