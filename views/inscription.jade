@@ -4,23 +4,32 @@
 extends layout
 block title
     title JCC pokémon
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/inscriptionConnexion.css')
 block content
-
     title JCC Pokémon
-    h1 JCC Pokémon
+    img(src="/images/pokemon_logo.png")
 
-    h2 Inscription
-
-    div
-        form(action='/signup',method='post')
+    div(id="formConnect")
+        h2 Inscription
+        form(action='#',method='get', id='inscription')
             div(data-role='fieldcontain')
                 fieldset(data-role='controlgroup')
-                    label(for='pseudo') Pseudo
-                        input(id='pseudo',type='text',value='',placeholder='Tape ton pseudo',name='pseudo')
+                        input(id='pseudo',type='text',value='',placeholder='Pseudo',name='pseudo')
+                        span(class="erreur",id="errPseudo", style="display:none; color:#F00;") Tape ton pseudo !
+            div(data-role='fieldcontain')
+                fieldset(data-role='controlgroup')
+                        input(id='email',type='email',value='',placeholder='Adresse email',name='email')
+                        span(class="erreur",id="errMail", style="display:none; color:#F00;") Tape ton email !
             div#passworddiv(data-role='fieldcontain')
                 fieldset(data-role='controlgroup')
-                    label(for='password') Mot de passe
-                        input(id='password',type='password',value='',placeholder='Tape ton mot de passe',name='password')
+                        input(id='password',type='password',value='',placeholder='Mot de passe',name='password')
+                        span(class="erreur",id="errMdp", style="display:none; color:#F00;") Tape ton mot de passe
             div(data-role='fieldcontain')
-                button(type='submit',value='Valider',data-transition='fade', data-theme='c') Valider
-            a(href='/inscription') Pas encore de compte ? Inscrivez-vous maintenant
+                button(type='submit',value='Valider',data-transition='fade', data-theme='c' id="inscription_button") Inscription
+        hr
+        p Déjà un compte ?
+        button(id="connexion_move") Connectez-vous
+
+    script(src="/js/connexionInscription.js")
+
