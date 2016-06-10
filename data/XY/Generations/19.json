@@ -1,5 +1,5 @@
 {
-  "name": "Stari",
+  "name": "Kokiyas",
   "type": "WATER",
   "stage": "BASE",
   "life_point": 60,
@@ -7,14 +7,16 @@
   "attacks": [
     {
       "energies": [
-        "WATER", "COLORLESS"
+        "WATER",
+        "COLORLESS"
       ],
-      "title": "Attaque Imprudente",
-      "text": "Ce Pokémon s'inflige 10 dégâts",
-      "action": "board.attacker().applyDamage(10);",
+      "title": "Pluie Eclaboussante",
+      "text": "",
+      "action": "",
       "value": {
         "operator": "-",
-        "value": 30
+        "value": 20,
+        "supplement": ""
       }
     }
   ],
@@ -26,16 +28,17 @@
     }
   },
   "resistance": {
-    "type" : "",
+    "type": "",
     "value": {
-      "operator" :"",
-      "value" : ""
+      "operator": "",
+      "value": ""
     }
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Generations",
+    "card_number": 83
   },
-  "card_number": 33
+  "card_number": 19,
+  "rarity": "Commune"
 }

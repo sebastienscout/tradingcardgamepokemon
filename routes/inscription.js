@@ -7,9 +7,9 @@ var router = express.Router();
 var core = require('../core');
 var fs = require('fs');
 
-/* GET connexion page. */
+/* GET inscription page. */
 router.get('/', function(req, res, next) {
-    res.render('connexion');
+    res.render('inscription');
 });
 
 module.exports = router;

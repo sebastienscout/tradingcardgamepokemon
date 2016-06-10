@@ -3,23 +3,32 @@
 extends layout
 block title
     title JCC pokémon
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/inscriptionConnexion.css')
 block content
 
     title JCC Pokémon
-    h1 JCC Pokémon
+    img(src="/images/pokemon_logo.png")
 
-    h2 Connexion
-
-    div
-        form(action='/signup',method='post')
+    div(id="formConnect")
+        h2 Connexion
+        form(action='#',method='get' id="connexion")
             div(data-role='fieldcontain')
                 fieldset(data-role='controlgroup')
-                    label(for='pseudo') Pseudo
-                        input(id='pseudo',type='text',value='',placeholder='Tape ton pseudo',name='pseudo')
+                    input(id='pseudo',type='text',value='',placeholder='Pseudo',name='pseudo')
+                    span(class="erreur", id="errPseudo", style="display:none; color:#F00;") Tape ton pseudo !
             div#passworddiv(data-role='fieldcontain')
                 fieldset(data-role='controlgroup')
-                    label(for='password') Mot de passe
-                        input(id='password',type='password',value='',placeholder='Tape ton mot de passe',name='password')
-            div(data-role='fieldcontain')
-                button(type='submit',value='Valider',data-transition='fade', data-theme='c') Valider
-            a(href='/inscription') Pas encore de compte ? Inscrivez-vous maintenant
+                    input(id='password',type='password',value='',placeholder='Mot de passe',name='password')
+                    span(class="erreur",id="errMdp", style="display:none; color:#F00;") Tape ton mot de passe !
+                div(data-role='fieldcontain')
+            button(type='submit',value='submit',data-transition='fade', data-theme='c' id="connexion_button") Se connecter
+        hr
+        p Pas de compte ?
+
+        button(value='inscription', id="inscription_move") Inscription
+        //fenêtre DIALOG
+        div(style="display: none;" id="dialog_si_erreur" title="Erreur !")
+            p Le formulaire est incomplet !
+
+    script(src="/js/connexionInscription.js")

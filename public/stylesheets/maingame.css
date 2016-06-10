@@ -1,0 +1,129 @@
+html, body {
+    height:100%;
+}
+/* Grow */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+/***********/
+/* Plateau */
+/***********/
+#board {
+    height:100%;
+    background: url('../images/board/background.jpg') no-repeat 50% 50%;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+}
+#board img.interaction {
+    cursor: pointer;
+}
+#board img.interaction:hover {
+    /*opacity: 0.5;*/
+}
+.cards-hand ul,
+.cards-bench ul {
+    padding:0;
+    margin:0 auto;
+    text-align:center;
+}
+.cards-bench ul {
+    margin-top:5px;
+    margin-bottom:5px;
+    background: rgba(0,0,0,.25);
+    border: 2px solid rgba(0,0,0,.2);
+    border-radius: 2px;
+    width: 275px;
+    height: 78px;
+}
+.cards-hand ul li,
+.cards-bench ul li{
+    display:inline-block;
+    position: relative;
+    margin: 0 2px;
+    margin-top: 4px;
+}
+.cards-active {
+    text-align: center;
+    display: block;
+}
+.cards-active img{
+    height: 180px;
+}
+
+/******************/
+/*  Carte zoomée  */
+/* - #zoomed-card */
+/******************/
+#zoomed-card {
+    position:absolute;
+    top:100px;
+    left:40px;
+    padding:10px;
+    background: rgba(0,0,0,.5);
+    border-radius: 5px;
+}
+#zoomed-card img {
+    height:450px;
+}
+
+/***********************/
+/* Plateau coté joueur */
+/*  - #board-player    */
+/***********************/
+#board-player {
+    margin-top: -50px;
+}
+#board-player .cards-hand li {
+    top:0;
+    -webkit-transition: top .5s;
+    transition: top .5s;
+    z-index:3;
+}
+#board-player .cards-hand li:hover {
+    top:-120px;
+}
+#board-player .cards-hand li img{
+    height:170px;
+}
+#board-player .cards-bench ul {
+    width: 475px;
+    height: 133px;
+}
+#board-player .cards-bench li img {
+    height: 125px;
+}
+
+/***************************/
+/* Plateau coté adversaire */
+/*  - #board-opponent      */
+/***************************/
+#board-opponent {
+    position:relative;
+    top: -50px;
+}
+#board-opponent .cards-hand li img,
+#board-opponent .cards-bench li img{
+    height:70px;
+}
+#board-opponent .cards-hand,
+#board-opponent .cards-bench {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}

@@ -6,6 +6,8 @@ var path = require('path');
 var core = require('./../core');
 
 describe('Pokemon card loading', function () {
+
+  //test unitaire pikachu
   it('Pikachu', function () {
     var card_pikachu = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/XY/42.json', 'utf8'));
 
@@ -17,6 +19,19 @@ describe('Pokemon card loading', function () {
     expect(card_pikachu.card_number()).to.equal(42);
   });
 
+  //test ponyta
+  it('Ponyta', function () {
+    var card_ponyta = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/Generations/14.json', 'utf8'));
+
+    expect(card_ponyta.name()).to.equal("Ponyta");
+    expect(card_ponyta.attacks().length).to.equal(2);
+    expect(card_ponyta.retreat_cost()).to.equal(1);
+    expect(card_ponyta.expansion().name()).to.equal("Generations");
+    expect(card_ponyta.expansion().number()).to.equal(83);
+    expect(card_ponyta.card_number()).to.equal(14);
+  });
+
+  //test combat stari et Pikachu
   it('Stari & Pikachu', function () {
     var card_stari = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/XY/33.json', 'utf8'));
     var card_pikachu = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/XY/42.json', 'utf8'));
@@ -29,6 +44,22 @@ describe('Pokemon card loading', function () {
     board.turn();
 
     expect(stari.life_point()).to.equal(50);
+  });
+
+  //test combat kokiyas et Ponyta
+  it('Kokiyas & Ponyta', function () {
+    var card_kokiyas = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/Generations/19.json', 'utf8'));
+    var card_ponyta = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/Generations/14.json', 'utf8'));
+    //creations cartes
+    var kokiyas = new core.Pokemon(card_kokiyas);
+    var ponyta = new core.Pokemon(card_ponyta);
+    var board = new core.Board([kokiyas, ponyta]);
+
+    expect(kokiyas.life_point()).to.equal(60);
+
+    board.turn();
+
+    expect(kokiyas.life_point()).to.equal(60);
   });
 
   it('All XY cards', function () {
@@ -103,7 +134,7 @@ describe('Board', function () {
     expect(board.attacker().hand().length).to.equal(7);
     expect(board.defender().hand().length).to.equal(7);
 
-/*    console.log('===== ATTACKER =====');
+  console.log('===== ATTACKER =====');
     board.attacker().hand().forEach(function (card) {
       if (card.card_type() === core.CardType.POKEMON) {
         console.log(card.name() + ' ' + card.stage());
@@ -120,7 +151,7 @@ describe('Board', function () {
         console.log('ENERGY ' + card.type());
       }
     });
-    console.log(' => ' + board.defender().isValidInitialHand()); */
+    console.log(' => ' + board.defender().isValidInitialHand());
 
   });
 
