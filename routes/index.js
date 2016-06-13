@@ -5,7 +5,7 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var fileCard = '../data/XY/XY/42.json';
+  var fileCard = './data/XY/XY/42.json';
   var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
   var cardPokemon = new core.Pokemon(cardJson);
   console.log(cardPokemon.to_object());

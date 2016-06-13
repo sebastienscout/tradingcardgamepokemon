@@ -28,7 +28,13 @@ block content
                     img(src="images/cards/pokemon/XY/XY/24.png", class="interaction hvr-grow")
             div.numbered-cards
                 div.deck
+                    p Deck
+                    img(src="images/board/back.png")
+                    div.number-cards 60
                 div.rewards
+                    p Cartes récompenses
+                    img(src="images/board/back.png")
+                    div.number-cards 6
         div#board-player
             div.cards
                 div.cards-active
@@ -49,7 +55,20 @@ block content
                             - n++
             div.numbered-cards
                 div.rewards
+                    p Cartes récompenses
+                    img(src="images/board/back.png")
+                    div.number-cards 6
                 div.deck
+                    p Deck
+                    img(src="images/board/back.png")
+                    div.number-cards 60
         div#zoomed-card
             img(src="images/cards/pokemon/XY/XY/42.png", class="interaction")
+            ul#menu-card
+                li 
+                    a(href="#") Attaque Imprudente
+                li 
+                    a(href="#") Retrait
+                li 
+                    a(href="#") Annuler
     script(src="js/jeu.js")
