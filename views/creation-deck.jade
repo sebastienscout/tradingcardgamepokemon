@@ -5,6 +5,8 @@ block content
 
     script(src='/js/creation-deck.js')
 
+    form(method="post")
+
     div#menu
         ul
             li.menu1.selected Pokémons
@@ -15,21 +17,30 @@ block content
         div#pokemons
             -for (var i = 0; i < card.length; i++) {
                  div.cardContent
-                    img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
 
+                    img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
+                    input(type="number", id= i+1, step="1" readonly)
             - }
 
         div#energies
             -for (var i = 74; i < 83; i++) {
                 div.cardContent
                     img(src="images/cards/energy/" + i + ".png")
-
+                    input(type="number", id= i, step="1" readonly)
             - }
 
         div#trainer
             -for (var i = 59; i < 73; i++) {
-            div.cardContent
-                img(src="images/cards/trainer/" + i + ".png")
+             div.cardContent
+                img(src="images/cards/trainer/" + i + ".png" readonly)
+                input(type="number", id= i, step="1")
             - }
 
-     div#donnees
+    div#donnees
+
+    div#bouton
+        button(id="envoiDeck") Valider le deck
+    div#top
+        a(href="#menu")
+            img(src="images/icons/bw2-expansion-symbol.png")
+            | Haut de page

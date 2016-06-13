@@ -1,4 +1,4 @@
-var OpenPokemon = OpenPokemon || {};
+ var OpenPokemon = OpenPokemon || {};
 
 var merge = require('merge');
 var core = merge(require('./card_type'), require('./energy'), require('./stage'));

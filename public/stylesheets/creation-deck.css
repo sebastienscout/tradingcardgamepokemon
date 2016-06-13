@@ -11,33 +11,92 @@ a {
 .cardContent {
     display: inline-block;
     vertical-align: top;
-    margin: 5%;
     padding : 15px;
-}
-.cardContent:hover {
-    cursor:pointer;
+    text-align: center;
+    margin:1%;
+    width: 15%;
+
 }
 
-.purple{
-    background-color: rgba(255, 0, 255, 1);
+div{
+    border-radius: 5px;
+}
+#energies > .cardContent {
+    margin:3%;
+}
+
+.cardContent img {
+    width: 100%;
+    display:block;
+}
+
+.cardContent:hover {
+    cursor:pointer;
+    width: 20%;
+}
+
+.cardContent > input{
+    width: 100px;
+    background-color:  rgba(255, 0, 255, 0);
+    border:0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
 }
 
 .cardContent:not(.purple):hover {
     background-color:  rgba(255, 0, 255, 0.2);
 
 }
+
+.purple{
+    background-color: rgba(255, 0, 255, 1);
+}
+
+
 .cartes{
     background-color: darkgrey;
     margin-top: 0px;
+    display:inline-block;
+    width:84.6%;
 }
-.cardContent img {
-    width: 245px;
-    height: 342px;
+
+button{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: darkgrey;
+    height: 30px;
+    border:0;
+    margin-bottom: 8px;
+    font-weight: bold;
+    cursor:pointer;
+}
+#bouton{
+    position: fixed;
+    top: 384px;
+    width: 15%;
+    right:1%;
+    display:none;
+}
+#top{
+    position: fixed;
+    bottom: 124px;
+    width: 15%;
+    right:1%;
+
 }
 
 #donnees{
     display:none;
-
+    position: fixed;
+    top: 124px;
+    width: 15%;
+    right:1%;
+    background-color: darkgrey;
+    text-align: center;
+    font-weight: bold;
+    font-size:25px;
 }
 
 #menu > ul > li:not(.selected){
