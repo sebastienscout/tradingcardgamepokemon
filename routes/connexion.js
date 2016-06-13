@@ -9,8 +9,6 @@ var fs = require('fs');
 
 /* GET connexion page. */
 router.get('/', function(req, res, next) {
-
-    console.log("Bienvenue dans l'espace de connexion");
     res.render('connexion');
 });
 

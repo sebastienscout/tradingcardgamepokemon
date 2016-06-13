@@ -1,0 +1,35 @@
+extends layout
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/creation-deck.css')
+block content
+
+    script(src='/js/creation-deck.js')
+
+    div#menu
+        ul
+            li.menu1.selected Pokémons
+            li.menu2 Energies
+            li.menu3 Champions
+
+    div.cartes
+        div#pokemons
+            -for (var i = 0; i < card.length; i++) {
+                 div.cardContent
+                    img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
+
+            - }
+
+        div#energies
+            -for (var i = 74; i < 83; i++) {
+                div.cardContent
+                    img(src="images/cards/energy/" + i + ".png")
+
+            - }
+
+        div#trainer
+            -for (var i = 59; i < 73; i++) {
+            div.cardContent
+                img(src="images/cards/trainer/" + i + ".png")
+            - }
+
+     div#donnees

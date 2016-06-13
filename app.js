@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 
 var indexRoutes = require('./routes/index');
 var connexionRoutes = require('./routes/connexion');
+var inscriptionRoutes = require('./routes/inscription');
 var jeuRoutes = require('./routes/jeu');
+var deckRoutes = require('./routes/creation-deck')
 
 var app = express();
 
@@ -25,7 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRoutes);
 app.use('/connexion', connexionRoutes);
+app.use('/inscription', inscriptionRoutes);
 app.use('/jeu', jeuRoutes);
+app.use('/creation-deck', deckRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
