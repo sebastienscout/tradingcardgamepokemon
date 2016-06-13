@@ -7,49 +7,53 @@
 var app = require('../app');
 var debug = require('debug')('OpenPokemon:server');
 var http = require('http');
+var core = require('../core');
+var fs = require('fs');
+var path = require('path');
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
 
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+var tabPokemon = ["42","33"];
+var tabClient=[];
 var nbClient = 0;
-var tab = ["42","33"];
-var tabClient = ["",""];
-io.sockets.on('connection', function (socket, pseudo) {
-  nbClient++;
-  console.log("Nb Client: " );
-  console.log(nbClient);
+// PROBLEME DE RAFRAICHISSEMENT
 
-    if (nbClient < 2) {
-      socket.emit('message', 'Vous êtes bien connecté !');
+io.sockets.on('connection', function (socket) {
 
-      socket.on('petit_nouveau', function (pseudo) {
-        socket.pseudo = pseudo;
-      });
+    if (tabClient.length <= 2) {
+      nbClient++;
+      tabClient.push(socket);
+      console.log("Nb Client "+nbClient);
+      var fileCard = '../data/XY/XY/42.json';
+      var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
+      var cardPokemon = new core.Pokemon(cardJson);
+      socket.emit('card',cardPokemon.to_object());
     }
-
-  socket.on('message', function (message) {
-
-    console.log(socket.pseudo + ' me parle ! Il me dit : ' + message);
-  });
+  
   socket.on('disconnect', function(){
     nbClient--;
+    var i = tabClient.indexOf(socket);
+    tabClient.splice(i, 1);
+    console.log('Got disconnect!');
+    console.log("Nb Client "+nbClient);
+    socket.emit('carte');
+
   });
 });
 /**
@@ -110,5 +114,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log("test");
 }
