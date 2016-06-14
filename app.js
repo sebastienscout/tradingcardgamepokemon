@@ -9,8 +9,30 @@ var indexRoutes = require('./routes/index');
 var connexionRoutes = require('./routes/connexion');
 var inscriptionRoutes = require('./routes/inscription');
 var jeuRoutes = require('./routes/jeu');
+var menuRoutes = require('./routes/menu');
+
+// DB
+var dbConfig = require('./data/db/db.js');
+var mongoose = require('mongoose');
 
 var app = express();
+
+app.db = mongoose.createConnection(dbConfig.url);
+app.db.on('error', console.error.bind(console, 'mongoose connection error'));
+require('./models')(app, mongoose);
+
+// Configuring Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({
+  secret: 'mySecretKey',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +50,7 @@ app.use('/', indexRoutes);
 app.use('/connexion', connexionRoutes);
 app.use('/inscription', inscriptionRoutes);
 app.use('/jeu', jeuRoutes);
+app.use('/menu', menuRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,5 +83,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//setup passport
+//require('./passport')(app, passport);
 
 module.exports = app;

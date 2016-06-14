@@ -1,6 +1,7 @@
 /**
  * Created by Alexis on 09/06/2016.
  */
+
 $( document ).ready(function() {
 
     //Gestion des cliques boutons pour inscription/connexion
@@ -12,7 +13,10 @@ $( document ).ready(function() {
     $("#inscription_move").click(function(){
         window.location.replace("/inscription");
     });
+    
+});
 
+/*
 
     var pseudo = $("#pseudo").val();
     var email = $("#email").val();
@@ -60,4 +64,4 @@ $( document ).ready(function() {
         });
 
     }
-});
+    */
