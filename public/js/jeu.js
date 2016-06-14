@@ -9,6 +9,10 @@ var benchPlayer = boardPlayer.children('div.cards').children('div.cards-bench').
 var tabBench;
 var main;
 var pokemonActive;
+var idJoueur;
+socket.on('idJoueur',function(id) {
+    idJoueur=id;
+})
 
 socket.on('hand',function(hand) {
     handPlayer.html('');

@@ -37,16 +37,14 @@ var pokemon_cards = [];
 var energy_cards = [];
 var filesGeneration = fs.readdirSync('../data/XY/Generations/');
 var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
-/*filesGeneration.forEach(function (file) {
+filesGeneration.forEach(function (file) {
   if (path.extname(file) === '.json') {
     pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
     //console.log(pokemon_cards[pokemon_cards.length-1]);
   }
-}); */
+});
 filesPoingsFurieux.forEach(function (file) {
   if (path.extname(file) === '.json') {
-
-    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
     pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
     pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
   }
@@ -71,7 +69,6 @@ player2.selectInitialHand();
 var board = new core.Board([player1, player2]);
 
 io.sockets.on('connection', function (socket) {
-
     if (tabClient.length <= 2) {
       nbClient++;
       tabClient.push(socket);
@@ -79,9 +76,8 @@ io.sockets.on('connection', function (socket) {
       var fileCard = '../data/XY/XY/42.json';
       var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
       var cardPokemon = new core.Pokemon(cardJson);
-      socket.emit('card',cardPokemon.to_object());
     }
-
+  socket.emit("idJoueur",nbClient);
   socket.emit("bench",player1.bench());
   socket.emit("hand",player1.hand());
   socket.emit("nbCarteDeck",player1.deckLengh());
