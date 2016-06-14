@@ -1,0 +1,45 @@
+{
+  "name": "Empiflor",
+  "type": "PLANT",
+  "stage": "STAGE_2",
+  "life_point": 130,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "PLANT",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Spirale Epuisante",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 60,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Poings Furieux",
+    "card_number": 111
+  },
+  "card_number": 3,
+  "rarity": "Commune"
+}

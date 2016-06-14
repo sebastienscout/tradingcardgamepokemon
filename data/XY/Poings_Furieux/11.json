@@ -1,0 +1,59 @@
+{
+  "name": "Maganon",
+  "type": "FIRE",
+  "stage": "STAGE_1",
+  "life_point": 120,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FIRE"
+      ],
+      "title": "Nitrocharge",
+      "text": "Cherchez une carte énergie Feu dans votre deck et attachez-la à ce Pokémon. Mélangez ensuite votre Deck.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "FIRE",
+        "COLORLESS",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Exploisions en Duo",
+      "text": "Si Elekable est sur votre Banc, cette attaque inflige 80 dégâts supplémentaires",
+      "action": "",
+      "value": {
+        "operator": "+",
+        "value": 80,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "WATTER",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 3,
+  "expansion": {
+    "name": "Poings Furieux",
+    "card_number": 111
+  },
+  "card_number": 11,
+  "rarity": "Rare"
+}

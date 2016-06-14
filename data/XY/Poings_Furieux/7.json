@@ -1,0 +1,58 @@
+{
+  "name": "Phyllali",
+  "type": "PLANT",
+  "stage": "STAGE_1",
+  "life_point": 90,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "PLANT"
+      ],
+      "title": "Senteur apaisante",
+      "text": "Le Pokémon Actif de votre adversaire est maintenant Endormi.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "PLANT",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Feuille Magik",
+      "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires et vous soignez 30 dégâts à ce Pokémon.",
+      "action": "",
+      "value": {
+        "operator": "+",
+        "value": 50,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Poings Furieux",
+    "card_number": 111
+  },
+  "card_number": 7,
+  "rarity": "Rare"
+}
