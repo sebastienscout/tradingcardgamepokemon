@@ -16,7 +16,9 @@
     },
     {
       "energies": [
-        "PLANT","COLORLESS", "COLORLESS"
+        "PLANT",
+        "COLORLESS",
+        "COLORLESS"
       ],
       "title": "Tornade",
       "text": "",
@@ -32,6 +34,7 @@
     "value": {
       "operator": "x",
       "value": 2
+    }
     },
     "resistance": {
       "type": "FIGHTING",
@@ -47,4 +50,4 @@
     },
     "card_number": 5,
     "rarity": "Holographique rare"
-  }
+}

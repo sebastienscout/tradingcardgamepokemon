@@ -67,6 +67,9 @@ module.exports = ( function (self) {
         list.splice(index, 1);
       });
     };
+    this.deckLengh= function() {
+      return indexes.length;
+    }
 
     this.valid = function () {
       return pokemon_cards.length + energy_cards.length + trainer_cards.length === 60;

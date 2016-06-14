@@ -7,7 +7,8 @@
   "attacks": [
     {
       "energies": [
-        "COLORLESS", "COLORLESS"
+        "COLORLESS",
+        "COLORLESS"
       ],
       "title": "Armure",
       "text": "Pendant le prochain tour de votre adversaire, si ce Pokémon doit subir les dégâts d'une attaque, évitez les dégâts infligés à ce Pokémon si ces dégâts sont de 60 ou moins.",
@@ -20,10 +21,14 @@
     "value": {
       "operator": "x",
       "value": 2
+    }
     },
     "resistance": {
       "type": "",
-      "value": {}
+      "value": {
+        "operator": "",
+        "value": ""
+      }
     },
     "retreat_cost": 2,
     "expansion": {

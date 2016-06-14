@@ -183,6 +183,7 @@ html, body {
 }
 #board-player .cards-active {
     margin-bottom: 15px;
+    visibility: hidden;
 }
 
 /***************************/
