@@ -12,7 +12,30 @@ var jeuRoutes = require('./routes/jeu');
 var deckRoutes = require('./routes/creation-deck');
 var menuRoutes = require('./routes/menu');
 
+
+// DB
+var dbConfig = require('./data/db/db.js');
+var mongoose = require('mongoose');
+
+var deckRoutes = require('./routes/creation-deck');
+
 var app = express();
+
+app.db = mongoose.createConnection(dbConfig.url);
+app.db.on('error', console.error.bind(console, 'mongoose connection error'));
+require('./models')(app, mongoose);
+
+// Configuring Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({
+  secret: 'mySecretKey',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -64,5 +87,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//setup passport
+//require('./passport')(app, passport);
 
 module.exports = app;
