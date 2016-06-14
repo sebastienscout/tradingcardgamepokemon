@@ -24,7 +24,6 @@ var io = require('socket.io').listen(server);
  * Listen on provided port, on all network interfaces.
  */
 
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -36,15 +35,24 @@ var nbClient = 0;
 
 var pokemon_cards = [];
 var energy_cards = [];
-var files = fs.readdirSync('../data/XY/Generations/');
-
-files.forEach(function (file) {
+var filesGeneration = fs.readdirSync('../data/XY/Generations/');
+var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
+/*filesGeneration.forEach(function (file) {
   if (path.extname(file) === '.json') {
-    console.log(file);
     pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
-    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
+    //console.log(pokemon_cards[pokemon_cards.length-1]);
+  }
+}); */
+filesPoingsFurieux.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
   }
 });
+
+
 /*for (var i = 0; i < 6; ++i) {
   energy_cards.push(new core.EnergyCard(core.EnergyType.PLANT));
   energy_cards.push(new core.EnergyCard(core.EnergyType.WATER));
@@ -54,6 +62,10 @@ var deck1 = new core.Deck(pokemon_cards, energy_cards, []);
 var deck2 = new core.Deck(pokemon_cards, energy_cards, []);
 var player1 = new core.Player(deck1);
 player1.selectInitialHand();
+var i=0;
+for(i ; i < player1.hand().length;i++) {
+  console.log(player1.hand()[i]);
+}
 var player2 = new core.Player(deck2);
 player2.selectInitialHand();
 var board = new core.Board([player1, player2]);
@@ -72,7 +84,6 @@ io.sockets.on('connection', function (socket) {
 
   socket.emit("bench",player1.bench());
   socket.emit("hand",player1.hand());
-  console.log(player1.deckLengh());
   socket.emit("nbCarteDeck",player1.deckLengh());
   if (player1.activePokemon() != null) {
     socket.emit("pokemonActive", player1.activePokemon());

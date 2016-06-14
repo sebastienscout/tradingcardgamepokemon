@@ -35,8 +35,6 @@ module.exports = ( function (self) {
       var ok = false;
       var index = 0;
 
-
-
       while (index < hand.length && !ok) {
         if (hand[index].card_type() === core.CardType.POKEMON && hand[index].stage() === core.Stage.BASE) {
           ok = true;
