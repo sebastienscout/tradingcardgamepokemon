@@ -29,12 +29,12 @@ div{
     width: 100%;
     display:block;
 }
-
+/*
 .cardContent:hover {
     cursor:pointer;
     width: 20%;
 }
-
+*/
 .cardContent > input{
     width: 100px;
     background-color:  rgba(255, 0, 255, 0);
@@ -43,19 +43,21 @@ div{
     font-weight: bold;
     font-size: 25px;
 }
-
+/*
 .cardContent:not(.purple):hover {
     background-color:  rgba(255, 0, 255, 0.2);
 
 }
-
+*/
 .purple{
-    background-color: rgba(255, 0, 255, 1);
+    background-color: #B08930;
+    opacity:0.7;
+    background: rgba(0,0,0,0.2);
 }
 
 
 .cartes{
-    background-color: darkgrey;
+    background-color: rgba(223,179,80,0.9);
     margin-top: 0px;
     display:inline-block;
     width:84.6%;
@@ -102,6 +104,25 @@ button{
 #menu > ul > li:not(.selected){
 
     background-color: rgba(192,192,192,0.6);
+}
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.09);
+    transform: scale(1.09);
 }
 
 #energies{

@@ -16,7 +16,7 @@ block content
     div.cartes
         div#pokemons
             -for (var i = 0; i < card.length; i++) {
-                 div.cardContent
+                 div.cardContent.hvr-grow
 
                     img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
                     input(type="number", id= i+1, step="1" readonly)
@@ -24,14 +24,14 @@ block content
 
         div#energies
             -for (var i = 74; i < 83; i++) {
-                div.cardContent
+                div.cardContent.hvr-grow
                     img(src="images/cards/energy/" + i + ".png")
                     input(type="number", id= i, step="1" readonly)
             - }
 
         div#trainer
             -for (var i = 59; i < 73; i++) {
-             div.cardContent
+             div.cardContent.hvr-grow
                 img(src="images/cards/trainer/" + i + ".png" readonly)
                 input(type="number", id= i, step="1")
             - }
