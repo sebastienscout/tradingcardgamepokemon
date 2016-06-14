@@ -1,0 +1,26 @@
+//
+   Created by Alexis on 14/06/2016.
+
+extends layout
+block title
+    title JCC pokémon
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/inscriptionConnexion.css')
+block content
+    img(src="/images/pokemon_logo.png")
+
+    //Menu
+    div(id="formConnect" class="menu")
+        h2 Menu Pokémon JCC
+        button(id='createDeck') Créer un nouveau Deck
+        button(id='editDeck') Modifier le Deck
+        button(id='playGame') Lancer une partie
+
+    //Liste du Deck actuel
+    div(id="listDeck")
+        //Intérrogation de la BDD pour le Deck
+
+
+
+    script(src="/js/menu.js")
+    script(src="/js/creation-deck.js")

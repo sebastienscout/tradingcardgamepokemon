@@ -1,0 +1,59 @@
+{
+  "name": "Boustiflor",
+  "type": "PLANT",
+  "stage": "STAGE_1",
+  "life_point": 80,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "PLANT",
+        "COLORLESS"
+      ],
+      "title": "Fouet Lianes",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 20,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "PLANT",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Crache-Venin",
+      "text": "Le Pokémon Actif de votre adversaire est maintenant Empoisonné.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 40,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Poings Furieux",
+    "card_number": 111
+  },
+  "card_number": 2,
+  "rarity": "Commune"
+}

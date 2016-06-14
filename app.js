@@ -9,7 +9,8 @@ var indexRoutes = require('./routes/index');
 var connexionRoutes = require('./routes/connexion');
 var inscriptionRoutes = require('./routes/inscription');
 var jeuRoutes = require('./routes/jeu');
-var deckRoutes = require('./routes/creation-deck')
+var deckRoutes = require('./routes/creation-deck');
+var menuRoutes = require('./routes/menu');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/connexion', connexionRoutes);
 app.use('/inscription', inscriptionRoutes);
 app.use('/jeu', jeuRoutes);
 app.use('/creation-deck', deckRoutes);
+app.use('/menu', menuRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
