@@ -12,7 +12,7 @@
       "title": "Vol-Vie",
       "text": "Soignez 20 dégâts à ce Pokémon.",
       "action": "board.attacker().applyHeal(20)",
-      "value": "value": {
+      "value": {
       "operator": "-",
       "value": 20
       }
@@ -23,8 +23,8 @@
       ],
       "title": "Fouet Lianes",
       "text": "",
-      "action": ""
-      "value": "value": {
+      "action": "",
+      "value": {
       "operator": "-",
       "value": 30
       }
@@ -35,7 +35,8 @@
     "value": {
       "operator": "x",
       "value": 2
-    },
+    }
+  },
     "resistance": {
       "type": "",
       "value": {}

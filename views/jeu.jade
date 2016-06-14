@@ -25,7 +25,7 @@ block content
                                 img(src="images/board/back.png")
                             - n++
                 div.cards-active
-                    img(src="images/cards/pokemon/XY/XY/24.png", class="interaction hvr-grow")
+                    img(src="images/cards/pokemon/XY/XY/24.png", class="interaction hvr-grow ")
             div.numbered-cards
                 div.deck
                     p Deck
@@ -38,21 +38,12 @@ block content
         div#board-player
             div.cards
                 div.cards-active
-                    img(src="images/cards/pokemon/XY/XY/33.png", class="interaction hvr-grow")
+                    img(src="", class="interaction hvr-grow card-active" id="player-active")
                 div.cards-bench
-                    - var n = 0
                     ul
-                        while n < 2
-                            li.hvr-grow
-                                img(src="images/cards/pokemon/XY/XY/"+(n+1)+".png", class="interaction")
-                            - n++
+
                 div.cards-hand
-                    - var n = 0
                     ul
-                        while n < 7
-                            li
-                                img(src="images/cards/pokemon/XY/XY/" + (n + 5) + ".png", class="interaction")
-                            - n++
             div.numbered-cards
                 div.rewards
                     p Cartes récompenses
@@ -63,7 +54,7 @@ block content
                     img(src="images/board/back.png")
                     div.number-cards 60
         div#zoomed-card
-            img(src="images/cards/pokemon/XY/XY/42.png", class="interaction")
+            img(src="#", class="interaction")
             ul#menu-card
                 li 
                     a(href="#") Attaque Imprudente
@@ -71,4 +62,5 @@ block content
                     a(href="#") Retrait
                 li 
                     a(href="#") Annuler
+    script(src="http://localhost:3000/socket.io/socket.io.js")
     script(src="js/jeu.js")

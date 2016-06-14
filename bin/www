@@ -34,6 +34,30 @@ var tabClient=[];
 var nbClient = 0;
 // PROBLEME DE RAFRAICHISSEMENT
 
+var pokemon_cards = [];
+var energy_cards = [];
+var files = fs.readdirSync('../data/XY/Generations/');
+
+files.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+    console.log(file);
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
+  }
+});
+/*for (var i = 0; i < 6; ++i) {
+  energy_cards.push(new core.EnergyCard(core.EnergyType.PLANT));
+  energy_cards.push(new core.EnergyCard(core.EnergyType.WATER));
+} */
+
+var deck1 = new core.Deck(pokemon_cards, energy_cards, []);
+var deck2 = new core.Deck(pokemon_cards, energy_cards, []);
+var player1 = new core.Player(deck1);
+player1.selectInitialHand();
+var player2 = new core.Player(deck2);
+player2.selectInitialHand();
+var board = new core.Board([player1, player2]);
+
 io.sockets.on('connection', function (socket) {
 
     if (tabClient.length <= 2) {
@@ -45,7 +69,28 @@ io.sockets.on('connection', function (socket) {
       var cardPokemon = new core.Pokemon(cardJson);
       socket.emit('card',cardPokemon.to_object());
     }
-  
+
+  socket.emit("bench",player1.bench());
+  socket.emit("hand",player1.hand());
+  console.log(player1.deckLengh());
+  socket.emit("nbCarteDeck",player1.deckLengh());
+  if (player1.activePokemon() != null) {
+    socket.emit("pokemonActive", player1.activePokemon());
+  }
+  socket.on("toBench",function(id) {
+    if(player1.bench().length < 5) {
+      player1.addBench(id);
+      player1.takeCardInHand(id);
+      socket.emit("bench", player1.bench());
+      socket.emit("hand", player1.hand());
+    }
+
+  });
+  socket.on("toActive",function(id) {
+    player1.benchToActive(id);
+    socket.emit("bench", player1.bench());
+    socket.emit("pokemonActive",player1.activePokemon());
+  });
   socket.on('disconnect', function(){
     nbClient--;
     var i = tabClient.indexOf(socket);
