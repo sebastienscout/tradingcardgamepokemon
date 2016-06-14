@@ -15,6 +15,9 @@ var menuRoutes = require('./routes/menu');
 var dbConfig = require('./data/db/db.js');
 var mongoose = require('mongoose');
 
+var deckRoutes = require('./routes/creation-deck');
+
+
 var app = express();
 
 app.db = mongoose.createConnection(dbConfig.url);
@@ -51,6 +54,8 @@ app.use('/connexion', connexionRoutes);
 app.use('/inscription', inscriptionRoutes);
 app.use('/jeu', jeuRoutes);
 app.use('/menu', menuRoutes);
+app.use('/creation-deck', deckRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

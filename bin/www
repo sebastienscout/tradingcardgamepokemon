@@ -7,17 +7,17 @@
 var app = require('../app');
 var debug = require('debug')('OpenPokemon:server');
 var http = require('http');
+var core = require('../core');
+var fs = require('fs');
+var path = require('path');
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 /**
@@ -28,28 +28,84 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+var tabPokemon = ["42","33"];
+var tabClient=[];
 var nbClient = 0;
-var tab = ["42","33"];
-var tabClient = ["",""];
-io.sockets.on('connection', function (socket, pseudo) {
-  nbClient++;
-  console.log("Nb Client: " );
-  console.log(nbClient);
+// PROBLEME DE RAFRAICHISSEMENT
 
-    if (nbClient < 2) {
-      socket.emit('message', 'Vous êtes bien connecté !');
+var pokemon_cards = [];
+var energy_cards = [];
+var filesGeneration = fs.readdirSync('../data/XY/Generations/');
+var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
+filesGeneration.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
+    //console.log(pokemon_cards[pokemon_cards.length-1]);
+  }
+});
+filesPoingsFurieux.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
+    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
+  }
+});
 
-      socket.on('petit_nouveau', function (pseudo) {
-        socket.pseudo = pseudo;
-      });
+
+/*for (var i = 0; i < 6; ++i) {
+  energy_cards.push(new core.EnergyCard(core.EnergyType.PLANT));
+  energy_cards.push(new core.EnergyCard(core.EnergyType.WATER));
+} */
+
+var deck1 = new core.Deck(pokemon_cards, energy_cards, []);
+var deck2 = new core.Deck(pokemon_cards, energy_cards, []);
+var player1 = new core.Player(deck1);
+player1.selectInitialHand();
+var i=0;
+for(i ; i < player1.hand().length;i++) {
+  console.log(player1.hand()[i]);
+}
+var player2 = new core.Player(deck2);
+player2.selectInitialHand();
+var board = new core.Board([player1, player2]);
+
+io.sockets.on('connection', function (socket) {
+    if (tabClient.length <= 2) {
+      nbClient++;
+      tabClient.push(socket);
+      console.log("Nb Client "+nbClient);
+      var fileCard = '../data/XY/XY/42.json';
+      var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
+      var cardPokemon = new core.Pokemon(cardJson);
+    }
+  socket.emit("idJoueur",nbClient);
+  socket.emit("bench",player1.bench());
+  socket.emit("hand",player1.hand());
+  socket.emit("nbCarteDeck",player1.deckLengh());
+  if (player1.activePokemon() != null) {
+    socket.emit("pokemonActive", player1.activePokemon());
+  }
+  socket.on("toBench",function(id) {
+    if(player1.bench().length < 5) {
+      player1.addBench(id);
+      player1.takeCardInHand(id);
+      socket.emit("bench", player1.bench());
+      socket.emit("hand", player1.hand());
     }
 
-  socket.on('message', function (message) {
-
-    console.log(socket.pseudo + ' me parle ! Il me dit : ' + message);
+  });
+  socket.on("toActive",function(id) {
+    player1.benchToActive(id);
+    socket.emit("bench", player1.bench());
+    socket.emit("pokemonActive",player1.activePokemon());
   });
   socket.on('disconnect', function(){
     nbClient--;
+    var i = tabClient.indexOf(socket);
+    tabClient.splice(i, 1);
+    console.log('Got disconnect!');
+    console.log("Nb Client "+nbClient);
+    socket.emit('carte');
+
   });
 });
 /**
@@ -110,5 +166,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log("test");
 }

@@ -1,0 +1,48 @@
+{
+  "name": "Parasect",
+  "type": "PLANT",
+  "stage": "STAGE_1",
+  "life_point": 100,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Spores Colorées",
+      "text": "Choisissez 3 de vos Pokémon. Pour chacun de ces Pokémon, cherchez une carte Energie de base de type différent dans votre deck et attachez-la au Pokémon. Mélangez ensuite votre deck.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
+        "PLANT","COLORLESS"
+      ],
+      "title": "Plaie-Croix",
+      "text": "Lancez une pièce; Si c'est face, cette attaque inflige 30 dégâts supplémentaires",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }",
+      "value": {
+      "operator": "-",
+      "value": 30
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+    },
+    "resistance": {
+      "type": "",
+      "value": {}
+    },
+    "retreat_cost": 2,
+    "expansion": {
+      "name": "Generations",
+      "card_number": 83
+    },
+    "card_number": 7,
+    "rarity": "Rare"
+  }

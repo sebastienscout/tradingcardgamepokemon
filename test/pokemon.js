@@ -42,8 +42,11 @@ describe('Pokemon card loading', function () {
     expect(stari.life_point()).to.equal(60);
 
     board.turn();
-
     expect(stari.life_point()).to.equal(50);
+
+    board.attacker().applyDamage(30);
+    expect(pikachu.life_point()).to.equal(30);
+
   });
 
   //test combat kokiyas et Ponyta
@@ -58,7 +61,7 @@ describe('Pokemon card loading', function () {
     expect(kokiyas.life_point()).to.equal(60);
 
     board.turn();
-
+    
     expect(kokiyas.life_point()).to.equal(60);
   });
 

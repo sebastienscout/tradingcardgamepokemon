@@ -3,107 +3,31 @@ extends layout
 block content
   //Pour accéder au jeu avec formulaire de connexion
   a(href='/connexion') Play the Game !
-  h1= card.name
+  h1.cardName
 
   div#cardContent
-    img(src="images/cards/pokemon/XY/"+card.expansion.name+"/"+card.card_number+".png")
+    img(src="")
 
   div#cardDetail
-    h1 #{card.name}
+    h1.cardName
     div#pokemonType
-      span Pokémon de #{card.stage}
+      span#evolution
       span#lifePointType
-        span#lifePoint pv #{card.life_point}
-        if card.type == 'LIGHTNING'
-          div.icoLightning
-        if card.type == 'COLORLESS'
-          div.icoColorless
-        if card.type == 'WATER'
-            div.icoWater
-        if card.type == 'PLANT'
-          div.icoPlant
-        if card.type == 'FIRE'
-          div.icoFire
-        if card.type == 'DARKNESS'
-           div.icoDarkness
-        if card.type == 'FAIRY'
-          div.icoFairy
-        if card.type == 'PSYCHIC'
-          div.icoPsychic
-        if card.type == 'METAL'
-          div.icoMetal
-        if card.type == 'FIGHTING'
-          div.icoMain
+        span#lifePoint
 
-    each attack in card.attacks
-      div.attack
-        h2
-          each energy in attack.energies
-            if energy == 'COLORLESS'
-              div.icoColorless
-          | #{attack.title}
-          if attack.value
-            span#attackPoint #{attack.value.value}#{attack.value.supplement}
-        p #{attack.text}
     div#properties
       div.property
         h3 Faiblesse
         div
-          if card.weakness.energy == 'FIGHTING'
-            div.icoMain
-          if card.weakness.energy == 'METAL'
-            div.icoMetal
-          if card.weakness.energy == 'WATER'
-            div.icoWater
-          if card.weakness.energy == 'PLANT'
-            div.icoPlant
-          if card.weakness.energy == 'FIRE'
-            div.icoFire
-          if card.weakness.energy == 'DARKNESS'
-            div.icoDarkness
-          if card.weakness.energy == 'FAIRY'
-            div.icoFairy
-          if card.weakness.energy == 'PSYCHIC'
-            div.icoPsychic
-          if card.weakness.energy == 'LIGHTNING'
-            div.icoLightning
 
-          span #{card.weakness.value.operator}#{card.weakness.value.value}
       div.property
         h3 Résistance
         div
-          if card.resistance.energy == 'FIGHTING'
-            div.icoMain
-          if card.resistance.energy == 'METAL'
-            div.icoMetal
-          if card.resistance.energy == 'WATER'
-            div.icoWater
-          if card.resistance.energy == 'PLANT'
-            div.icoPlant
-          if card.resistance.energy == 'FIRE'
-            div.icoFire
-          if card.resistance.energy == 'DARKNESS'
-            div.icoDarkness
-          if card.resistance.energy == 'FAIRY'
-            div.icoFairy
-          if card.resistance.energy == 'PSYCHIC'
-            div.icoPsychic
-          if card.resistance.energy == 'LIGHTNING'
-            div.icoLightning
 
-          span #{card.resistance.value.operator}#{card.resistance.value.value}
       div.property
         h3 Coût de Retraite
-        - for (var x = 0; x < card.retreat_cost; x++)
-          div.icoColorless
 
       div#cardInfo
-        input(type="button",value="Embeter le serveur", id="poke")
-        div#xy
-        |  #{card.expansion.name}
-        div#cardNumber
-        | #{card.card_number}/#{card.expansion.number} #{card.rarity}
-        img#xyLogo(src="/images/icons/xy1-expansion-symbol.png")
 
       script(src="http://localhost:3000/socket.io/socket.io.js")
       script(src="//code.jquery.com/jquery-1.11.0.min.js")

@@ -25,7 +25,5 @@
     "express-session": "~1.13.0",
     "connect-flash": "~0.1.1"
 
-
   }
 }
-

@@ -1,0 +1,53 @@
+{
+  "name": "Papillusion",
+  "type": "PLANT",
+  "stage": "STAGE_2",
+  "life_point": 70,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "PLANT"
+      ],
+      "title": "Papillodanse",
+      "text": "Cherchez une carte Energie de base de votre deck et attachez-la à ce Pokémon. Mélangez ensuite votre deck. Si vous avez attaché de l'Energie de cette façon, soignez 40 dégâts à ce Pokémon.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
+        "PLANT",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Tornade",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 70
+      }
+    }
+  ],
+  "weakness": {
+    "type": "LIGHTNING",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+    },
+    "resistance": {
+      "type": "FIGHTING",
+      "value": {
+        "operator": "-",
+        "value": 20
+      }
+    },
+    "retreat_cost": 1,
+    "expansion": {
+      "name": "Generations",
+      "card_number": 83
+    },
+    "card_number": 5,
+    "rarity": "Holographique rare"
+}

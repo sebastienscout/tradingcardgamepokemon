@@ -17,8 +17,8 @@ html, body {
     transition-property: transform;
 }
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.09);
+    transform: scale(1.09);
 }
 /***********/
 /* Plateau */
@@ -26,15 +26,12 @@ html, body {
 #board {
     height:100%;
     background: url('../images/board/background.jpg') no-repeat 50% 50%;
-    background-position: center;
+    background-size: cover;
     overflow: hidden;
     position: relative;
 }
 #board img.interaction {
     cursor: pointer;
-}
-#board img.interaction:hover {
-    /*opacity: 0.5;*/
 }
 .cards-hand ul,
 .cards-bench ul {
@@ -63,7 +60,7 @@ html, body {
     display: block;
 }
 .cards-active img{
-    height: 180px;
+    height: 150px;
 }
 
 /******************/
@@ -74,12 +71,85 @@ html, body {
     position:absolute;
     top:100px;
     left:40px;
-    padding:10px;
-    background: rgba(0,0,0,.5);
-    border-radius: 5px;
+    display:none;
 }
 #zoomed-card img {
     height:450px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,.5);
+}
+#zoomed-card #menu-card {
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+    background: rgba(0,0,0,.5);
+    padding: 0;
+    border-radius: 0 10px 10px 0;
+}
+#zoomed-card #menu-card li a{
+    text-decoration: none;
+    display: block;
+    padding: 8px 25px;
+    color:white;
+}
+#zoomed-card #menu-card li a:hover{
+    color:#99cb4c;
+}
+
+/**************************/
+/* Cartes rewards et deck */
+/**************************/
+.numbered-cards {
+    position: relative;
+    text-align: center;
+}
+#board-player .numbered-cards > div {
+    position: absolute;
+    bottom: 250px;
+}
+#board-opponent .numbered-cards > div {
+    position: absolute;
+    top: -270px;
+}
+.numbered-cards .deck img, .numbered-cards .rewards img {
+    height:120px;
+}
+#board-opponent .numbered-cards .deck img, #board-opponent .numbered-cards .rewards img {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+.numbered-cards p {
+    font-weight:bold;
+}
+#board-opponent .numbered-cards p {
+    color:white;
+}
+#board-player .numbered-cards .rewards {
+    left: 150px;
+}
+#board-player .numbered-cards .deck {
+    right: 150px;
+}
+#board-opponent .numbered-cards .rewards {
+    right: 120px;
+}
+#board-opponent .numbered-cards .deck {
+    left: 180px;
+}
+.number-cards{
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -25px;
+    background: white;
+    width: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    display: block;
+    font-weight: bold;
+    border: 1px solid grey;
 }
 
 /***********************/
@@ -87,7 +157,10 @@ html, body {
 /*  - #board-player    */
 /***********************/
 #board-player {
-    margin-top: -50px;
+    margin-top: -30px;
+    position:relative;
+    bottom:0px;
+    height:50%;
 }
 #board-player .cards-hand li {
     top:0;
@@ -96,7 +169,7 @@ html, body {
     z-index:3;
 }
 #board-player .cards-hand li:hover {
-    top:-120px;
+    top:-80px;
 }
 #board-player .cards-hand li img{
     height:170px;
@@ -108,6 +181,10 @@ html, body {
 #board-player .cards-bench li img {
     height: 125px;
 }
+#board-player .cards-active {
+    margin-bottom: 15px;
+    visibility: hidden;
+}
 
 /***************************/
 /* Plateau coté adversaire */
@@ -116,6 +193,7 @@ html, body {
 #board-opponent {
     position:relative;
     top: -50px;
+    height:50%;
 }
 #board-opponent .cards-hand li img,
 #board-opponent .cards-bench li img{
@@ -126,4 +204,7 @@ html, body {
     -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
+}
+#board-opponent .cards-active {
+    margin-top:10px;
 }
