@@ -31,38 +31,38 @@ server.on('listening', onListening);
 var tabClient=[];
 // PROBLEME DE RAFRAICHISSEMENT
 
-var pokemon_cards = [];
+var pokemons = [];
 var energy_cards = [];
 var filesGeneration = fs.readdirSync('../data/XY/Generations/');
 var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
 filesGeneration.forEach(function (file) {
   if (path.extname(file) === '.json') {
-    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8')));
-    //console.log(pokemon_cards[pokemon_cards.length-1]);
+    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8'));
+    pokemons.push(new core.Pokemon(card));
   }
 });
 filesPoingsFurieux.forEach(function (file) {
   if (path.extname(file) === '.json') {
-    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
-    pokemon_cards.push(new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8')));
+    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/' + file, 'utf8'));
+    pokemons.push(new core.Pokemon(card));
+    pokemons.push(new core.Pokemon(card));
   }
 });
 
 
-/*for (var i = 0; i < 6; ++i) {
+for (var i = 0; i < 6; ++i) {
   energy_cards.push(new core.EnergyCard(core.EnergyType.PLANT));
-  energy_cards.push(new core.EnergyCard(core.EnergyType.WATER));
-} */
 
-var deck1 = new core.Deck(pokemon_cards, energy_cards, []);
-var deck2 = new core.Deck(pokemon_cards, energy_cards, []);
+  energy_cards.push(new core.EnergyCard(core.EnergyType.WATER));
+}
+
+var deck1 = new core.Deck(pokemons, energy_cards, []);
+var deck2 = new core.Deck(pokemons, energy_cards, []);
 // players[0] == PLAYER 1
 // players[1] == PLAYER 2
 var players = [new core.Player(deck1),new core.Player(deck2)];
-players[0].selectInitialHand();
-players[1].selectInitialHand();
-
 var board = new core.Board([players[0], players[1]]);
+board.selectInitialHands();
 io.sockets.on('connection', function (socket) {
   if (tabClient.length <= 2) {
     if (tabClient[0] == null) {
@@ -105,7 +105,6 @@ io.sockets.on('connection', function (socket) {
   //Ajouter pokémon dans le banc
   socket.on("toBench",function(id) {
     var indexPlayer = tabClient.indexOf(socket.client.id);
-
     if(players[indexPlayer].bench().length < 5) {
       players[indexPlayer].addBench(id);
       players[indexPlayer].takeCardInHand(id);
@@ -138,7 +137,16 @@ io.sockets.on('connection', function (socket) {
     socket.emit("pokemonActive",players[indexPlayer].activePokemon());
     socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
   });
+  socket.on("attack",function(idAttack) {
 
+
+    if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined) {
+      if (players[(indexPlayer+1) % 2].activePokemon() == null) {
+        
+      }
+
+    }
+  });
   //Déconnexion d'un client
   socket.on('disconnect', function(){
     var indexPlayer = tabClient.indexOf(socket.client.id);

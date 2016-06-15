@@ -23,9 +23,19 @@ module.exports = ( function (self) {
     this.name = function () {
       return card.name();
     };
-
+    function extend(target) {
+      var sources = [].slice.call(arguments, 1);
+      sources.forEach(function (source) {
+        for (var prop in source) {
+          target[prop] = source[prop];
+        }
+      });
+      return target;
+    }
     this.to_object = function () {
-      return card.to_object();
+      // RECUPERE LE LIFE POINT / CREER UNE VARIABLE remaining_life_points
+      var test = { remaining_life_points : life_point};
+       return extend({},card.to_object(),test);
     };
 
     var init = function (_card) {

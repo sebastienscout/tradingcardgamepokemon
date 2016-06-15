@@ -74,7 +74,6 @@ $(document).on('click','.interaction',function(event){
             
     }else if ($(this).attr("id") == 'player-active' ) {
         $.each(pokemonActive.attacks, function(i, attack) {
-            console.log(attack);
             $('#menu-card').append('<li><a idAttack="' + i + '" id="attackActive" href="#">"' + attack.title + '"</a></li>');
         });
     }
@@ -90,5 +89,9 @@ $(document).on('click','#toBench',function() {
 });
 
 $(document).on('click','body',function() {
+    $('#zoomed-card').hide();
+});
+$(document).on('click','#attackActive',function() {
+    socket.emit("attack",$(this).attr("idAttack"));
     $('#zoomed-card').hide();
 });
