@@ -224,11 +224,11 @@ jQuery(document).ready(function(){
                     else
                         envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":9};
                     indice++;
-                    console.log(i + " " + nb + " " +indice);
+                    //console.log(i + " " + nb + " " +indice);
                 }
             }
         });
-
+            console.log("test");
             console.log(envoi);
     });
 
