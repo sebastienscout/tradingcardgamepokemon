@@ -12,7 +12,7 @@
         "COLORLESS"
       ],
       "title": "Spirale Epuisante",
-      "text": "",
+      "text": "Soignez 30 dégâts à ce Pokémon.",
       "action": "",
       "value": {
         "operator": "-",
@@ -41,5 +41,5 @@
     "card_number": 111
   },
   "card_number": 3,
-  "rarity": "Commune"
+  "rarity": "Holographique rare"
 }
