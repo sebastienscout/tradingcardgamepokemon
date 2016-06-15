@@ -9,10 +9,14 @@ var handPlayer = boardPlayer.children('div.cards').children('div.cards-hand').ch
 var handOpponent = boardOpponent.children('div.cards').children('div.cards-hand').children('ul');
 var benchPlayer = boardPlayer.children('div.cards').children('div.cards-bench').children('ul');
 var benchOpponent = boardOpponent.children('div.cards').children('div.cards-bench').children('ul');
+var lifePointsPlayer = boardPlayer.children('div.cards').children('div.cards-active').children('div.life-points');
 var tabBench;
 var main;
 var pokemonActive;
 
+socket.on('life-points',function(pv) {
+    lifePointsPlayer.html(pv);
+});
 socket.on('hand',function(hand) {
     handPlayer.html('');
     $.each(hand, function(i, card){
@@ -40,13 +44,13 @@ socket.on('bench-opponent',function(nbBench) {
     }
 });
 socket.on('pokemonActive',function(pokActive) {
-   pokemonActive = pokActive;
-   $('#player-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#player-active').css('visibility','visible');
+    pokemonActive = pokActive;
+    $('#player-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
+    $('#player-active').parent().css('visibility','visible');
 });
 socket.on('pokemonActive-opponent',function(pokActive) {
     $('#opponent-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#opponent-active').css('visibility','visible');
+    $('#opponent-active').parent().css('visibility','visible');
 });
 socket.on('nbCardDeck',function(nbCarteDeck) {
     boardPlayer.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);

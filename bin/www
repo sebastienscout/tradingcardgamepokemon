@@ -92,9 +92,11 @@ io.sockets.on('connection', function (socket) {
   socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
   socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
   socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
+
   //Gestion du pokémon actif : mise a jour player et opponent
   if (players[indexPlayer].activePokemon() !=null) {
     socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
     if ( players[(indexPlayer + 1) % 2].activePokemon() != null) {
       socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
     }
@@ -115,6 +117,18 @@ io.sockets.on('connection', function (socket) {
   });
 
   //Ajouter pokémon actif
+  socket.on("toActive",function(id) {
+
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+    players[indexPlayer].benchToActive(id);
+    socket.emit("bench", players[indexPlayer].bench());
+    socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
+    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+    console.log('Points de vie : '+players[indexPlayer].activePokemon().life_point());
+    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
+  });
+
   socket.on("toActive",function(id) {
 
     var indexPlayer = tabClient.indexOf(socket.client.id);
