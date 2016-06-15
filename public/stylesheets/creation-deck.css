@@ -1,21 +1,55 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background-color: #F5C556;
+    background : url("/images/fond_inscription.jpg") 50% 50% ;
+    background-size: cover;
+    color: white;
+    overflow: hidden;
 }
 
 a {
     color: #00B7FF;
 }
+.rond{
+    border-radius: 50%;
 
+    display: inline-block;
+    position: absolute;
+    bottom: 10px;
+    right:10px;
+    font-weight: bold;
+    padding: 15px;
+    width:15px;
+    height: 15px;
+}
+
+input{
+    display: none;
+}
 .cardContent {
+    position: relative;
     display: inline-block;
     vertical-align: top;
     padding : 15px;
     text-align: center;
     margin:1%;
     width: 15%;
+    color:white;
 
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(96,96,96,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(96,96,96,0.5);
 }
 
 div{
@@ -55,31 +89,38 @@ div{
     background: rgba(0,0,0,0.2);
 }
 
+#entete button{
+    position: absolute;
+    right: 15px;
+    background-color: #C59934;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 5px 20px;
+    top:15px;
+}
 
 .cartes{
-    background-color: rgba(223,179,80,0.9);
-    margin-top: 0px;
+    margin-top: 1%;
+
     display:inline-block;
-    width:84.6%;
+    width:70%;
+    overflow-y: scroll;
+    height:700px;
 }
 
-button{
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-    background-color: darkgrey;
-    height: 30px;
-    border:0;
-    margin-bottom: 8px;
-    font-weight: bold;
-    cursor:pointer;
+#entete h1{
+    font-size: 45px;
+    padding: 0;
+    margin:0;
 }
-#bouton{
-    position: fixed;
-    top: 384px;
-    width: 15%;
-    right:1%;
-    display:none;
+#entete{
+    background-color: rgba(223,179,80,0.9);
+    margin-bottom: 15px;
+    text-align: center;
+    position: relative;
+    padding: 10px 0;
 }
 #top{
     position: fixed;
@@ -92,18 +133,18 @@ button{
 #donnees{
     display:none;
     position: fixed;
-    top: 124px;
-    width: 15%;
-    right:1%;
-    background-color: darkgrey;
-    text-align: center;
-    font-weight: bold;
+    top: 244px;
+    width: 25%;
+    right:2.5%;
+    background-color: rgba(223,179,80,0.9);
+    padding:1%;
     font-size:25px;
 }
 
 #menu > ul > li:not(.selected){
 
     background-color: rgba(192,192,192,0.6);
+    border:0;
 }
 
 .hvr-grow {
@@ -142,17 +183,21 @@ ul li:hover {
 
 li{
     display:inline-block;
-    width:25%;
+    width:15%;
     padding:15px;
-    margin:10px 10px 0px 0px;
-    background-color: rgba(192,192,192,1);
-    color: white;
+    margin:10px;
+    background-color: rgba(192,192,192,0.5);
+
     font-size: 30px;
     font-weight: bold;
+    list-style-position:inside;
+    border-bottom: 5px solid white;
+    text-align:center;
 }
 
 ul{
     margin: 0;
+    background-color: rgba(223,179,80,0.9);
 }
 
 #menu{
@@ -162,159 +207,4 @@ ul{
 #cardDetail {
     display: inline-block;
     width: 450px;
-}
-
-#cardDetail h1 {
-    background: #a4a4a4;
-    color: #f2f2f2;
-    border-radius: 5px 5px 0px 0px;
-    height: 70px;
-    line-height: 70px;
-    margin: 0px;
-}
-
-#cardDetail > * {
-    width: 100%;
-    padding-left: 15px;
-}
-
-#pokemonType {
-    height: 70px;
-    line-height: 70px;
-    background-color: #f2f2f2;
-    color: black;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 40px;
-}
-
-#lifePoint {
-    margin-right: 5px;
-    font-variant: small-caps;
-    font-size: 28px;
-}
-
-#lifePointType {
-    float: right;
-}
-
-.attack h2 {
-    color: #575757;
-}
-
-.attack p {
-    color: #8c8c8c;
-    font-size: 16px;
-    text-align: justify;
-}
-
-.property {
-    display: inline-block;
-    width: 32%;
-    vertical-align: top;
-    text-align: center;
-}
-
-.property h3 {
-    font-weight: normal;
-    font-size: 24px;
-}
-
-.property div {
-    font-size: 30px;
-}
-
-#properties {
-    background-color: #f2f2f2;
-    border-radius: 7px;
-    color: #575757;
-}
-
-#properties > div {
-    display: inline-block;
-}
-
-.icoLightning {
-    background-image: url("/images/icons/energy-types.png");
-    background-position: -25px -25px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.icoColorless {
-    background-image: url("/images/icons/energy-types.png");
-    background-position: -25px -0px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-}
-
-.icoMain {
-    background-image: url("/images/icons/energy-types.png");
-    background-position: -50px -25px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-.icoMetal {
-    background-image: url("/images/icons/energy-types.png");
-    background-position: -75px -0px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-#xyLogo {
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-#cardInfo {
-    width: 80%;
-    margin-top: 40px;
-}
-
-#xy {
-    color: #266ad2;
-    font-weight: bold;
-    font-size: 19px;
-}
-
-#cardNumber {
-    font-size: 17px;
-
-    font-weight: bold;
-}
-
-#attackPoint {
-    float: right;
-    font-weight: normal;
-    font-size: 21px;
-    color: #8c8c8c;
-}
-
-#illustratorBlock {
-    font-size: 21px;
-    margin-top: 30px;
-}
-
-#illustrator {
-    color: #9a9a9a;
-}
-
-#illustratorName {
-    color: #266ad2;
 }

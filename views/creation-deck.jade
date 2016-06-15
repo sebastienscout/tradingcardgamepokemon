@@ -7,11 +7,14 @@ block content
 
     form(method="post")
 
+    div#entete
+        h1 Création / Modification du Deck
+        button(id="envoiDeck") Enregistrer
     div#menu
         ul
             li.menu1.selected Pokémons
             li.menu2 Energies
-            li.menu3 Champions
+            //li.menu3 Champions
 
     div.cartes
         div#pokemons
@@ -19,6 +22,8 @@ block content
                  div.cardContent.hvr-grow
 
                     img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
+                    div.rond
+
                     input(type="number", id= i+1, step="1" readonly)
             - }
 
@@ -26,6 +31,7 @@ block content
             -for (var i = 74; i < 83; i++) {
                 div.cardContent.hvr-grow
                     img(src="images/cards/energy/" + i + ".png")
+                    div.rond
                     input(type="number", id= i, step="1" readonly)
             - }
 
@@ -33,14 +39,9 @@ block content
             -for (var i = 59; i < 73; i++) {
              div.cardContent.hvr-grow
                 img(src="images/cards/trainer/" + i + ".png" readonly)
+                div.rond
                 input(type="number", id= i, step="1")
             - }
 
     div#donnees
 
-    div#bouton
-        button(id="envoiDeck") Valider le deck
-    div#top
-        a(href="#menu")
-            img(src="images/icons/bw2-expansion-symbol.png")
-            | Haut de page

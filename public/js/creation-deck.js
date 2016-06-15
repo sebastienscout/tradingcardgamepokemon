@@ -61,24 +61,28 @@ jQuery(document).ready(function(){
             if(((($input.val() < 4)&&($(this).parent().attr('id') == "pokemons"))
                 ||(($(this).parent().attr('id') == "energies")&&bool_energies)
                 ||(($(this).parent().attr('id') == "trainer")&&bool_trainer))
-                &&(bool_total)
+                &&(bool_total)&&!(ok)
                  ){
                 $(this).addClass("purple");
                 $input.val(+$input.val() + 1);
+                $(this).children(".rond").html("<span>"+$input.val()+"</span>");
+                $(this).children(".rond").css("border","2px solid white");
+                $(this).children(".rond").css("background-color","red");
+
                 total += 1;
-            }
 
-            if($(this).parent().attr('id') == "pokemons"){
-                pokemons +=1;
-            }
-            else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
-                energies +=1;
-            }
-            else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
-                trainer +=1;
-            }
 
-            verif2();
+                if($(this).parent().attr('id') == "pokemons"){
+                    pokemons +=1;
+                }
+                else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
+                    energies +=1;
+                }
+                else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
+                    trainer +=1;
+                }
+            }
+        verif2();
 
     });
 
@@ -97,9 +101,12 @@ jQuery(document).ready(function(){
                 }
                 $input.val(+$input.val() - 1);
                 total -= 1;
+                $(this).children(".rond").text($input.val());
 
                 if ($input.val() == 0) {
-                    $input.val("");
+                    $(this).children(".rond").text("");
+                    $(this).children(".rond").css("border","0");
+                    $(this).children(".rond").css("background-color","");
                     if ($(this).hasClass("purple")) {
                         $(this).removeClass("purple");
                     }
@@ -117,20 +124,30 @@ jQuery(document).ready(function(){
                 verif.show();
 
                  if (total<60){
-                    verif.html("<span style='color:red;'>"+ (60-total)+" cartes.</span><br><br>");
+                    verif.html("<span style='color:white;'>Nombre de cartes : "+ total + "/60"+"</span><br>");
                      ok = false;
                      bool_total = true;
                  }
                  else if (total>60){
-                     verif.html("<span style='color:red;'>Trop de cartes.</span><br><br>");
+                     verif.html("<span style='color:white;'>Trop de cartes.</span><br><br>");
                      ok = false;
                      bool_total = false;
                  }
+                 else if (total==59){
+                     verif.html("<span style='color:green;'>Nombre de cartes OK.</span><br><br>");
+                     if (!(bool_energies)&&!(bool_trainer)&&!(bool_total)) {
+                         ok = true;
+                         bool_total = true;
+                     }
+                 }
                  else{
                     verif.html("<span style='color:green;'>Nombre de cartes OK.</span><br><br>");
-                     if (!(bool_energies)&&!(bool_trainer)&&!(bool_total)){
+                     bool_total = false;
+                     if (!(bool_energies)
+                         //&&!(bool_trainer)
+                         &&!(bool_total)){
                          ok = true;
-                         bool_total = false;
+
                      }
                  }
 
@@ -138,34 +155,39 @@ jQuery(document).ready(function(){
 
                 if(energies<18){
                     bool_energies = true;
-                    verif.append("<span style='color:red;'> "+(18 - energies) + " à " + (22 - energies) + " Energies. </span><br><br>");
+                    verif.append("<span style='color:white;'>Carte énergies : "+ energies + " (18~22) </span><br><br>");
                 }
                 else if (energies>22){
                     bool_energies = false;
-                    verif.append("<span style='color:red;'> Trop de cartes énergies. </span><br><br>");
+                    verif.append("<span style='color:white;'> Trop de cartes énergies. (" + (energies) + ") (18~22) </span><br><br>");
                 }
                 else{
-                    bool_energies = false;
-                    verif.append("<span style='color:green;'> Cartes Energies OK. (" + (energies) + ") </span><br><br>");
+                    bool_energies = true;
+                    verif.append("<span style='color:green;'> Cartes Energies OK:  (" + (energies) + ") (18~22) </span><br><br>");
                 }
 
 
+                console.log(bool_total+" "+bool_energies);
 
+                if((60-total)<(18-energies)){
 
+                    verif.append("<span style='color:red;'> Votre deck est déséquilibré, veuillez retirer des Pokémons afin d'ajouter des cartes Energies </span><br><br>");
+                }
+            /*
                 if(trainer<13) {
                     bool_trainer = true;
-                    verif.append("<span style='color:red;'> " + (13 - trainer) + " à " + (20 - trainer) + " Dresseurs.</span><br><br>");
+                    verif.append("<span style='color:red;'> Carte dresseur : "+ trainer + " (13~20)</span><br><br>");
                 }
                 else if(trainer>20){
                     bool_trainer = false;
                     verif.append("<span style='color:red;'> Trop de cartes dresseur. </span><br><br>");
                 }
                 else{
-                    bool_trainer = false;
+                    bool_trainer = true;
                     verif.append("<span style='color:green;'> Cartes Dresseurs OK. (" + (trainer) + ")</span><br><br>");
                 }
 
-
+            */
 
 
                 if (ok){
