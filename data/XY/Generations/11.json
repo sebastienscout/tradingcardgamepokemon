@@ -1,0 +1,59 @@
+{
+  "name": "Dracaufeu",
+  "type": "FIRE",
+  "stage": "BASE",
+  "life_point": 180,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FIRE", "COLORLESS"
+      ],
+      "title": "Manteau de Feu",
+      "text": "Attachez une carte Energie FEU de votre pile de défausse à ce Pokémon.",
+      "action": "",
+      "value": {
+        "operator": "",
+        "value": 30,
+        "supplement": "-"
+      }
+    },
+    {
+      "energies": [
+        "FIRE",
+        "FIRE",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Souffle de Feu",
+      "text": "Lancez 2 pièces. Cette attaque inflige 40 dégâts supplémentaires pour chaque côté face.",
+      "action": "for (var i =0;i<2;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
+      "value": {
+        "operator": "-",
+        "value": 80,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PLANT",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 43,
+  "rarity": "Commune"
+}

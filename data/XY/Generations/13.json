@@ -1,0 +1,58 @@
+{
+  "name": "Feunard",
+  "type": "FIRE",
+  "stage": "BASE",
+  "life_point": 170,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FIRE"
+      ],
+      "title": "Fulmi-Bonus",
+      "text": "Défaussez une carte Energie FEU de votre main. Dans ce cas, piochez 3 cartes.",
+      "action": "",
+      "value": {
+        "operator": "",
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "FIRE",
+        "COLORLESS",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Déflagration",
+      "text": "Lancez une pièce. Si c'est pile, défaussez une Energie FEU attachée à ce Pokémon.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 130,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PLANT",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 43,
+  "rarity": "Commune"
+}

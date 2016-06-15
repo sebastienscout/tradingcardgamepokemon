@@ -1,0 +1,59 @@
+{
+  "name": "Crustabri",
+  "type": "WATER",
+  "stage": "STAGE_1",
+  "life_point": 100,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "WATER",
+        "COLORLESS"
+      ],
+      "title": "Pince Broyeuse",
+      "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant Paralysé, et vous défaussez une Energie lui étant attachée",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "WATER",
+        "WATER",
+        "COLORLESS"
+      ],
+      "title": "Picanon",
+      "text": "Lancez 5 pièces. Cette attaque inflige 30 dégâts multipliés par le nombre de côtés face.",
+      "action": "for (var i =0;i<5;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }}",
+      "value": {
+        "operator": "-",
+        "value": 0,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PLANT",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 3,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 20,
+  "rarity": "Commune"
+}

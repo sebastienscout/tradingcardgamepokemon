@@ -1,0 +1,57 @@
+{
+  "name": "Persian",
+  "type": "COLORLESS",
+  "stage": "STAGE_1",
+  "life_point": 90,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Bluff",
+      "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant est maintenant Paralysé.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Embuscade",
+      "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 40,
+        "supplement": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }"
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIGHTING",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": 0
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 55,
+  "rarity": "Commune"
+}

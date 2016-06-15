@@ -1,17 +1,17 @@
 {
-  "name": "Doduo",
+  "name": "Dodrio",
   "type": "COLORLESS",
-  "stage": "BASE",
-  "life_point": 60,
+  "stage": "STAGE_1",
+  "life_point": 90,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "COLORLESS"
+        "COLORLESS","COLORLESS","COLORLESS"
       ],
-      "title": "Entaille Double",
-      "text": "Lancez 2 pi√®ces. Cette attaque inflige 10 d√©g√¢ts multipli√©s par le nombre de c√¥t√©s face.",
-      "action": "for (var i =0;i<2;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(10); }}",
+      "title": "Furie",
+      "text": "Lancez 3 piËces. Cette attaque inflige 40 dÈg‚ts multipliÈs par le nombre de cÙtÈs face.",
+      "action": "for (var i =0;i<3;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
       "value": {
         "operator": "-",
         "value": 0,

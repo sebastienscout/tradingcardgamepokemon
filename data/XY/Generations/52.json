@@ -1,0 +1,40 @@
+{
+  "name": "M. Mime",
+  "type": "FAIRY",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FAIRY","COLORLESS"
+      ],
+      "title": "Jonglerie",
+      "text": "Lancez 4 pièces. Cette attaque inflige 10 dégâts multipliés par le nombre de côtés face.",
+      "action": "for (var i =0;i<4;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(10); }}",
+      "value": {
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIGHTING",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 52,
+  "rarity": "Commune"
+}

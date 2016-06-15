@@ -1,0 +1,57 @@
+{
+  "name": "Galopa",
+  "type": "FIRE",
+  "stage": "STAGE_1",
+  "life_point": 90,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FIRE"
+      ],
+      "title": "Hâte",
+      "text": "Lancez une pièce. Si c'est face, évitez tous les effets d'attaques, y compris les dégâts, infligés à ce Pokémon pendant le prochain tour de votre adversaire. ",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Dépassement",
+      "text": "Cette attaque inflige 20 dégâts à l'un des Pokémon de Banc de votre adversaire. (N'appliquez ni la Faiblesse ni la Résistance aux Pokémon de Banc.)",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 40,
+        "supplement": "+"
+      }
+    }
+  ],
+  "weakness": {
+    "type": "WATER",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 0,
+  "expansion": {
+    "name": "Generations",
+    "card_number": 83
+  },
+  "card_number": 15,
+  "rarity": "Commune"
+}
