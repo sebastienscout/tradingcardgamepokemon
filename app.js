@@ -5,19 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var indexRoutes = require('./routes/index');
+var indexRoutes = require('./routes/menu');
 var connexionRoutes = require('./routes/connexion');
 var inscriptionRoutes = require('./routes/inscription');
 var jeuRoutes = require('./routes/jeu');
 var deckRoutes = require('./routes/creation-deck');
 var menuRoutes = require('./routes/menu');
+var testRoutes = require('./routes/test');
 
 
 // DB
 var dbConfig = require('./data/db/db.js');
 var mongoose = require('mongoose');
 
-var deckRoutes = require('./routes/creation-deck');
 
 var app = express();
 
@@ -55,6 +55,7 @@ app.use('/inscription', inscriptionRoutes);
 app.use('/jeu', jeuRoutes);
 app.use('/creation-deck', deckRoutes);
 app.use('/menu', menuRoutes);
+app.use('/test', testRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -86,8 +87,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-//setup passport
-//require('./passport')(app, passport);
 
 module.exports = app;
