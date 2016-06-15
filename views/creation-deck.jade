@@ -19,12 +19,26 @@ block content
     div.cartes
         div#pokemons
             -for (var i = 0; i < card.length; i++) {
-                 div.cardContent.hvr-grow
+                 div.cardContent.hvr-grow.xy
 
-                    img(src="images/cards/pokemon/XY/Generations/" + card[i].card_number + ".png")
+                    img(src="images/cards/pokemon/XY/XY/" + card[i].card_number + ".png")
                     div.rond
 
                     input(type="number", id= i+1, step="1" readonly)
+            - }
+
+            -for (var i = 0; i < card2.length; i++) {
+                div.cardContent.hvr-grow.generations
+                    img(src="images/cards/pokemon/XY/Generations/" + card2[i].card_number + ".png")
+                    div.rond
+                    input(type="number", id= i + 1, step="1" readonly)
+            - }
+
+            -for (var i = 0; i < card3.length; i++) {
+            div.cardContent.hvr-grow.poings_furieux
+                img(src="images/cards/pokemon/XY/Poings Furieux/" + card3[i].card_number + ".png")
+                div.rond
+                input(type="number", id= i + 1, step="1" readonly)
             - }
 
         div#energies

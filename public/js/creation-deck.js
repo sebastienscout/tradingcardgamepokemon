@@ -2,6 +2,7 @@
  * Created by mhabinka on 09/06/16.
  */
 
+
 jQuery(document).ready(function(){
 
     var total = 0;
@@ -13,6 +14,9 @@ jQuery(document).ready(function(){
     var bool_trainer = true;
     var bool_total = true
     var ok = false;
+    var envoi = new Array();
+    var indice = 0;
+
 
     $("li").on('click', function() {
 
@@ -63,26 +67,27 @@ jQuery(document).ready(function(){
                 ||(($(this).parent().attr('id') == "trainer")&&bool_trainer))
                 &&(bool_total)&&!(ok)
                  ){
-                $(this).addClass("purple");
-                $input.val(+$input.val() + 1);
-                $(this).children(".rond").html("<span>"+$input.val()+"</span>");
-                $(this).children(".rond").css("border","2px solid white");
-                $(this).children(".rond").css("background-color","red");
+                    $(this).addClass("purple");
+                    $input.val(+$input.val() + 1);
+                    $(this).children(".rond").html("<span>"+$input.val()+"</span>");
+                    $(this).children(".rond").css("border","2px solid white");
+                    $(this).children(".rond").css("background-color","red");
 
-                total += 1;
+                    total += 1;
 
 
-                if($(this).parent().attr('id') == "pokemons"){
-                    pokemons +=1;
-                }
-                else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
-                    energies +=1;
-                }
-                else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
-                    trainer +=1;
-                }
+                    if($(this).parent().attr('id') == "pokemons"){
+                        pokemons +=1;
+                    }
+                    else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
+                        energies +=1;
+                    }
+                    else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
+                        trainer +=1;
+                    }
             }
-        verif2();
+
+            verif2();
 
     });
 
@@ -111,8 +116,9 @@ jQuery(document).ready(function(){
                         $(this).removeClass("purple");
                     }
                 }
-            }
 
+
+            }
             verif2();
 
             return false;
@@ -159,7 +165,7 @@ jQuery(document).ready(function(){
                 }
                 else if (energies>22){
                     bool_energies = false;
-                    verif.append("<span style='color:white;'> Trop de cartes énergies. (" + (energies) + ") (18~22) </span><br><br>");
+                    verif.append("<span style='color:red;'> Trop de cartes énergies. (" + (energies) + ") (18~22) </span><br><br>");
                 }
                 else{
                     bool_energies = true;
@@ -202,8 +208,30 @@ jQuery(document).ready(function(){
         }
 
 
-    $("#bouton").click(function(){
-       window.location.replace("/jeu");
+    $("#envoiDeck").click(function(){
+        var indice = 0;
+        $("input").each(function(){
+            var nb = $(this).val();
+
+            if (nb>0){
+                for(var i =0;i<nb;i++){
+                    if ($(this).parent().hasClass("xy"))
+                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":143};
+                    else if ($(this).parent().hasClass("generations"))
+                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":83};
+                    else if ($(this).parent().hasClass("poings_furieux"))
+                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":111};
+                    else
+                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":9};
+                    indice++;
+                    console.log(i + " " + nb + " " +indice);
+                }
+            }
+        });
+
+            console.log(envoi);
     });
+
+
 });
 
