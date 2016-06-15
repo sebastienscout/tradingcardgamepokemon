@@ -1,5 +1,5 @@
 {
-  "name": "MÈlodelfe",
+  "name": "M√©lodelfe",
   "type": "FAIRY",
   "stage": "BASE",
   "life_point": 90,
@@ -10,7 +10,7 @@
         "COLORLESS"
       ],
       "title": "Par ici",
-      "text": "Echangez l'un des PokÈmon de Banc de votre adversaire avec le PokÈmon Actif de votre adversaire.",
+      "text": "Echangez l'un des Pok√©mon de Banc de votre adversaire avec le Pok√©mon Actif de votre adversaire.",
       "action": "",
       "value": {}
     },
@@ -20,8 +20,7 @@
         "COLORLESS"
       ],
       "title": "Pouvoir lunaire",
-      "text": "Pendant le prochain tour de votre adversaire, tous les dÈg‚ts infligÈs par des attaques du PokÈmon DÈfenseur sont rÈduits de 30
-      (avant application de la Faiblesse et de la RÈsistance)",
+      "text": "Pendant le prochain tour de votre adversaire, tous les d√©g√¢ts inflig√©s par des attaques du Pok√©mon D√©fenseur sont r√©duits de 30 (avant application de la Faiblesse et de la R√©sistance)",
       "action": "",
       "value": {
         "operator": "-",
