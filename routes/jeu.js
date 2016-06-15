@@ -5,7 +5,12 @@ var fs = require('fs');
 
 /* GET game page. */
 router.get('/', function(req, res, next) {
-    res.render('jeu');
+    if(!req.session._id && !req.session.username && !req.session.mail){  // Si non connecte, redirige vers connexion
+        res.redirect('/connexion');
+    }else { // Sinon on affiche jeu
+        res.render('jeu');
+    }
+
 });
 
 module.exports = router;

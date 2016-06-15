@@ -1,45 +1,44 @@
 {
-  "name": "Cabriolaine",
-  "type": "PLANT",
+  "name": "Baggiguane",
+  "type": "DARKNESS",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "COLORLESS",
-        "COLORLESS"
+        "DARKNESS",
+        "DARKNESS"
       ],
-      "title": "Charge",
+      "title": "Poing Tire-Bouchon",
       "text": "",
       "action": "",
       "value": {
         "operator": "-",
-        "value": 40,
+        "value": 30,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "FIGHTING",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "PSYCHIC",
     "value": {
       "operator": "-",
-      "value": ""
+      "value": 20
     }
   },
   "retreat_cost": 2,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Poings Furieux",
+    "card_number": 111
   },
-  "card_number": 18,
+  "card_number": 66,
   "rarity": "Commune"
 }

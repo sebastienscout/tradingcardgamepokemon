@@ -28,9 +28,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-var tabPokemon = ["42","33"];
 var tabClient=[];
-var nbClient = 0;
 // PROBLEME DE RAFRAICHISSEMENT
 
 var pokemon_cards = [];
@@ -58,60 +56,102 @@ filesPoingsFurieux.forEach(function (file) {
 
 var deck1 = new core.Deck(pokemon_cards, energy_cards, []);
 var deck2 = new core.Deck(pokemon_cards, energy_cards, []);
-var player1 = new core.Player(deck1);
-player1.selectInitialHand();
-var i=0;
-for(i ; i < player1.hand().length;i++) {
-  console.log(player1.hand()[i]);
-}
-var player2 = new core.Player(deck2);
-player2.selectInitialHand();
-var board = new core.Board([player1, player2]);
+// players[0] == PLAYER 1
+// players[1] == PLAYER 2
+var players = [new core.Player(deck1),new core.Player(deck2)];
+players[0].selectInitialHand();
+players[1].selectInitialHand();
 
+var board = new core.Board([players[0], players[1]]);
 io.sockets.on('connection', function (socket) {
-    if (tabClient.length <= 2) {
-      nbClient++;
-      tabClient.push(socket);
-      console.log("Nb Client "+nbClient);
-      var fileCard = '../data/XY/XY/42.json';
-      var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
-      var cardPokemon = new core.Pokemon(cardJson);
+  if (tabClient.length <= 2) {
+    if (tabClient[0] == null) {
+      tabClient[0] = socket.client.id;
+    }else if (tabClient[1] == null) {
+      tabClient[1] = socket.client.id;
     }
-  socket.emit("idJoueur",nbClient);
-  socket.emit("bench",player1.bench());
-  socket.emit("hand",player1.hand());
-  socket.emit("nbCarteDeck",player1.deckLengh());
-  if (player1.activePokemon() != null) {
-    socket.emit("pokemonActive", player1.activePokemon());
+    console.log("Nb Client "+tabClient.length);
+    var fileCard = '../data/XY/XY/42.json';
+    var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
+    var cardPokemon = new core.Pokemon(cardJson);
   }
-  socket.on("toBench",function(id) {
-    if(player1.bench().length < 5) {
-      player1.addBench(id);
-      player1.takeCardInHand(id);
-      socket.emit("bench", player1.bench());
-      socket.emit("hand", player1.hand());
+
+  var indexPlayer = tabClient.indexOf(socket.client.id);
+
+  //Gestion de la main : mise a jour player et opponent
+  socket.emit("hand", players[indexPlayer].hand());
+  socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
+  socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+
+  //Gestion du banc : mise a jour player et opponent
+  socket.emit("bench", players[indexPlayer].bench());
+  socket.emit("bench-opponent",players[(indexPlayer+1)%2].bench().length);
+  socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+
+  //Gestion du nombre de cartes : mise a jour player et opponent
+  socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
+  socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
+  socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
+
+  //Gestion du pokémon actif : mise a jour player et opponent
+  if (players[indexPlayer].activePokemon() !=null) {
+    socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
+    if ( players[(indexPlayer + 1) % 2].activePokemon() != null) {
+      socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
     }
+    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+  }
+  //Ajouter pokémon dans le banc
+  socket.on("toBench",function(id) {
+    var indexPlayer = tabClient.indexOf(socket.client.id);
 
+    if(players[indexPlayer].bench().length < 5) {
+      players[indexPlayer].addBench(id);
+      players[indexPlayer].takeCardInHand(id);
+      socket.emit("bench", players[indexPlayer].bench());
+      socket.emit("hand", players[indexPlayer].hand());
+      socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+      socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+    }
   });
+
+  //Ajouter pokémon actif
   socket.on("toActive",function(id) {
-    player1.benchToActive(id);
-    socket.emit("bench", player1.bench());
-    socket.emit("pokemonActive",player1.activePokemon());
-  });
-  socket.on('disconnect', function(){
-    nbClient--;
-    var i = tabClient.indexOf(socket);
-    tabClient.splice(i, 1);
-    console.log('Got disconnect!');
-    console.log("Nb Client "+nbClient);
-    socket.emit('carte');
 
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+    players[indexPlayer].benchToActive(id);
+    socket.emit("bench", players[indexPlayer].bench());
+    socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
+    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+    console.log('Points de vie : '+players[indexPlayer].activePokemon().life_point());
+    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
   });
+
+  socket.on("toActive",function(id) {
+
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+    players[indexPlayer].benchToActive(id);
+    socket.emit("bench", players[indexPlayer].bench());
+    socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
+    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+  });
+
+  //Déconnexion d'un client
+  socket.on('disconnect', function(){
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+    console.log('Client déconnecté');
+    tabClient[indexPlayer] = null;
+    console.log("Nb Client "+tabClient.length);
+  });
+
 });
+
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 

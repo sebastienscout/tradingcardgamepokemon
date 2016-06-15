@@ -1,22 +1,20 @@
 {
-  "name": "Cabriolaine",
+  "name": "Cheniti",
   "type": "PLANT",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "COLORLESS",
         "COLORLESS"
       ],
-      "title": "Charge",
+      "title": "Suspension",
       "text": "",
       "action": "",
       "value": {
         "operator": "-",
-        "value": 40,
+        "value": 10,
         "supplement": ""
       }
     }
@@ -33,13 +31,13 @@
     "value": {
       "operator": "-",
       "value": ""
-    }
-  },
-  "retreat_cost": 2,
-  "expansion": {
-    "name": "XY",
-    "card_number": 146
-  },
-  "card_number": 18,
-  "rarity": "Commune"
+    },
+    "retreat_cost": 1,
+    "expansion": {
+      "name": "Impact des Destins",
+      "card_number": 124
+    },
+    "card_number": 2,
+    "rarity": "Commune"
+  }
 }

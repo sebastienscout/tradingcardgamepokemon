@@ -1,15 +1,25 @@
 {
-  "name": "Feunnec",
-  "type": "FIRE",
+  "name": "Mélofée",
+  "type": "FAIRY",
   "stage": "BASE",
-  "life_point": 50,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "FIRE"
+        "COLORLESS"
       ],
-      "title": "Feu Follet",
+      "title": "Rayon Lune",
+      "text": "Soignez 30 dégâts à ce Pokémon.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
+        "FAIRY",
+        "COLORLESS"
+      ],
+      "title": "Ecras'Face",
       "text": "",
       "action": "",
       "value": {
@@ -20,24 +30,24 @@
     }
   ],
   "weakness": {
-    "type": "WATER",
+    "type": "METAL",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "DARKNESS",
     "value": {
       "operator": "-",
-      "value": ""
+      "value": 20
     }
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Poings Furieux",
+    "card_number": 111
   },
-  "card_number": 24,
+  "card_number": 69,
   "rarity": "Commune"
 }

@@ -1,6 +1,7 @@
 /**
  * Created by Alexis on 14/06/2016.
  */
+
 $( document ).ready(function() {
 
     //Bouton Créer Deck
@@ -18,4 +19,17 @@ $( document ).ready(function() {
         window.location.replace("/jeu");
     });
 
+    //Boutton Lancer Partie
+    $("#playGame").click(function () {
+        window.location.replace("/jeu");
+    });
+
+    $("#logOut").click(function () {
+        console.log("test");
+        window.location.replace("/connexion?deconnexion=true");
+    });
+
+
+
 });
+

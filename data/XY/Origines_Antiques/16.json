@@ -1,28 +1,27 @@
 {
-  "name": "Cabriolaine",
-  "type": "PLANT",
+  "name": "Pyronille",
+  "type": "FIRE",
   "stage": "BASE",
   "life_point": 70,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "COLORLESS",
+        "FIRE",
         "COLORLESS"
       ],
-      "title": "Charge",
+      "title": "Fournaise",
       "text": "",
       "action": "",
       "value": {
-        "operator": "-",
-        "value": 40,
-        "supplement": ""
+        "operator" : "-",
+        "value" : 30,
+        "supplement" : ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "WATER",
     "value": {
       "operator": "x",
       "value": 2
@@ -37,9 +36,9 @@
   },
   "retreat_cost": 2,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Origines Antiques",
+    "card_number": 98
   },
-  "card_number": 18,
+  "card_number": 16,
   "rarity": "Commune"
 }

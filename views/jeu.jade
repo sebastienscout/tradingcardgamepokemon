@@ -11,21 +11,12 @@ block content
         div#board-opponent
             div.cards
                 div.cards-hand
-                    - var n = 0
                     ul
-                        while n < 7
-                            li
-                                img(src="images/board/back.png")
-                            - n++
                 div.cards-bench
-                    - var n = 0
                     ul
-                        while n < 3
-                            li
-                                img(src="images/board/back.png")
-                            - n++
                 div.cards-active
-                    img(src="images/cards/pokemon/XY/XY/24.png", class="interaction hvr-grow ")
+                    img(src="", class="interaction hvr-grow card-active" id="opponent-active")
+                    div.life-points
             div.numbered-cards
                 div.deck
                     p Deck
@@ -39,6 +30,7 @@ block content
             div.cards
                 div.cards-active
                     img(src="", class="interaction hvr-grow card-active" id="player-active")
+                    div.life-points
                 div.cards-bench
                     ul
 

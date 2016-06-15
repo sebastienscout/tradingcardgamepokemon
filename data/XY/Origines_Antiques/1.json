@@ -1,5 +1,5 @@
 {
-  "name": "Aspicot",
+  "name": "Mystherbe",
   "type": "PLANT",
   "stage": "BASE",
   "life_point": 50,
@@ -9,13 +9,13 @@
       "energies": [
         "PLANT"
       ],
-      "title": "Mange-Feuille",
-      "text": "Si le Pokémon Actif de votre adversaire est un Pokémon Plante, cette attaque inflige 20 dégâts supplémentaires.",
-      "action": "if (board.defender().type == 'PLANT') { board.defender().applyDamage(20); }",
+      "title": "Croche-Pied",
+      "text": "Lancez une pièce. Si c'est face, cette attaque inflige 10 dégâts supplémentaires.",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(10); }",
       "value": {
-        "operator": "-",
-        "value": 10,
-        "supplement": "+"
+        "operator" : "-",
+        "value" : "10",
+        "supplement" : "+"
       }
     }
   ],
@@ -35,9 +35,9 @@
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Origines Antiques",
+    "card_number": 98
   },
-  "card_number": 3,
+  "card_number": 1,
   "rarity": "Commune"
 }
