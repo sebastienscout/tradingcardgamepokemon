@@ -1,28 +1,26 @@
 {
-  "name": "Cabriolaine",
-  "type": "PLANT",
+  "name": "Otaria",
+  "type": "WATER",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 80,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "COLORLESS",
-        "COLORLESS"
+        "WATER"
       ],
-      "title": "Charge",
+      "title": "Verglas",
       "text": "",
       "action": "",
       "value": {
         "operator": "-",
-        "value": 40,
+        "value": 10,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "METAL",
     "value": {
       "operator": "x",
       "value": 2
@@ -33,13 +31,13 @@
     "value": {
       "operator": "-",
       "value": ""
-    }
-  },
-  "retreat_cost": 2,
-  "expansion": {
-    "name": "XY",
-    "card_number": 146
-  },
-  "card_number": 18,
-  "rarity": "Commune"
+    },
+    "retreat_cost": 2,
+    "expansion": {
+      "name": "Impact des Destins",
+      "card_number": 124
+    },
+    "card_number": 15,
+    "rarity": "Commune"
+  }
 }

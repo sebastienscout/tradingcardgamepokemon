@@ -1,23 +1,21 @@
 {
-  "name": "Cabriolaine",
+  "name": "Apitrini",
   "type": "PLANT",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 40,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "COLORLESS",
-        "COLORLESS"
+        "PLANT"
       ],
-      "title": "Charge",
+      "title": "Piqûre",
       "text": "",
       "action": "",
       "value": {
-        "operator": "-",
-        "value": 40,
-        "supplement": ""
+        "operator" : "-",
+        "value" : 10,
+        "supplement" : ""
       }
     }
   ],
@@ -35,11 +33,11 @@
       "value": ""
     }
   },
-  "retreat_cost": 2,
+  "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Origines Antiques",
+    "card_number": 98
   },
-  "card_number": 18,
+  "card_number": 9,
   "rarity": "Commune"
 }

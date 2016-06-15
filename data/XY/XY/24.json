@@ -4,13 +4,40 @@
   "stage": "BASE",
   "life_point": 50,
   "abilities": [],
-  "attacks": [ ],
-  "weakness": {     "type": "",     "value": {       "operator": "",       "value": 0     }   },
-  "resistance": {     "type": "",     "value": {}   },
+  "attacks": [
+    {
+      "energies": [
+        "FIRE"
+      ],
+      "title": "Feu Follet",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 20,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "WATER",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "-",
+      "value": ""
+    }
+  },
   "retreat_cost": 1,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 24
+  "card_number": 24,
+  "rarity": "Commune"
 }

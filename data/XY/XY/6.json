@@ -4,13 +4,41 @@
   "stage": "BASE",
   "life_point": 60,
   "abilities": [],
-  "attacks": [ ],
-  "weakness": {     "type": "",     "value": {       "operator": "",       "value": 0     }   },
-  "resistance": {     "type": "",     "value": {}   },
+  "attacks": [
+    {
+      "energies": [
+        "PLANT",
+        "PLANT"
+      ],
+      "title": "Attaque Tournante",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "-",
+      "value": ""
+    }
+  },
   "retreat_cost": 1,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 6
+  "card_number": 6,
+  "rarity": "Commune"
 }
