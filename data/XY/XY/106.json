@@ -1,27 +1,27 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Keunotor",
+  "type": "COLORLESS",
   "stage": "BASE",
   "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "COLORLESS",
+        "COLORLESS"
       ],
-      "title": "Attaque Tournante",
-      "text": "",
-      "action": "",
+      "title": "Croc de Mort",
+      "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
+      "action": "if (board.flipCoin() === core.Coin.TAILS) { null; }",
       "value": {
         "operator": "-",
-        "value": 30,
+        "value": 40,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "FIGHTING",
     "value": {
       "operator": "x",
       "value": 2
@@ -34,11 +34,11 @@
       "value": ""
     }
   },
-  "retreat_cost": 1,
+  "retreat_cost": 3,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 6,
+  "card_number": 106,
   "rarity": "Commune"
 }

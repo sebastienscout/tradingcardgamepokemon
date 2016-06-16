@@ -1,27 +1,36 @@
 {
-  "name": "Pyronille",
-  "type": "FIRE",
+  "name": "Axoloto",
+  "type": "FIGHTING",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "FIRE",
         "COLORLESS"
       ],
-      "title": "Fournaise",
+      "title": "Tit'Sieste",
+      "text": "Soignez 20 dégâts à ce Pokemon.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
+        "WATER",
+        "COLORLESS"
+      ],
+      "title": "Grosse Vague",
       "text": "",
       "action": "",
       "value": {
         "operator" : "-",
-        "value" : 30,
+        "value" : 20,
         "supplement" : ""
       }
     }
   ],
   "weakness": {
-    "type": "WATER",
+    "type": "PLANT",
     "value": {
       "operator": "x",
       "value": 2
@@ -39,6 +48,6 @@
     "name": "Origines Antiques",
     "card_number": 98
   },
-  "card_number": 16,
+  "card_number": 38,
   "rarity": "Commune"
 }

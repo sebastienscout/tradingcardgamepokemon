@@ -1,27 +1,26 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Embrylex",
+  "type": "FIGHTING",
   "stage": "BASE",
   "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "COLORLESS"
       ],
-      "title": "Attaque Tournante",
-      "text": "",
+      "title": "Attaque Imprudente",
+      "text": "Ce Pokémon s'inflige 10 dégâts.",
       "action": "",
       "value": {
         "operator": "-",
-        "value": 30,
+        "value": 20,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "PLANT",
     "value": {
       "operator": "x",
       "value": 2
@@ -36,9 +35,9 @@
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Impact Des Destins",
+    "card_number": 124
   },
-  "card_number": 6,
+  "card_number": 40,
   "rarity": "Commune"
 }

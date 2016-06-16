@@ -1,27 +1,27 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Scrutella",
+  "type": "PSYCHIC",
   "stage": "BASE",
   "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "COLORLESS",
+        "COLORLESS"
       ],
-      "title": "Attaque Tournante",
-      "text": "",
-      "action": "",
+      "title": "Rafale Psy",
+      "text": "Le Pokémon Actif de votre adversaire est maintenant Confus.",
+      "action": "board.Defender().addState(core.State.COUNFUSED);",
       "value": {
         "operator": "-",
-        "value": 30,
+        "value": 20,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "PSYCHIC",
     "value": {
       "operator": "x",
       "value": 2
@@ -36,9 +36,9 @@
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Impact Des Destins",
+    "card_number": 124
   },
-  "card_number": 6,
+  "card_number": 32,
   "rarity": "Commune"
 }

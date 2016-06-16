@@ -1,43 +1,44 @@
 {
-  "name": "Spoink",
+  "name": "Gringolem",
   "type": "PSYCHIC",
   "stage": "BASE",
-  "life_point": 60,
+  "life_point": 90,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PSYCHIC"
+        "COLORLESS",
+        "COLORLESS"
       ],
-      "title": "Saut Propulsé",
+      "title": "Poing Ecrasant",
       "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
       "action": "",
       "value": {
-        "operator": "-",
-        "value": 30,
-        "supplement": ""
+        "operator" : "-",
+        "value" : 30,
+        "supplement" : ""
       }
     }
   ],
   "weakness": {
-    "type": "PSYCHIC",
+    "type": "DARKNESS",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "FIGHTING",
     "value": {
-      "operator": "",
-      "value": ""
+      "operator": "-",
+      "value": 20
     }
   },
-  "retreat_cost": 1,
+  "retreat_cost": 3,
   "expansion": {
-    "name": "Impact Des Destins",
-    "card_number": 124
+    "name": "Origines Antiques",
+    "card_number": 98
   },
-  "card_number": 30,
+  "card_number": 34,
   "rarity": "Commune"
 }

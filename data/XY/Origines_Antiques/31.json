@@ -1,5 +1,5 @@
 {
-  "name": "Spoink",
+  "name": "Balbuto",
   "type": "PSYCHIC",
   "stage": "BASE",
   "life_point": 60,
@@ -9,13 +9,27 @@
       "energies": [
         "PSYCHIC"
       ],
-      "title": "Saut Propulsé",
-      "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
+      "title": "Gible",
+      "text": "",
       "action": "",
       "value": {
-        "operator": "-",
-        "value": 30,
-        "supplement": ""
+        "operator" : "-",
+        "value" : 10,
+        "supplement" : ""
+      }
+    },
+    {
+      "energies": [
+        "PSYCHIC",
+        "COLORLESS"
+      ],
+      "title": "Attaque Tournante",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator" : "-",
+        "value" : 20,
+        "supplement" : ""
       }
     }
   ],
@@ -35,9 +49,9 @@
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "Impact Des Destins",
-    "card_number": 124
+    "name": "Origines Antiques",
+    "card_number": 98
   },
-  "card_number": 30,
+  "card_number": 31,
   "rarity": "Commune"
 }

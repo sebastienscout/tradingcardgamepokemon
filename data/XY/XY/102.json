@@ -1,17 +1,18 @@
 {
-  "name": "Aspicot",
-  "type": "PLANT",
+  "name": "Nirondelle",
+  "type": "COLORLESS",
   "stage": "BASE",
   "life_point": 50,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT"
+        "COLORLESS",
+        "COLORLESS"
       ],
-      "title": "Mange-Feuille",
-      "text": "Si le Pokémon Actif de votre adversaire est un Pokémon Plante, cette attaque inflige 20 dégâts supplémentaires.",
-      "action": "if (board.defender().type == 'PLANT') { board.defender().applyDamage(20); }",
+      "title": "Aéropique",
+      "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires.",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }",
       "value": {
         "operator": "-",
         "value": 10,
@@ -20,17 +21,17 @@
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "LIGHTNING",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "FIGHTING",
     "value": {
-      "operator": "",
-      "value": ""
+      "operator": "-",
+      "value": 20
     }
   },
   "retreat_cost": 1,
@@ -38,6 +39,6 @@
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 3,
+  "card_number": 102,
   "rarity": "Commune"
 }

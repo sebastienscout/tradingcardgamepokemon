@@ -1,0 +1,54 @@
+{
+  "name": "Vostourno",
+  "type": "DARKNESS",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Groz'Yeux",
+      "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant Paralysé.",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().addState(core.State.PARALYZED);}",
+      "value": {}
+    },
+    {
+      "energies": [
+        "DARKNESS",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Vent Glacial",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 40,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "LIGHTNING",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "FIGHTING",
+    "value": {
+      "operator": "-",
+      "value": 20
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Impact Des Destins",
+    "card_number": 124
+  },
+  "card_number": 57,
+  "rarity": "Commune"
+}

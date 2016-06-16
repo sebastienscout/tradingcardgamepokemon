@@ -1,15 +1,15 @@
 {
-  "name": "Apitrini",
-  "type": "PLANT",
+  "name": "Tarsal",
+  "type": "FAIRY",
   "stage": "BASE",
-  "life_point": 40,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT"
+        "COLORLESS"
       ],
-      "title": "Piqûre",
+      "title": "Murmure",
       "text": "",
       "action": "",
       "value": {
@@ -17,20 +17,33 @@
         "value" : 10,
         "supplement" : ""
       }
+    {
+      "energies": [
+        "FAIRY",
+        "COLORLESS"
+      ],
+      "title": "Coup Magique",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator" : "-",
+        "value" : 20,
+        "supplement" : ""
+      }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "METAL",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "DARKNESS",
     "value": {
-      "operator": "",
-      "value": ""
+      "operator": "-",
+      "value": 20
     }
   },
   "retreat_cost": 1,
@@ -38,6 +51,6 @@
     "name": "Origines Antiques",
     "card_number": 98
   },
-  "card_number": 9,
+  "card_number": 52,
   "rarity": "Commune"
 }

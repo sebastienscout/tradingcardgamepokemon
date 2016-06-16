@@ -1,16 +1,30 @@
 {
-  "name": "Pyronille",
-  "type": "FIRE",
+  "name": "Terhal",
+  "type": "METAL",
   "stage": "BASE",
-  "life_point": 70,
+  "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "FIRE",
+        "METAL"
+      ],
+      "title": "Collision",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "METAL",
+        "COLORLESS",
         "COLORLESS"
       ],
-      "title": "Fournaise",
+      "title": "Attaque Tournante",
       "text": "",
       "action": "",
       "value": {
@@ -21,17 +35,17 @@
     }
   ],
   "weakness": {
-    "type": "WATER",
+    "type": "FIRE",
     "value": {
       "operator": "x",
       "value": 2
     }
   },
   "resistance": {
-    "type": "",
+    "type": "PSYCHIC",
     "value": {
-      "operator": "",
-      "value": ""
+      "operator": "-",
+      "value": 20
     }
   },
   "retreat_cost": 2,
@@ -39,6 +53,6 @@
     "name": "Origines Antiques",
     "card_number": 98
   },
-  "card_number": 16,
+  "card_number": 47,
   "rarity": "Commune"
 }

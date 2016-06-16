@@ -1,26 +1,27 @@
 {
-  "name": "Feunnec",
-  "type": "FIRE",
+  "name": "Charpenti",
+  "type": "FIGHTING",
   "stage": "BASE",
-  "life_point": 50,
+  "life_point": 70,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "FIRE"
+        "FIGHTING",
+        "COLORLESS"
       ],
-      "title": "Feu Follet",
-      "text": "",
-      "action": "",
+      "title": "Matelage",
+      "text": "Lancez une pièce. Si c'est face, cette attaque inflige 20 dégâts supplémentaires.",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(20); }",
       "value": {
         "operator": "-",
         "value": 20,
-        "supplement": ""
+        "supplement": "+"
       }
     }
   ],
   "weakness": {
-    "type": "WATER",
+    "type": "PSYCHIC",
     "value": {
       "operator": "x",
       "value": 2
@@ -33,11 +34,11 @@
       "value": ""
     }
   },
-  "retreat_cost": 1,
+  "retreat_cost": 2,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 24,
+  "card_number": 65,
   "rarity": "Commune"
 }

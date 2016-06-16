@@ -1,17 +1,16 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Riolu",
+  "type": "FIGHTING",
   "stage": "BASE",
   "life_point": 60,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "FIGHTING"
       ],
-      "title": "Attaque Tournante",
-      "text": "",
+      "title": "Poing Ecrasant",
+      "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
       "action": "",
       "value": {
         "operator": "-",
@@ -21,7 +20,7 @@
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "PSYCHIC",
     "value": {
       "operator": "x",
       "value": 2
@@ -36,9 +35,9 @@
   },
   "retreat_cost": 1,
   "expansion": {
-    "name": "XY",
-    "card_number": 146
+    "name": "Impact Des Destins",
+    "card_number": 124
   },
-  "card_number": 6,
+  "card_number": 46,
   "rarity": "Commune"
 }

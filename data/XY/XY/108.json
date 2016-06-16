@@ -1,27 +1,40 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Ponchiot",
+  "type": "COLORLESS",
   "stage": "BASE",
-  "life_point": 60,
+  "life_point": 50,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "COLORLESS"
       ],
-      "title": "Attaque Tournante",
+      "title": "Charge",
       "text": "",
       "action": "",
       "value": {
         "operator": "-",
-        "value": 30,
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Morsure",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 20,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "FIGHTING",
     "value": {
       "operator": "x",
       "value": 2
@@ -39,6 +52,6 @@
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 6,
+  "card_number": 108,
   "rarity": "Commune"
 }

@@ -1,27 +1,27 @@
 {
-  "name": "Coxy",
-  "type": "PLANT",
+  "name": "Venipatte",
+  "type": "PSYCHIC",
   "stage": "BASE",
-  "life_point": 60,
+  "life_point": 70,
   "abilities": [],
   "attacks": [
     {
       "energies": [
-        "PLANT",
-        "PLANT"
+        "PSYCHIC",
+        "COLORLESS"
       ],
-      "title": "Attaque Tournante",
-      "text": "",
-      "action": "",
+      "title": "Dard-Venin",
+      "text": "Le Pokémon Actif de votre adversaire est maintenant Empoisonné.",
+      "action": "board.defender().addState(core.State.POISONED);",
       "value": {
         "operator": "-",
-        "value": 30,
+        "value": 20,
         "supplement": ""
       }
     }
   ],
   "weakness": {
-    "type": "FIRE",
+    "type": "PSYCHIC",
     "value": {
       "operator": "x",
       "value": 2
@@ -34,11 +34,11 @@
       "value": ""
     }
   },
-  "retreat_cost": 1,
+  "retreat_cost": 3,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 6,
+  "card_number": 51,
   "rarity": "Commune"
 }
