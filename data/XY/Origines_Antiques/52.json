@@ -13,10 +13,11 @@
       "text": "",
       "action": "",
       "value": {
-        "operator" : "-",
-        "value" : 10,
-        "supplement" : ""
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
       }
+    },
     {
       "energies": [
         "FAIRY",
