@@ -16,9 +16,13 @@ jQuery(document).ready(function(){
     var ok = false;
     var envoi = new Array();
     var indice = 0;
+    var nbCarteValide = 60;
+
+
 
 
     $("li").on('click', function() {
+
 
         if ( $(this).text() == "Pokémons" ){
             $("#pokemons").show();
@@ -58,68 +62,86 @@ jQuery(document).ready(function(){
 
     //clic gauche => ajouter carte
     $(".cardContent").click(function(event) {
-
-            var $input = $(this).children("input");
-
-
-            if(((($input.val() < 4)&&($(this).parent().attr('id') == "pokemons"))
-                ||(($(this).parent().attr('id') == "energies")&&bool_energies)
-                ||(($(this).parent().attr('id') == "trainer")&&bool_trainer))
-                &&(bool_total)&&!(ok)
-                 ){
-                    $(this).addClass("purple");
-                    $input.val(+$input.val() + 1);
-                    $(this).children(".rond").html("<span>"+$input.val()+"</span>");
-                    $(this).children(".rond").css("border","2px solid white");
-                    $(this).children(".rond").css("background-color","red");
-
-                    total += 1;
+        var $input = $(this).children("input");
 
 
-                    if($(this).parent().attr('id') == "pokemons"){
-                        pokemons +=1;
-                    }
-                    else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
-                        energies +=1;
-                    }
-                    else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
-                        trainer +=1;
-                    }
-            }
+        if(((($input.val() < 4)&&($(this).parent().attr('id') == "pokemons"))
+            ||(($(this).parent().attr('id') == "energies")&&bool_energies)
+            ||(($(this).parent().attr('id') == "trainer")&&bool_trainer))
+            &&(bool_total)&&!(ok)
+             ){
+                $(this).addClass("purple");
+                $input.val(+$input.val() + 1);
+                $(this).children(".rond").html("<span>"+$input.val()+"</span>");
+                $(this).children(".rond").css("border","2px solid white");
+                $(this).children(".rond").css("background-color","red");
 
-            verif2();
+                total += 1;
+
+
+                if($(this).parent().attr('id') == "pokemons"){
+                    pokemons +=1;
+                }
+                else if(($(this).parent().attr('id') == "energies")&&(bool_energies)){
+                    energies +=1;
+                }
+                else if(($(this).parent().attr('id') == "trainer")&&(bool_trainer)){
+                    trainer +=1;
+                }
+        }
+
+        verif2();
+
+        // Active/Desactive bouton enregistrement
+        console.log(total);
+        if(total == nbCarteValide){ // Si 60 cartes sont selectionnees, on active le bouton de validation
+            $("#envoiDeck").prop('disabled', false);
+            //$("#envoiDeck").
+        }else{ // Sinon on desactive le bouton
+            $("#envoiDeck").prop('disabled', true);
+        }
 
     });
 
     //clic droit => supprimer carte
     $(".cardContent").bind("contextmenu",function(e){
         var $input = $(this).children("input");
-            if ($input.val() >=1) {
-                if($(this).parent().attr('id') == "pokemons"){
-                    pokemons -=1;
-                }
-                else if($(this).parent().attr('id') == "energies"){
-                    energies -=1;
-                }
-                else if($(this).parent().attr('id') == "trainer"){
-                    trainer -=1;
-                }
-                $input.val(+$input.val() - 1);
-                total -= 1;
-                $(this).children(".rond").text($input.val());
-
-                if ($input.val() == 0) {
-                    $(this).children(".rond").text("");
-                    $(this).children(".rond").css("border","0");
-                    $(this).children(".rond").css("background-color","");
-                    if ($(this).hasClass("purple")) {
-                        $(this).removeClass("purple");
-                    }
-                }
-
-
+        if ($input.val() >=1) {
+            if($(this).parent().attr('id') == "pokemons"){
+                pokemons -=1;
             }
-            verif2();
+            else if($(this).parent().attr('id') == "energies"){
+                energies -=1;
+            }
+            else if($(this).parent().attr('id') == "trainer"){
+                trainer -=1;
+            }
+            $input.val(+$input.val() - 1);
+            total -= 1;
+            $(this).children(".rond").text($input.val());
+
+            if ($input.val() == 0) {
+                $(this).children(".rond").text("");
+                $(this).children(".rond").css("border","0");
+                $(this).children(".rond").css("background-color","");
+                if ($(this).hasClass("purple")) {
+                    $(this).removeClass("purple");
+                }
+            }
+
+
+        }
+        verif2();
+
+        // Active/Desactive bouton enregistrement
+        console.log(total);
+        if(total == nbCarteValide){ // Si 60 cartes sont selectionnees, on active le bouton de validation
+            $("#envoiDeck").prop('disabled', false);
+            //$("#envoiDeck").
+        }else{ // Sinon on desactive le bouton
+            $("#envoiDeck").prop('disabled', true);
+        }
+
 
             return false;
         });
@@ -216,20 +238,47 @@ jQuery(document).ready(function(){
             if (nb>0){
                 for(var i =0;i<nb;i++){
                     if ($(this).parent().hasClass("xy"))
-                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":143};
+                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":143};
                     else if ($(this).parent().hasClass("generations"))
-                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":83};
+                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":83};
                     else if ($(this).parent().hasClass("poings_furieux"))
-                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":111};
+                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":111};
                     else
-                        envoi[indice]={"num-carte":$(this).attr("id"),"id-deck":1,"id-generation":9};
+                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":9};
                     indice++;
                     //console.log(i + " " + nb + " " +indice);
                 }
             }
         });
-            console.log("test");
-            console.log(envoi);
+        //Faire envoi du tableau vers le routes/creation_deck.js
+        //Faire l'insertion dans la base depuis routes/creation_deck.js
+        //$("#envoiDeck").click(function(){
+
+
+
+        $.ajax({
+            type: 'PUT',
+            url: '/creation-deck',
+            data: {
+                tab: envoi
+            },
+            sucess:function(sucess) {
+                alert('sucess');
+                console.log('sucess');
+
+            },
+            err:function(err) {
+                alert('err');
+                console.log('err');
+            }
+        });
+
+
+
+
+
+
+        //});
     });
 
 

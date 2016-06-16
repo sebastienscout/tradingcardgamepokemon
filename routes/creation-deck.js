@@ -61,4 +61,42 @@ router.get('/', function(req, res, next) {
 
   }
 });
+
+
+
+router.put('', function(req, res) {
+    if(req.session._id && req.session.username && req.session.mail) {
+        var i;
+        var tab_cartes = [];
+
+        // Cree le document du type Deck
+        var newDeck = {
+            id_joueur: req.session._id
+        };
+
+        // Insert le deck et recupere l'id du Deck insere
+        req.app.db.models.Deck.create(newDeck, function (err, deck) {
+            // Cree le tableau de documents de type carte
+            for (i = 0; i < 60; i++) {
+                tab_cartes[i] = {
+                    num_carte: req.body["tab[" + i + "][num_carte]"],
+                    id_deck: deck._id,
+                    id_generation: req.body["tab[" + i + "][id_generation]"]
+
+                };
+            }
+            // Insertion des cartes
+            req.app.db.models.Carte.insertMany(tab_cartes);
+
+        });
+    }
+});
+
+
+
+
+
+
+
+
 module.exports = router;
