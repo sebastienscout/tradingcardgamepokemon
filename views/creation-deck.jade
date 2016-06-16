@@ -18,28 +18,13 @@ block content
 
     div.cartes
         div#pokemons
-            -for (var i = 0; i < card.length; i++) {
-                 div.cardContent.hvr-grow.xy
-
-                    img(src="images/cards/pokemon/XY/XY/" + card[i].card_number + ".png")
+            each card in cards
+                div(class="cardContent hvr-grow", expansion='#{card.expansion.name}')
+                    img(src="images/cards/pokemon/XY/"+card.expansion.name+"/" + card.card_number + ".png")
                     div.rond
+                    input(type="number", id= card.card_number, step="1" readonly)
 
-                    input(type="number", id= i+1, step="1" readonly)
-            - }
 
-            -for (var i = 0; i < card2.length; i++) {
-                div.cardContent.hvr-grow.generations
-                    img(src="images/cards/pokemon/XY/Generations/" + card2[i].card_number + ".png")
-                    div.rond
-                    input(type="number", id= i + 1, step="1" readonly)
-            - }
-
-            -for (var i = 0; i < card3.length; i++) {
-            div.cardContent.hvr-grow.poings_furieux
-                img(src="images/cards/pokemon/XY/Poings Furieux/" + card3[i].card_number + ".png")
-                div.rond
-                input(type="number", id= i + 1, step="1" readonly)
-            - }
 
         div#energies
             -for (var i = 74; i < 83; i++) {
@@ -47,14 +32,6 @@ block content
                     img(src="images/cards/energy/" + i + ".png")
                     div.rond
                     input(type="number", id= i, step="1" readonly)
-            - }
-
-        div#trainer
-            -for (var i = 59; i < 73; i++) {
-             div.cardContent.hvr-grow
-                img(src="images/cards/trainer/" + i + ".png" readonly)
-                div.rond
-                input(type="number", id= i, step="1")
             - }
 
     div#donnees
