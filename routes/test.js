@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
 
     var newGenerationEnergies = {
         num_generation: 9,
-        nom_generation: 'Energies'
+        nom_generation: 'energy'
     };
 
     req.app.db.models.Generation.create(

@@ -1,18 +1,18 @@
 var merge = require('merge');
-var core = merge(require('./ability'), require('./action'), require('./attack'), require('./energy'),
+var core = merge(require('./ability'), require('./action'), require('./attack'), require('./energy'), require('./energy_card'),
   require('./expansion'), require('./pokemon'), require('./resistance'), require('./stage'),
   require('./state'), require('./value'), require('./weakness'));
 
-module.exports = ( function (self) {
+module.exports = function (self) {
   "use strict";
 
   self.Builder = function () {
     this.createFromJSON = function (json) {
       var data = JSON.parse(json);
       var weakness = data.weakness ? new core.Weakness(core.EnergyType[data.weakness.type],
-        new core.Value(data.weakness.value.operator, data.weakness.value.value, data.weakness.value.supplement)) : null;
+          new core.Value(data.weakness.value.operator, data.weakness.value.value, data.weakness.value.supplement)) : null;
       var resistance = data.resistance ? new core.Resistance(core.EnergyType[data.resistance.type],
-        new core.Value(data.resistance.value.operator, data.resistance.value.value, data.resistance.value.supplement)) : null;
+          new core.Value(data.resistance.value.operator, data.resistance.value.value, data.resistance.value.supplement)) : null;
       var expansion = new core.Expansion(data.expansion.name, data.expansion.card_number);
       var attacks = [];
 
@@ -26,9 +26,19 @@ module.exports = ( function (self) {
         attacks.push(new core.Attack(energies, attack.title, attack.text, new core.Action(attack.action), value));
       });
       return new core.PokemonCard(data.name, core.EnergyType[data.type], core.Stage[data.stage], data.evolution, data.life_point,
-        data.abilities, attacks, weakness, resistance, data.retreat_cost, expansion, data.card_number, data.rarity);
+          data.abilities, attacks, weakness, resistance, data.retreat_cost, expansion, data.card_number, data.rarity);
     };
+
+
+
+    this.createEnergyFromJSON = function (json) {
+      var data = JSON.parse(json);
+      var expansion = new core.Expansion(data.expansion.name, data.expansion.card_number);
+
+      return new core.EnergyCard(data.type, expansion, data.card_number);
+    };
+
   };
 
   return self;
-}({}));
+}({});

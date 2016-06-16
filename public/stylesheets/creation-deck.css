@@ -89,9 +89,21 @@ div{
     background: rgba(0,0,0,0);
 }
 
-#entete button{
+#envoiDeck{
     position: absolute;
     right: 15px;
+    background-color: #C59934;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 5px 20px;
+    top:15px;
+}
+
+#reload{
+    position: absolute;
+    right: 200px;
     background-color: #C59934;
     color: white;
     border: 0;

@@ -6,16 +6,27 @@ var path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
   if(!req.session._id && !req.session.username && !req.session.mail){ // Si non connecte, redirige vers connexion
     res.redirect('/connexion');
   }else{
 
       var tabPokemon=[];
+      var tabEnergy=[];
       var filesGeneration = fs.readdirSync('../data/XY/Generations/');
       var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
       var filesXY = fs.readdirSync('../data/XY/XY/');
       var filesImpactDesDestins = fs.readdirSync('../data/XY/Impact_Des_Destins/');
       var filesOriginesAntiques = fs.readdirSync('../data/XY/Origines_Antiques/');
+      var filesEnergy = fs.readdirSync('../data/XY/energy/');
+
+
+      filesEnergy.forEach(function (file) {
+          if (path.extname(file) === '.json') {
+              var card = new core.Builder().createEnergyFromJSON(fs.readFileSync('../data/XY/energy/' + file, 'utf8'));
+              tabEnergy.push(card.to_object());
+          }
+      });
 
       filesGeneration.forEach(function (file) {
           if (path.extname(file) === '.json') {
@@ -58,7 +69,7 @@ router.get('/', function(req, res, next) {
 
 
 
-    res.render('creation-deck', { cards: tabPokemon  });
+    res.render('creation-deck', { cards: tabPokemon, energies: tabEnergy });
 
   }
 });
