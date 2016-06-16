@@ -10,7 +10,7 @@
         "FAIRY","COLORLESS"
       ],
       "title": "Jonglerie",
-      "text": "Lancez 4 pièces. Cette attaque inflige 10 dégâts multipliés par le nombre de côtés face.",
+      "text": "Lancez 4 piÃ¨ces. Cette attaque inflige 10 dÃ©gÃ¢ts multipliÃ©s par le nombre de cÃ´tÃ©s face.",
       "action": "for (var i =0;i<4;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(10); }}",
       "value": {
       }

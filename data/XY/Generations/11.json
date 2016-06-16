@@ -10,7 +10,7 @@
         "FIRE", "COLORLESS"
       ],
       "title": "Manteau de Feu",
-      "text": "Attachez une carte Energie FEU de votre pile de dÈfausse ‡ ce PokÈmon.",
+      "text": "Attachez une carte Energie FEU de votre pile de d√©fausse √† ce Pok√©mon.",
       "action": "",
       "value": {
         "operator": "",
@@ -26,7 +26,7 @@
         "COLORLESS"
       ],
       "title": "Souffle de Feu",
-      "text": "Lancez 2 piËces. Cette attaque inflige 40 dÈg‚ts supplÈmentaires pour chaque cÙtÈ face.",
+      "text": "Lancez 2 pi√®ces. Cette attaque inflige 40 d√©g√¢ts suppl√©mentaires pour chaque c√¥t√© face.",
       "action": "for (var i =0;i<2;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
       "value": {
         "operator": "-",
@@ -54,6 +54,6 @@
     "name": "Generations",
     "card_number": 83
   },
-  "card_number": 43,
+  "card_number": 11,
   "rarity": "Commune"
 }

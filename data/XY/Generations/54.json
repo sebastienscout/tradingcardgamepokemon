@@ -10,7 +10,7 @@
         "COLORLESS"
       ],
       "title": "Bluff",
-      "text": "Lancez une piËce. Si c'est face, le PokÈmon Actif de votre adversaire est maintenant est maintenant ParalysÈ.",
+      "text": "Lancez une pi√®ce. Si c'est face, le Pok√©mon Actif de votre adversaire est maintenant est maintenant Paralys√©.",
       "action": "",
       "value": {
         "operator": "-",
@@ -24,7 +24,7 @@
         "COLORLESS"
       ],
       "title": "Embuscade",
-      "text": "Lancez une piËce. Si c'est face, cette attaque inflige 30 dÈg‚ts supplÈmentaires.",
+      "text": "Lancez une pi√®ce. Si c'est face, cette attaque inflige 30 d√©g√¢ts suppl√©mentaires.",
       "action": "",
       "value": {
         "operator": "-",
@@ -52,6 +52,6 @@
     "name": "Generations",
     "card_number": 83
   },
-  "card_number": 55,
+  "card_number": 54,
   "rarity": "Commune"
 }

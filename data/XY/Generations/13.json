@@ -10,7 +10,7 @@
         "FIRE"
       ],
       "title": "Fulmi-Bonus",
-      "text": "Défaussez une carte Energie FEU de votre main. Dans ce cas, piochez 3 cartes.",
+      "text": "DÃ©faussez une carte Energie FEU de votre main. Dans ce cas, piochez 3 cartes.",
       "action": "",
       "value": {
         "operator": "",
@@ -24,8 +24,8 @@
         "COLORLESS",
         "COLORLESS"
       ],
-      "title": "Déflagration",
-      "text": "Lancez une pièce. Si c'est pile, défaussez une Energie FEU attachée à ce Pokémon.",
+      "title": "DÃ©flagration",
+      "text": "Lancez une piÃ¨ce. Si c'est pile, dÃ©faussez une Energie FEU attachÃ©e Ã  ce PokÃ©mon.",
       "action": "",
       "value": {
         "operator": "-",
@@ -53,6 +53,6 @@
     "name": "Generations",
     "card_number": 83
   },
-  "card_number": 43,
+  "card_number": 13,
   "rarity": "Commune"
 }

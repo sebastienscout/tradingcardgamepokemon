@@ -10,7 +10,7 @@
         "COLORLESS","COLORLESS","COLORLESS"
       ],
       "title": "Furie",
-      "text": "Lancez 3 piËces. Cette attaque inflige 40 dÈg‚ts multipliÈs par le nombre de cÙtÈs face.",
+      "text": "Lancez 3 pi√®ces. Cette attaque inflige 40 d√©g√¢ts multipli√©s par le nombre de c√¥t√©s face.",
       "action": "for (var i =0;i<3;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
       "value": {
         "operator": "-",
@@ -48,6 +48,6 @@
     "name": "Generations",
     "card_number": 83
   },
-  "card_number": 55,
+  "card_number": 56,
   "rarity": "Commune"
 }
