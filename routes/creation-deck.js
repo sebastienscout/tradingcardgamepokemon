@@ -14,6 +14,8 @@ router.get('/', function(req, res, next) {
       var filesGeneration = fs.readdirSync('../data/XY/Generations/');
       var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
       var filesXY = fs.readdirSync('../data/XY/XY/');
+      var filesImpactDesDestins = fs.readdirSync('../data/XY/Impact_Des_Destins/');
+      var filesOriginesAntiques = fs.readdirSync('../data/XY/Origines_Antiques/');
 
       filesGeneration.forEach(function (file) {
           if (path.extname(file) === '.json') {
@@ -36,6 +38,22 @@ router.get('/', function(req, res, next) {
               tabPokemon.push(card.to_object());
           }
       });
+
+      filesImpactDesDestins.forEach(function (file) {
+          if (path.extname(file) === '.json') {
+              var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Impact_Des_Destins/' + file, 'utf8'));
+              tabPokemon.push(card.to_object());
+          }
+      });
+
+
+      filesOriginesAntiques.forEach(function (file) {
+          if (path.extname(file) === '.json') {
+              var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Origines_Antiques/' + file, 'utf8'));
+              tabPokemon.push(card.to_object());
+          }
+      });
+
 
 
 

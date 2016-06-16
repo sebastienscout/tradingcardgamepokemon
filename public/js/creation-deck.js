@@ -244,8 +244,12 @@ jQuery(document).ready(function(){
                         envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":83};
                     else if ($(this).parent().attr("expansion") == "Poings Furieux")
                         envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":111};
+                    else if ($(this).parent().attr("expansion") == "Impact Des Destins")
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":124};
+                    else if ($(this).parent().attr("expansion") == "Origines Antiques")
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":98};
                     else
-                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":9};
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":9}; //Cartes énergies 
                     indice++;
                     //console.log(i + " " + nb + " " +indice);
                 }
