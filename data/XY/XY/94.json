@@ -1,0 +1,57 @@
+{
+  "name": "Sucroquin",
+  "type": "FAIRY",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Charge",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "FAIRY",
+        "COLORLESS"
+      ],
+      "title": "Vent Féérique",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 20,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "METAL",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "DARKNESS",
+    "value": {
+      "operator": "-",
+      "value": 20
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "XY",
+    "card_number": 146
+  },
+  "card_number": 94,
+  "rarity": "Commune"
+}

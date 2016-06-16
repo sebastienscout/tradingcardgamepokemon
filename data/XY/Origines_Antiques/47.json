@@ -1,0 +1,58 @@
+{
+  "name": "Terhal",
+  "type": "METAL",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "METAL"
+      ],
+      "title": "Collision",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "METAL",
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Attaque Tournante",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator" : "-",
+        "value" : 30,
+        "supplement" : ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIRE",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "PSYCHIC",
+    "value": {
+      "operator": "-",
+      "value": 20
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Origines Antiques",
+    "card_number": 98
+  },
+  "card_number": 47,
+  "rarity": "Commune"
+}

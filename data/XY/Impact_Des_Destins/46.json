@@ -1,0 +1,43 @@
+{
+  "name": "Riolu",
+  "type": "FIGHTING",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "FIGHTING"
+      ],
+      "title": "Poing Ecrasant",
+      "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 30,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PSYCHIC",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Impact Des Destins",
+    "card_number": 124
+  },
+  "card_number": 46,
+  "rarity": "Commune"
+}

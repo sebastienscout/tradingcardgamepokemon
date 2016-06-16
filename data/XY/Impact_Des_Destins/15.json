@@ -29,15 +29,15 @@
   "resistance": {
     "type": "",
     "value": {
-      "operator": "-",
+      "operator": "",
       "value": ""
-    },
+    }
+  },
     "retreat_cost": 2,
     "expansion": {
-      "name": "Impact des Destins",
+      "name": "Impact Des Destins",
       "card_number": 124
     },
     "card_number": 15,
     "rarity": "Commune"
   }
-}

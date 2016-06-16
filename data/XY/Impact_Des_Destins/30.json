@@ -11,7 +11,7 @@
       ],
       "title": "Saut Propulsé",
       "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
-      "action": "board.attacker().",
+      "action": "",
       "value": {
         "operator": "-",
         "value": 30,
@@ -29,15 +29,15 @@
   "resistance": {
     "type": "",
     "value": {
-      "operator": "-",
+      "operator": "",
       "value": ""
-    },
-    "retreat_cost": 1,
-    "expansion": {
-      "name": "Impact des Destins",
-      "card_number": 124
-    },
-    "card_number": 30,
-    "rarity": "Commune"
-  }
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Impact Des Destins",
+    "card_number": 124
+  },
+  "card_number": 30,
+  "rarity": "Commune"
 }

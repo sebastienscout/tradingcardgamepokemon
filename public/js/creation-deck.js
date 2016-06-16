@@ -237,14 +237,15 @@ jQuery(document).ready(function(){
 
             if (nb>0){
                 for(var i =0;i<nb;i++){
-                    if ($(this).parent().hasClass("xy"))
-                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":143};
-                    else if ($(this).parent().hasClass("generations"))
-                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":83};
-                    else if ($(this).parent().hasClass("poings_furieux"))
-                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":111};
+
+                    if ($(this).parent().attr("expansion") == "XY")
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":143};
+                    else if ($(this).parent().attr("expansion")=="Generations")
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":83};
+                    else if ($(this).parent().attr("expansion") == "Poings Furieux")
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":111};
                     else
-                        envoi[indice]={"num_carte":$(this).attr("id"),"id_deck":1,"id_generation":9};
+                        envoi[indice]={"num_carte":parseInt($(this).attr("id")),"id_deck":1,"id_generation":9};
                     indice++;
                     //console.log(i + " " + nb + " " +indice);
                 }

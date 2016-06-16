@@ -7,6 +7,15 @@
   "attacks": [
     {
       "energies": [
+        "COLORLESS"
+      ],
+      "title": "Mentor",
+      "text": "Lancez une pièce. Si c'est face, cherchez une carte Supporter dans votre deck, montrez-la, puis ajoutez-la à votre main. Mélangez ensuite votre deck.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
         "PLANT",
         "COLORLESS",
         "COLORLESS"
@@ -31,7 +40,7 @@
   "resistance": {
     "type": "",
     "value": {
-      "operator": "-",
+      "operator": "",
       "value": ""
     }
   },

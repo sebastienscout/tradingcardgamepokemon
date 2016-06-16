@@ -1,0 +1,53 @@
+{
+  "name": "Axoloto",
+  "type": "FIGHTING",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Tit'Sieste",
+      "text": "Soignez 20 dégâts à ce Pokemon.",
+      "action": "",
+      "value": {}
+    },
+    {
+      "energies": [
+        "WATER",
+        "COLORLESS"
+      ],
+      "title": "Grosse Vague",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator" : "-",
+        "value" : 20,
+        "supplement" : ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PLANT",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 2,
+  "expansion": {
+    "name": "Origines Antiques",
+    "card_number": 98
+  },
+  "card_number": 38,
+  "rarity": "Commune"
+}

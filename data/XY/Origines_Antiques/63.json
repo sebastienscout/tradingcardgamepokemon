@@ -1,0 +1,57 @@
+{
+  "name": "Evoli",
+  "type": "COLORLESS",
+  "stage": "BASE",
+  "life_point": 60,
+  "abilities": [],
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS"
+      ],
+      "title": "Charge",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 10,
+        "supplement": ""
+      }
+    },
+    {
+      "energies": [
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Coup Rapide",
+      "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
+      "action":"",
+      "value": {
+        "operator" : "-",
+        "value" : 30,
+        "supplement" : ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "FIGHTING",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
+  "retreat_cost": 1,
+  "expansion": {
+    "name": "Origines Antiques",
+    "card_number": 98
+  },
+  "card_number": 63,
+  "rarity": "Commune"
+}

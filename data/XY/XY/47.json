@@ -4,13 +4,41 @@
   "stage": "BASE",
   "life_point": 70,
   "abilities": [],
-  "attacks": [ ],
-  "weakness": {     "type": "",     "value": {       "operator": "",       "value": 0     }   },
-  "resistance": {     "type": "",     "value": {}   },
+  "attacks": [
+    {
+      "energies": [
+        "COLORLESS",
+        "COLORLESS"
+      ],
+      "title": "Morsure",
+      "text": "",
+      "action": "",
+      "value": {
+        "operator": "-",
+        "value": 20,
+        "supplement": ""
+      }
+    }
+  ],
+  "weakness": {
+    "type": "PSYCHIC",
+    "value": {
+      "operator": "x",
+      "value": 2
+    }
+  },
+  "resistance": {
+    "type": "",
+    "value": {
+      "operator": "",
+      "value": ""
+    }
+  },
   "retreat_cost": 2,
   "expansion": {
     "name": "XY",
     "card_number": 146
   },
-  "card_number": 47
+  "card_number": 47,
+  "rarity": "Commune"
 }

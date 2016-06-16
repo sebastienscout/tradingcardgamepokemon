@@ -30,7 +30,7 @@
   "resistance": {
     "type": "",
     "value": {
-      "operator": "-",
+      "operator": "",
       "value": ""
     }
   },
