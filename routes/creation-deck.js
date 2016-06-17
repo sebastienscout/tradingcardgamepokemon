@@ -99,9 +99,9 @@ router.put('', function(req, res) {
             }
             // Insertion des cartes
             req.app.db.models.Carte.insertMany(tab_cartes);
-
         });
     }
+    res.redirect('/menu');
 });
 
 
