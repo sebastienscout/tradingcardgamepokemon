@@ -8,7 +8,7 @@ block content
     form(method="post")
 
     div#entete
-        h1 Création / Modification du Deck
+        h1 Création du Deck
         button(id="reload") Remettre à 0
         button(id="envoiDeck" disabled="disabled") Enregistrer
     div#menu
@@ -32,7 +32,7 @@ block content
                 div(class="cardContent hvr-grow", expansion='#{energy.expansion.name}')
                     img(src="images/cards/" + energy.expansion.name + "/" + energy.card_number + ".png")
                     div.rond
-                    input(type="number", id= i, step="1" readonly)
+                    input(type="number", id= energy.card_number, step="1" readonly)
 
     div#donnees
 

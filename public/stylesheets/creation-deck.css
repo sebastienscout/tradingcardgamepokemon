@@ -1,3 +1,7 @@
+html{
+    height:100%;
+}
+
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,7 +9,7 @@ body {
     background-size: cover;
     color: white;
     overflow: hidden;
-    height:1000px;
+    height: 100%;
 }
 
 a {
@@ -101,6 +105,9 @@ div{
     top:15px;
 }
 
+#envoiDeck:disabled{
+    opacity: 0.25;
+}
 #reload{
     position: absolute;
     right: 200px;
@@ -115,11 +122,10 @@ div{
 
 .cartes{
     margin-top: 1%;
-
     display:inline-block;
     width:70%;
     overflow-y: scroll;
-    height:70%;
+    height: 70%;
 }
 
 #entete h1{
