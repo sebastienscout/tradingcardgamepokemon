@@ -22,10 +22,11 @@ module.exports = ( function (self) {
       }
       return tab;
     };
+
     this.deckLengh = function() {
       return deck.deckLengh();
+    };
 
-    }
     this.cancelInitialHand = function () {
       hand = [];
       deck.mix();
@@ -62,24 +63,30 @@ module.exports = ( function (self) {
       for (var i = 0; i < 7; ++i) {
         hand.push(deck.takeFirstCard());
       }
+    };
 
+    // Retrait du pokémon
+    this.withdraw = function(idPokemonBench) {
+      var tempPokemon = bench[idPokemonBench];
+      bench.splice(idPokemonBench, 1, active_pokemon);
+      active_pokemon = tempPokemon;
     };
 
     this.takeCardInHand = function (index) {
       if (index < hand.length) {
         var card = hand[index];
-
         hand.splice(index, 1);
         return card;
-      } else {
+      }
+      else {
         return null;
       }
     };
-    this.addBench=function(id) {
 
+    this.addBench=function(id) {
         bench.push(hand[id]);
-      
-    }
+    };
+
     this.bench = function(){
       var tab =[];
       var i=0;
@@ -87,16 +94,22 @@ module.exports = ( function (self) {
         tab.push(bench[i].to_object());
       }
       return tab;
-    }
+    };
+
     this.benchToActive = function(id) {
       if (active_pokemon == null && !bench.empty) {
-        active_pokemon = bench[id].to_object();
+        active_pokemon = bench[id];
         bench.splice(id, 1);
       }
-    }
+    };
+
     this.activePokemon = function() {
-      return active_pokemon;
-    }
+      if (active_pokemon != null) {
+        return active_pokemon.to_object();
+      }
+      return null;
+    };
+
     var init = function (_deck) {
       deck = _deck;
       deck.mix();

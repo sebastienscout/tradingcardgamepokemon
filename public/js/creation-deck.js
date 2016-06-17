@@ -262,18 +262,13 @@ $(document).ready(function() {
             sucess: function (sucess) {
                 alert('sucess');
                 console.log('sucess');
-
             },
             err: function (err) {
                 alert('err');
                 console.log('err');
             }
         });
-
-
-        //});
-
-
+        window.location.replace("/menu");
     });
 
 

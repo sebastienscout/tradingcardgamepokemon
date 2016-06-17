@@ -10,6 +10,7 @@ var handOpponent = boardOpponent.children('div.cards').children('div.cards-hand'
 var benchPlayer = boardPlayer.children('div.cards').children('div.cards-bench').children('ul');
 var benchOpponent = boardOpponent.children('div.cards').children('div.cards-bench').children('ul');
 var lifePointsPlayer = boardPlayer.children('div.cards').children('div.cards-active').children('div.life-points');
+var lifePointsOpponent = boardOpponent.children('div.cards').children('div.cards-active').children('div.life-points');
 var tabBench;
 var main;
 var pokemonActive;
@@ -17,6 +18,11 @@ var pokemonActive;
 socket.on('life-points',function(pv) {
     lifePointsPlayer.html(pv);
 });
+
+socket.on('life-points-opponent',function(pv) {
+    lifePointsOpponent.html(pv);
+});
+
 socket.on('hand',function(hand) {
     handPlayer.html('');
     $.each(hand, function(i, card){
@@ -24,12 +30,14 @@ socket.on('hand',function(hand) {
     });
     main=hand;
 });
+
 socket.on('hand-opponent',function(nbHand) {
     handOpponent.html('');
     for(var i=0 ; i < nbHand; i++) {
         handOpponent.append('<li><img src="images/board/back.png"/></li>');
     }
 });
+
 socket.on('bench',function(bench) {
     benchPlayer.html('');
     $.each(bench, function(i, card){
@@ -37,27 +45,33 @@ socket.on('bench',function(bench) {
     });
     tabBench=bench;
 });
+
 socket.on('bench-opponent',function(nbBench) {
     benchOpponent.html('');
     for(var i=0 ; i < nbBench; i++) {
         benchOpponent.append('<li><img src="images/board/back.png"/></li>');
     }
 });
+
 socket.on('pokemonActive',function(pokActive) {
     pokemonActive = pokActive;
     $('#player-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
     $('#player-active').parent().css('visibility','visible');
 });
+
 socket.on('pokemonActive-opponent',function(pokActive) {
     $('#opponent-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
     $('#opponent-active').parent().css('visibility','visible');
 });
+
 socket.on('nbCardDeck',function(nbCarteDeck) {
     boardPlayer.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);
 });
+
 socket.on('nbCardDeck-opponent',function(nbCarteDeck) {
     boardOpponent.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);
 });
+
 $(document).on('click','.interaction',function(event){
     event.stopPropagation();
     var id = $(this).attr('id');
@@ -76,22 +90,40 @@ $(document).on('click','.interaction',function(event){
         $.each(pokemonActive.attacks, function(i, attack) {
             $('#menu-card').append('<li><a idAttack="' + i + '" id="attackActive" href="#">"' + attack.title + '"</a></li>');
         });
+        $('#menu-card').append('<li><a id="withdraw" href="#">Retrait</a></li>');
+        $.each(tabBench, function(i, card){
+            $('#menu-card').append('<li class="withdraw" ><a idPokemon="'+i+'" href="#">&gt; Echanger avec '+card.name+'</a></li>');
+        });
     }
-    $('#menu-card').append('<li><a href="#">Annuler</a></li>');
-
+    $('#menu-card').append('<li><a href="#" id="cancel">Annuler</a></li>');
 });
+
 $(document).on('click','#toActive',function() {
     socket.emit("toActive",$(this).attr('idPokemon'));
+    $('#zoomed-card').hide();
 });
 
 $(document).on('click','#toBench',function() {
     socket.emit("toBench",$(this).attr('idPokemon'));
-});
-
-$(document).on('click','body',function() {
     $('#zoomed-card').hide();
 });
+
 $(document).on('click','#attackActive',function() {
     socket.emit("attack",$(this).attr("idAttack"));
+    $('#zoomed-card').hide();
+});
+
+$(document).on('click','#cancel',function() {
+    $('#zoomed-card').hide();
+});
+
+$('.withdraw').hide();
+$(document).on('click','#withdraw',function() {
+    $('.withdraw').show();
+});
+
+$(document).on('click','.withdraw',function() {
+    socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
+    console.log('IdPokemon = '+$(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });

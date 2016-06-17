@@ -109,6 +109,9 @@ html, body {
 #zoomed-card #menu-card li a:hover{
     color:#99cb4c;
 }
+#zoomed-card .widthdraw {
+    margin-left: 20px;
+}
 
 /**************************/
 /* Cartes rewards et deck */

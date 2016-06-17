@@ -96,11 +96,15 @@ io.sockets.on('connection', function (socket) {
   //Gestion du pokémon actif : mise a jour player et opponent
   if (players[indexPlayer].activePokemon() !=null) {
     socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
+    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+
     if ( players[(indexPlayer + 1) % 2].activePokemon() != null) {
       socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
+      socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemon().remaining_life_points);
     }
+
     socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
   }
   //Ajouter pokémon dans le banc
   socket.on("toBench",function(id) {
@@ -120,33 +124,39 @@ io.sockets.on('connection', function (socket) {
 
     var indexPlayer = tabClient.indexOf(socket.client.id);
     players[indexPlayer].benchToActive(id);
+
     socket.emit("bench", players[indexPlayer].bench());
+
     socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
     socket.emit("pokemonActive",players[indexPlayer].activePokemon());
     socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-    console.log('Points de vie : '+players[indexPlayer].activePokemon().life_point());
-    socket.emit("life-points", players[indexPlayer].activePokemon().life_point());
+
+    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+
   });
 
-  socket.on("toActive",function(id) {
-
-    var indexPlayer = tabClient.indexOf(socket.client.id);
-    players[indexPlayer].benchToActive(id);
-    socket.emit("bench", players[indexPlayer].bench());
-    socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
-    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-  });
   socket.on("attack",function(idAttack) {
-
-
     if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined) {
       if (players[(indexPlayer+1) % 2].activePokemon() == null) {
         
       }
-
     }
   });
+
+  socket.on("withdraw",function(idPokemonBench) {
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+    players[indexPlayer].withdraw(idPokemonBench);
+
+    socket.emit("bench", players[indexPlayer].bench());
+
+    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
+    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+
+    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+  });
+
   //Déconnexion d'un client
   socket.on('disconnect', function(){
     var indexPlayer = tabClient.indexOf(socket.client.id);
@@ -156,6 +166,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 });
+
 
 /**
  * Normalize a port into a number, string, or false.
