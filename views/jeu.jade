@@ -31,9 +31,9 @@ block content
                 div.cards-active
                     img(src="", class="interaction hvr-grow card-active" id="player-active")
                     div.life-points
+                    div.energies-icones
                 div.cards-bench
                     ul
-
                 div.cards-hand
                     ul
             div.numbered-cards
@@ -48,11 +48,5 @@ block content
         div#zoomed-card
             img(src="#", class="interaction")
             ul#menu-card
-                li 
-                    a(href="#") Attaque Imprudente
-                li 
-                    a(href="#") Retrait
-                li 
-                    a(href="#") Annuler
     script(src="http://localhost:3000/socket.io/socket.io.js")
     script(src="js/jeu.js")

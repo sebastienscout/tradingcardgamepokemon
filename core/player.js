@@ -12,7 +12,7 @@ module.exports = ( function (self) {
     var bench=[]; // banc
     var price_cards; // cartes Récompense
     var discard_pile; // pile de défausse
-    var hand; // main
+    var hand = []; // main
 
     this.hand = function () {
       var tab =[];
@@ -37,8 +37,8 @@ module.exports = ( function (self) {
       var index = 0;
 
       while (index < hand.length && !ok) {
-        if (hand[index].card_type() === core.CardType.POKEMON && hand[index].stage() === core.Stage.BASE) {
-          ok = true;
+        if (hand[index].card_type() === core.CardType.POKEMON && hand[index].card().stage() === core.Stage.BASE) {
+            ok = true;
         } else {
           ++index;
         }
@@ -47,6 +47,15 @@ module.exports = ( function (self) {
         return -1;
       } else {
         return index;
+      }
+    };
+
+    this.addEnergyToPokemon = function (active, idPokemon, idEnergy) {
+      if(active){
+        active_pokemon.addEnergy(hand[idEnergy]);
+      }
+      else {
+        bench[idPokemon].addEnergy(hand[idEnergy]);
       }
     };
 
@@ -67,9 +76,12 @@ module.exports = ( function (self) {
 
     // Retrait du pokémon
     this.withdraw = function(idPokemonBench) {
-      var tempPokemon = bench[idPokemonBench];
-      bench.splice(idPokemonBench, 1, active_pokemon);
-      active_pokemon = tempPokemon;
+      if(active_pokemon.energies().length >= active_pokemon.card().retreat_cost()) {
+        active_pokemon.removeEnergy(active_pokemon.card().retreat_cost());
+        var tempPokemon = bench[idPokemonBench];
+        bench.splice(idPokemonBench, 1, active_pokemon);
+        active_pokemon = tempPokemon;
+      }
     };
 
     this.takeCardInHand = function (index) {

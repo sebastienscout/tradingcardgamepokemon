@@ -35,7 +35,7 @@ module.exports = function (self) {
       var data = JSON.parse(json);
       var expansion = new core.Expansion(data.expansion.name, data.expansion.card_number);
 
-      return new core.EnergyCard(data.type, expansion, data.card_number);
+      return new core.EnergyCard(core.EnergyType[data.type], expansion, data.card_number);
     };
 
   };
