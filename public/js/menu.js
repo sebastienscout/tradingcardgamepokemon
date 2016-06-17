@@ -11,12 +11,7 @@ $( document ).ready(function() {
 
     //Boutton Modifier Deck
     $("#editDeck").click(function () {
-        window.location.replace("/creation-deck");
-    });
-
-    //Boutton Lancer Partie
-    $("#playGame").click(function () {
-        window.location.replace("/jeu");
+        window.location.replace("/modification-deck");
     });
 
     //Boutton Lancer Partie

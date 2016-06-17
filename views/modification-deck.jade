@@ -1,0 +1,43 @@
+extends layout
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/modification-deck.css')
+block content
+
+    script(src='/js/modification-deck.js')
+
+    form(method="post")
+
+    div#recupCarte
+        each bddCarte in bdd
+            div(class="cardContent hvr-grow", expansion='#{bddCarte.num_carte}_#{bddCarte.id_generation}')
+
+
+    div#entete
+        h1 Modification du Deck
+        button(id="reload") Remettre à 0
+        button(id="envoiDeck" disabled="disabled") Enregistrer
+    div#menu
+        ul
+            li.menu1.selected Pokémons
+            li.menu2 Energies
+            //li.menu3 Champions
+
+    div.cartes
+        div#pokemons
+            each card in cards
+                div(class="cardContent hvr-grow", expansion='#{card.expansion.name}')
+                    img(src="images/cards/pokemon/XY/"+card.expansion.name+"/" + card.card_number + ".png")
+                    div.rond
+                    input(type="number", id= 'p'+card.card_number, step="1" readonly)
+
+
+
+        div#energies
+            each energy in energies
+                div(class="cardContent hvr-grow", expansion='#{energy.expansion.name}')
+                    img(src="images/cards/" + energy.expansion.name + "/" + energy.card_number + ".png")
+                    div.rond
+                    input(type="number", id= 'e'+energy.card_number, step="1" readonly)
+
+    div#donnees
+
