@@ -32,38 +32,60 @@ var tabClient=[];
 // PROBLEME DE RAFRAICHISSEMENT
 
 var pokemons = [];
-var energy_cards = [];
+var energy = [];
+
 var filesGeneration = fs.readdirSync('../data/XY/Generations/');
 var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
+
+var filesXY = fs.readdirSync('../data/XY/XY/');
+var filesImpactDesDestins = fs.readdirSync('../data/XY/Impact_Des_Destins/');
+var filesOriginesAntiques = fs.readdirSync('../data/XY/Origines_Antiques/');
 var filesEnergy = fs.readdirSync('../data/XY/energy/');
-filesGeneration.forEach(function (file) {
+
+filesEnergy.forEach(function (file) {
   if (path.extname(file) === '.json') {
-    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Generations/' + file, 'utf8'));
+    var card = new core.Builder().createEnergyFromJSON(fs.readFileSync('../data/XY/energy/' + file, 'utf8'));
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
+  }
+});
+filesImpactDesDestins.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Impact_Des_Destins/' + file, 'utf8'));
+    pokemons.push(new core.Pokemon(card));
+  }
+});
+filesOriginesAntiques.forEach(function (file) {
+  if (path.extname(file) === '.json') {
+    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Origines_Antiques/' + file, 'utf8'));
+
     pokemons.push(new core.Pokemon(card));
   }
 });
 
-filesPoingsFurieux.forEach(function (file) {
-  if (path.extname(file) === '.json') {
-    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Poings_Furieux/'+ file,'utf8'));
-    pokemons.push(new core.Pokemon(card));
-  }
-});
+var deck1 = new core.Deck(pokemons, energy, []);
+var deck2 = new core.Deck(pokemons, energy, []);
 
-/*filesEnergy.forEach(function (file) {
-  if (path.extname(file) === '.json') {
-    var energy_card = new core.Builder().createEnergyFromJSON(fs.readFileSync('../data/XY/energy/'+ file,'utf8'));
-    pokemons.push(energy_card);
-  }
-});
-*/
-
-
-var deck1 = new core.Deck(pokemons, energy_cards, []);
-var deck2 = new core.Deck(pokemons, energy_cards, []);
-// players[0] == PLAYER 1
-// players[1] == PLAYER 2
 var players = [new core.Player(deck1),new core.Player(deck2)];
+
 var board = new core.Board([players[0], players[1]]);
 // INIT HAND
 board.selectInitialHands();
@@ -192,6 +214,28 @@ io.sockets.on('connection', function (socket) {
 
     socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
     socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+  });
+
+
+  socket.on("energyToPokemon",function(idPokemon, idEnergy) {
+    var indexPlayer = tabClient.indexOf(socket.client.id);
+
+    if(idPokemon == "active") {
+      players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
+      players[indexPlayer].takeCardInHand(idEnergy);
+
+      socket.emit("pokemonActive",players[indexPlayer].activePokemon());
+      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+    }
+    else {
+      players[indexPlayer].addEnergyToPokemon(false, idPokemon, idEnergy);
+      players[indexPlayer].takeCardInHand(idEnergy);
+
+      socket.emit("bench", players[indexPlayer].bench());
+      socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+    }
+    socket.emit("hand", players[indexPlayer].hand());
+    socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
   });
 
   //Déconnexion d'un client

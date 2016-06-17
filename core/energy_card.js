@@ -1,6 +1,7 @@
 var OpenPokemon = OpenPokemon || {};
 
-var core = require('./card_type');
+var merge = require('merge');
+var core = merge(require('./card_type'), require('./energy'));
 
 module.exports = ( function (self) {
   "use strict";
@@ -30,7 +31,7 @@ module.exports = ( function (self) {
       return {
         type: core.EnergyType.key(type),
         expansion: expansion.to_object(),
-        card_number: card_number,
+        card_number: card_number
       }
     };
 

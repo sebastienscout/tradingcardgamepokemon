@@ -3,7 +3,7 @@
  */
 
 
-jQuery(document).ready(function() {
+$(document).ready(function() {
 
     var total = 0;
     var pokemons = 0;
@@ -188,7 +188,7 @@ jQuery(document).ready(function() {
             }
             else {
                 bool_energies = true;
-                verif.append("<span style='color:green;'> Cartes energy OK:  (" + (energies) + ") (18~22) </span><br><br>");
+                verif.append("<span style='color:green;'> Cartes énergies OK:  (" + (energies) + ") (18~22) </span><br><br>");
             }
 
 
@@ -262,18 +262,13 @@ jQuery(document).ready(function() {
             sucess: function (sucess) {
                 alert('sucess');
                 console.log('sucess');
-
             },
             err: function (err) {
                 alert('err');
                 console.log('err');
             }
         });
-
-
-        //});
-
-
+        window.location.replace("/menu");
     });
 
 

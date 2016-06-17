@@ -37,6 +37,10 @@ module.exports = ( function (self) {
     this.selectInitialHands = function () {
       players.forEach(function (player) {
         player.selectInitialHand();
+        while(!player.isValidInitialHand()){
+          player.cancelInitialHands();
+          player.selectInitialHands();
+        }
       });
     };
 
