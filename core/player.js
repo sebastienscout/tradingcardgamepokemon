@@ -10,19 +10,34 @@ module.exports = ( function (self) {
     var deck; // deck
     var active_pokemon; // pokémon actif
     var bench=[]; // banc
-    var price_cards; // cartes Récompense
+    var price_cards=[]; // cartes Récompense
     var discard_pile; // pile de défausse
     var hand; // main
 
     this.hand = function () {
-      var tab =[];
-      var i=0;
-      for(i; i < hand.length; i++) {
-        tab.push(hand[i].to_object());
+      if (!hand.empty) {
+        var tab = [];
+        var i = 0;
+        for (i; i < hand.length; i++) {
+          tab.push(hand[i].to_object());
+        }
+        return tab;
       }
-      return tab;
     };
 
+    this.initPriceCard = function(card) {
+      for (var i =0 ; i < 6 ; i++) {
+        price_cards[i]=deck.takeFirstCard();
+      }
+    };
+    this.priceCardLength = function() {
+      return price_cards.length;
+    };
+    this.addPriceToHand = function(id) {
+      console.log(price_cards[id]);
+      hand.push(price_cards[id]);
+      price_cards.splice(id, 1);
+    };
     this.deckLengh = function() {
       return deck.deckLengh();
     };
@@ -86,7 +101,6 @@ module.exports = ( function (self) {
     this.addBench=function(id) {
         bench.push(hand[id]);
     };
-
     this.bench = function(){
       var tab =[];
       var i=0;
@@ -109,7 +123,12 @@ module.exports = ( function (self) {
       }
       return null;
     };
-
+    this.activePokemonNotObject = function() {
+      return active_pokemon;
+    }
+    this.activePokemonToDefausse = function() {
+      active_pokemon = null;
+    }
     var init = function (_deck) {
       deck = _deck;
       deck.mix();

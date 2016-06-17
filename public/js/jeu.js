@@ -16,11 +16,21 @@ var main;
 var pokemonActive;
 
 socket.on('life-points',function(pv) {
-    lifePointsPlayer.html(pv);
+    if (pv != 0) {
+        lifePointsPlayer.html(pv);
+        lifePointsPlayer.css('visibility','visible');
+    }else {
+        lifePointsPlayer.css('visibility','hidden');
+    }
 });
 
 socket.on('life-points-opponent',function(pv) {
-    lifePointsOpponent.html(pv);
+    if (pv != 0) {
+        lifePointsOpponent.html(pv);
+        lifePointsOpponent.css('visibility','visible');
+    }else {
+        lifePointsOpponent.css('visibility','hidden');
+    }
 });
 
 socket.on('hand',function(hand) {
@@ -55,13 +65,28 @@ socket.on('bench-opponent',function(nbBench) {
 
 socket.on('pokemonActive',function(pokActive) {
     pokemonActive = pokActive;
-    $('#player-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#player-active').parent().css('visibility','visible');
+    if (pokemonActive != null) {
+        $('#player-active').attr('src', 'images/cards/pokemon/XY/' + pokActive.expansion.name + '/' + pokActive.card_number + '.png');
+        $('#player-active').parent().css('visibility', 'visible');
+    }else {
+        $('#player-active').parent().css('visibility', 'hidden');
+    }
 });
 
 socket.on('pokemonActive-opponent',function(pokActive) {
-    $('#opponent-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#opponent-active').parent().css('visibility','visible');
+    if (pokActive != null) {
+        $('#opponent-active').attr('src', 'images/cards/pokemon/XY/' + pokActive.expansion.name + '/' + pokActive.card_number + '.png');
+        $('#opponent-active').parent().css('visibility', 'visible');
+    }else {
+        $('#opponent-active').parent().css('visibility', 'hidden');
+    }
+});
+
+socket.on("nbCardPrice", function(nbCartePrice) {
+    boardPlayer.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
+});
+socket.on("nbCardPrice-opponent", function(nbCartePrice) {
+    boardOpponent.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
 });
 
 socket.on('nbCardDeck',function(nbCarteDeck) {
@@ -124,6 +149,5 @@ $(document).on('click','#withdraw',function() {
 
 $(document).on('click','.withdraw',function() {
     socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
-    console.log('IdPokemon = '+$(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });
