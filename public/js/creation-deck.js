@@ -60,6 +60,9 @@ $(document).ready(function() {
 
     //clic gauche => ajouter carte
     $(".cardContent").click(function (event) {
+
+        $('#sonClic')[0].play(); //Son au clic d'une carte
+
         var $input = $(this).children("input");
 
 

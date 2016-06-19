@@ -6,7 +6,7 @@ block content
     script(src='/js/modification-deck.js')
 
     form(method="post")
-
+    audio(preload="auto" id="sonClic", src="/sound/clic.mp3", type="audio/mp3")
     div#recupCarte
         each bddCarte in bdd
             div(class="cardContent hvr-grow", expansion='#{bddCarte.num_carte}_#{bddCarte.id_generation}')
