@@ -1,0 +1,43 @@
+#formMenu .menu{
+    width:100%;
+
+}
+
+button{
+    display:inline-block;
+}
+
+#createDeck{
+    width:20%;
+}
+
+#editDeck{
+     width:20%;
+ }
+
+#playGame{
+    width:60%;
+}
+
+#logOut{
+    width:20%;
+}
+
+#listDeck{
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+.cards{
+    display:inline-block;
+    width:100px;
+}
+
+.enabled{
+    opacity:0.25;
+}
+
+.enabled:hover{
+    cursor:default;
+}

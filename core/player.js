@@ -60,9 +60,9 @@ module.exports = ( function (self) {
       }
       if (!ok) {
         return -1;
-      } else {
-        return index;
       }
+        return index;
+
     };
 
     this.addEnergyToPokemon = function (active, idPokemon, idEnergy) {

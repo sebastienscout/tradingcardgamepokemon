@@ -86,9 +86,6 @@ router.put('', function(req, res) {
             id_joueur: req.session._id
         };
 
-        req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
-
-        });
 
 
         // Insert le deck et recupere l'id du Deck insere
