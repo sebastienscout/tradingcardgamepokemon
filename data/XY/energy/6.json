@@ -2,7 +2,7 @@
   "type" : "FIGHTING",
   "expansion" : {
     "name" : "energy",
-    "card-number" : 9
+    "card_number" : 9
   },
   "card_number" : 6
 }

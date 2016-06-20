@@ -10,19 +10,34 @@ module.exports = ( function (self) {
     var deck; // deck
     var active_pokemon; // pokémon actif
     var bench=[]; // banc
-    var price_cards; // cartes Récompense
+    var price_cards=[]; // cartes Récompense
     var discard_pile; // pile de défausse
-    var hand; // main
+    var hand = []; // main
 
     this.hand = function () {
-      var tab =[];
-      var i=0;
-      for(i; i < hand.length; i++) {
-        tab.push(hand[i].to_object());
+      if (!hand.empty) {
+        var tab = [];
+        var i = 0;
+        for (i; i < hand.length; i++) {
+          tab.push(hand[i].to_object());
+        }
+        return tab;
       }
-      return tab;
     };
 
+    this.initPriceCard = function(card) {
+      for (var i =0 ; i < 6 ; i++) {
+        price_cards[i]=deck.takeFirstCard();
+      }
+    };
+    this.priceCardLength = function() {
+      return price_cards.length;
+    };
+    this.addPriceToHand = function(id) {
+      console.log(price_cards[id]);
+      hand.push(price_cards[id]);
+      price_cards.splice(id, 1);
+    };
     this.deckLengh = function() {
       return deck.deckLengh();
     };
@@ -37,8 +52,8 @@ module.exports = ( function (self) {
       var index = 0;
 
       while (index < hand.length && !ok) {
-        if (hand[index].card_type() === core.CardType.POKEMON && hand[index].stage() === core.Stage.BASE) {
-          ok = true;
+        if (hand[index].card_type() === core.CardType.POKEMON && hand[index].card().stage() === core.Stage.BASE) {
+            ok = true;
         } else {
           ++index;
         }
@@ -47,6 +62,15 @@ module.exports = ( function (self) {
         return -1;
       } else {
         return index;
+      }
+    };
+
+    this.addEnergyToPokemon = function (active, idPokemon, idEnergy) {
+      if(active){
+        active_pokemon.addEnergy(hand[idEnergy]);
+      }
+      else {
+        bench[idPokemon].addEnergy(hand[idEnergy]);
       }
     };
 
@@ -67,9 +91,12 @@ module.exports = ( function (self) {
 
     // Retrait du pokémon
     this.withdraw = function(idPokemonBench) {
-      var tempPokemon = bench[idPokemonBench];
-      bench.splice(idPokemonBench, 1, active_pokemon);
-      active_pokemon = tempPokemon;
+      if(active_pokemon.energies().length >= active_pokemon.card().retreat_cost()) {
+        active_pokemon.removeEnergy(active_pokemon.card().retreat_cost());
+        var tempPokemon = bench[idPokemonBench];
+        bench.splice(idPokemonBench, 1, active_pokemon);
+        active_pokemon = tempPokemon;
+      }
     };
 
     this.takeCardInHand = function (index) {
@@ -86,7 +113,6 @@ module.exports = ( function (self) {
     this.addBench=function(id) {
         bench.push(hand[id]);
     };
-
     this.bench = function(){
       var tab =[];
       var i=0;
@@ -109,7 +135,12 @@ module.exports = ( function (self) {
       }
       return null;
     };
-
+    this.activePokemonNotObject = function() {
+      return active_pokemon;
+    }
+    this.activePokemonToDefausse = function() {
+      active_pokemon = null;
+    }
     var init = function (_deck) {
       deck = _deck;
       deck.mix();

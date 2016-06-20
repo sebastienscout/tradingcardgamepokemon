@@ -9,6 +9,7 @@ var indexRoutes = require('./routes/menu');
 var connexionRoutes = require('./routes/connexion');
 var inscriptionRoutes = require('./routes/inscription');
 var jeuRoutes = require('./routes/jeu');
+var modifRoutes = require('./routes/modification-deck');
 var deckRoutes = require('./routes/creation-deck');
 var menuRoutes = require('./routes/menu');
 var testRoutes = require('./routes/test');
@@ -56,6 +57,7 @@ app.use('/jeu', jeuRoutes);
 app.use('/creation-deck', deckRoutes);
 app.use('/menu', menuRoutes);
 app.use('/test', testRoutes);
+app.use('/modification-deck', modifRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

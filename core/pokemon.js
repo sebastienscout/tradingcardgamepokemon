@@ -7,6 +7,19 @@ module.exports = ( function (self) {
     var card;
     var life_point;
     var states;
+    var energies = [];
+
+    this.addEnergy = function(energy) {
+      energies.push(energy);
+    };
+
+    this.removeEnergy = function(index) {
+      energies.splice(0, index);
+    };
+
+    this.energies = function(){
+      return energies;
+    };
 
     this.attacks = function () {
       return card.attacks();
@@ -33,9 +46,19 @@ module.exports = ( function (self) {
       return target;
     }
     this.to_object = function () {
-      // RECUPERE LE LIFE POINT / CREER UNE VARIABLE remaining_life_points
-      var test = { remaining_life_points : life_point};
-       return extend({},card.to_object(),test);
+      var energiesJson = {
+        energies : energies.map(function (energy) { return energy.to_object(); })
+      };
+      var remainingHP = { remaining_life_points : life_point};
+      return extend({},card.to_object(),energiesJson,remainingHP);
+    };
+
+    this.card_type = function() {
+      return card.card_type();
+    };
+
+    this.card = function () {
+      return card;
     };
 
     var init = function (_card) {

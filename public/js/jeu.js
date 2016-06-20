@@ -16,17 +16,32 @@ var main;
 var pokemonActive;
 
 socket.on('life-points',function(pv) {
-    lifePointsPlayer.html(pv);
+    if (pv != 0) {
+        lifePointsPlayer.html(pv);
+        lifePointsPlayer.css('visibility','visible');
+    }else {
+        lifePointsPlayer.css('visibility','hidden');
+    }
 });
 
 socket.on('life-points-opponent',function(pv) {
-    lifePointsOpponent.html(pv);
+    if (pv != 0) {
+        lifePointsOpponent.html(pv);
+        lifePointsOpponent.css('visibility','visible');
+    }else {
+        lifePointsOpponent.css('visibility','hidden');
+    }
 });
 
 socket.on('hand',function(hand) {
     handPlayer.html('');
     $.each(hand, function(i, card){
-        handPlayer.append('<li><img src="images/cards/pokemon/XY/'+card.expansion.name+'/'+card.card_number+'.png" class="interaction hand" id="'+i+'"/></li>');
+        if(card.expansion.name == "energy") {
+            handPlayer.append('<li><img src="images/cards/' + card.expansion.name + '/' + card.card_number + '.png" class="interaction energy" id="' + i + '"/></li>');
+        }
+        else {
+            handPlayer.append('<li><img src="images/cards/pokemon/XY/' + card.expansion.name + '/' + card.card_number + '.png" class="interaction hand" id="' + i + '"/></li>');
+        }
     });
     main=hand;
 });
@@ -40,8 +55,18 @@ socket.on('hand-opponent',function(nbHand) {
 
 socket.on('bench',function(bench) {
     benchPlayer.html('');
+
     $.each(bench, function(i, card){
-        benchPlayer.append('<li><img src="images/cards/pokemon/XY/'+card.expansion.name+'/'+card.card_number+'.png" class="interaction bench hvr-grow" id="'+i+'"/></li>');
+        var temp = '<div class="energies-icones">';
+
+        $.each(card.energies, function (i, energy) {
+            temp+='<div class="ico' + energy.type + '"></div>';
+        });
+
+        temp+='</div>';
+        benchPlayer.append('<li><img src="images/cards/pokemon/XY/'+card.expansion.name+'/'+card.card_number+'.png" class="interaction bench hvr-grow" id="'+i+'"/>'+temp+'</li>');
+
+        $('#bench').parent().children('div.energies-icones').html('');
     });
     tabBench=bench;
 });
@@ -55,13 +80,36 @@ socket.on('bench-opponent',function(nbBench) {
 
 socket.on('pokemonActive',function(pokActive) {
     pokemonActive = pokActive;
-    $('#player-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#player-active').parent().css('visibility','visible');
+
+    if (pokemonActive != null) {
+        $('#player-active').attr('src', 'images/cards/pokemon/XY/' + pokActive.expansion.name + '/' + pokActive.card_number + '.png');
+        if(pokActive.energies != null) {
+            $('#player-active').parent().children('div.energies-icones').html('');
+            $.each(pokActive.energies, function (i, energy) {
+                $('#player-active').parent().children('div.energies-icones').append('<div class="ico' + energy.type + '"></div>');
+            });
+        }
+        $('#player-active').parent().css('visibility', 'visible');
+    }else {
+        $('#player-active').parent().css('visibility', 'hidden');
+    }
+
 });
 
 socket.on('pokemonActive-opponent',function(pokActive) {
-    $('#opponent-active').attr('src','images/cards/pokemon/XY/'+pokActive.expansion.name+'/'+pokActive.card_number+'.png');
-    $('#opponent-active').parent().css('visibility','visible');
+    if (pokActive != null) {
+        $('#opponent-active').attr('src', 'images/cards/pokemon/XY/' + pokActive.expansion.name + '/' + pokActive.card_number + '.png');
+        $('#opponent-active').parent().css('visibility', 'visible');
+    }else {
+        $('#opponent-active').parent().css('visibility', 'hidden');
+    }
+});
+
+socket.on("nbCardPrice", function(nbCartePrice) {
+    boardPlayer.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
+});
+socket.on("nbCardPrice-opponent", function(nbCartePrice) {
+    boardOpponent.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
 });
 
 socket.on('nbCardDeck',function(nbCarteDeck) {
@@ -82,6 +130,18 @@ $(document).on('click','.interaction',function(event){
     $('#menu-card').html('');
     if ($(this).hasClass("hand")) {
         $('#menu-card').append('<li><a idPokemon="'+id+'" id="toBench" href="#">Banc</a></li>');
+
+    }else if ($(this).hasClass("energy")) {
+        if(pokemonActive != null) {
+            $('#menu-card').append('<li><a id="showActive" href="#">Actif :</a></li>');
+            $('#menu-card').append('<li><a idEnergy="' + id + '" idPokemon="active" id="energyToPokemon" href="#">&gt; ' + pokemonActive.name + '</a></li>');
+        }
+        if(tabBench.length > 0) {
+            $('#menu-card').append('<li><a id="showBench" href="#">Banc :</a></li>');
+            $.each(tabBench, function (i, card) {
+                $('#menu-card').append('<li><a idEnergy="' + id + '" idPokemon="' + i + '" id="energyToPokemon" href="#">&gt; ' + card.name + '</a></li>');
+            });
+        }
 
     }else if ($(this).hasClass("bench")){
         $('#menu-card').append('<li><a idPokemon="'+id+'" id="toActive" href="#">Passer actif</a></li>');
@@ -113,6 +173,11 @@ $(document).on('click','#attackActive',function() {
     $('#zoomed-card').hide();
 });
 
+$(document).on('click','#energyToPokemon',function() {
+    socket.emit("energyToPokemon",$(this).attr('idpokemon'), $(this).attr('idenergy'));
+    $('#zoomed-card').hide();
+});
+
 $(document).on('click','#cancel',function() {
     $('#zoomed-card').hide();
 });
@@ -124,6 +189,5 @@ $(document).on('click','#withdraw',function() {
 
 $(document).on('click','.withdraw',function() {
     socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
-    console.log('IdPokemon = '+$(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });

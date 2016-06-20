@@ -26,7 +26,10 @@ module.exports = ( function (self) {
         player.cancelInitialHand();
       });
     };
-
+    this.initPriceCard = function() {
+      players[0].initPriceCard();
+      players[1].initPriceCard();
+    }
     this.flipCoin = function () {
       return (Math.random() <= 0.5) ? self.Coin.HEADS : self.Coin.TAILS;
     };
@@ -34,6 +37,10 @@ module.exports = ( function (self) {
     this.selectInitialHands = function () {
       players.forEach(function (player) {
         player.selectInitialHand();
+        while(!player.isValidInitialHand()){
+          player.cancelInitialHands();
+          player.selectInitialHands();
+        }
       });
     };
 

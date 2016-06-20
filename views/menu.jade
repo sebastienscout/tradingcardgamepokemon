@@ -5,13 +5,15 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/inscriptionConnexion.css')
     link(rel='stylesheet', href='/stylesheets/menu.css')
 block content
-    //img(src="/images/pokemon_logo.png")
+    audio(preload="auto" id="sonMenu", src="/sound/menu.mp3", type="audio/mp3")
 
     //a(href='' style='display:block;text-align:center;') #{username}
     //Menu
     div(id="formMenu" class="menu")
-        button(id='createDeck') Créer un nouveau Deck
-        //button(id='editDeck') Modifier le Deck
+        if deck == 0
+            button(id='createDeck') Créer un nouveau Deck
+        else
+            button(id='editDeck') Modifier le Deck
         button(id='playGame') Lancer une partie
         button(id='logOut') Deconnexion
 

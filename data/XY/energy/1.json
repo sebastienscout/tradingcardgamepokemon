@@ -2,7 +2,7 @@
   "type" : "PLANT",
   "expansion" : {
     "name" : "energy",
-    "card-number" : 9
+    "card_number" : 9
   },
   "card_number" : 1
 }
