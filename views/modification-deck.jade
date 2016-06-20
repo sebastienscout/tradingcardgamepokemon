@@ -1,15 +1,19 @@
 extends layout
 block append stylesheets
-    link(rel='stylesheet', href='/stylesheets/creation-deck.css')
+    link(rel='stylesheet', href='/stylesheets/modification-deck.css')
 block content
 
-    script(src='/js/creation-deck.js')
+    script(src='/js/modification-deck.js')
 
     form(method="post")
-
     audio(preload="auto" id="sonClic", src="/sound/clic.mp3", type="audio/mp3")
+    div#recupCarte
+        each bddCarte in bdd
+            div(class="cardContent hvr-grow", expansion='#{bddCarte.num_carte}_#{bddCarte.id_generation}')
+
+
     div#entete
-        h1 Création du Deck
+        h1 Modification du Deck
         button(id="reload") Remettre à 0
         button(id="envoiDeck" disabled="disabled") Enregistrer
     div#menu
@@ -24,7 +28,7 @@ block content
                 div(class="cardContent hvr-grow", expansion='#{card.expansion.name}')
                     img(src="images/cards/pokemon/XY/"+card.expansion.name+"/" + card.card_number + ".png")
                     div.rond
-                    input(type="number", id= card.card_number, step="1" readonly)
+                    input(type="number", id= 'p'+card.card_number, step="1" readonly)
 
 
 
@@ -33,7 +37,7 @@ block content
                 div(class="cardContent hvr-grow", expansion='#{energy.expansion.name}')
                     img(src="images/cards/" + energy.expansion.name + "/" + energy.card_number + ".png")
                     div.rond
-                    input(type="number", id= energy.card_number, step="1" readonly)
+                    input(type="number", id= 'e'+energy.card_number, step="1" readonly)
 
     div#donnees
 

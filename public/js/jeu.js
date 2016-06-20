@@ -129,30 +129,32 @@ $(document).on('click','.interaction',function(event){
 
     $('#menu-card').html('');
     if ($(this).hasClass("hand")) {
-        $('#menu-card').append('<li><a idPokemon="'+id+'" id="toBench" href="#">Banc</a></li>');
+        $('#menu-card').append('<li><a idPokemon="'+id+'" id="toBench" href="#">Placer sur le banc</a></li>');
 
     }else if ($(this).hasClass("energy")) {
         if(pokemonActive != null) {
-            $('#menu-card').append('<li><a id="showActive" href="#">Actif :</a></li>');
-            $('#menu-card').append('<li><a idEnergy="' + id + '" idPokemon="active" id="energyToPokemon" href="#">&gt; ' + pokemonActive.name + '</a></li>');
+            $('#menu-card').append('<li><a id="showActive" href="#"><b>&or; Actif</b></a></li>');
+            $('#menu-card').append('<li class="show-active"><a idEnergy="' + id + '" idPokemon="active" id="energyToPokemon" href="#">' + pokemonActive.name + '</a></li>');
         }
         if(tabBench.length > 0) {
-            $('#menu-card').append('<li><a id="showBench" href="#">Banc :</a></li>');
+            $('#menu-card').append('<li><a id="showBench" href="#"><b>&or; Banc</b></a></li>');
             $.each(tabBench, function (i, card) {
-                $('#menu-card').append('<li><a idEnergy="' + id + '" idPokemon="' + i + '" id="energyToPokemon" href="#">&gt; ' + card.name + '</a></li>');
+                $('#menu-card').append('<li class="show-bench"><a idEnergy="' + id + '" idPokemon="' + i + '" id="energyToPokemon" href="#">' + card.name + '</a></li>');
             });
         }
 
     }else if ($(this).hasClass("bench")){
-        $('#menu-card').append('<li><a idPokemon="'+id+'" id="toActive" href="#">Passer actif</a></li>');
+        if(pokemonActive == null){
+            $('#menu-card').append('<li><a idPokemon="'+id+'" id="toActive" href="#">Placer en actif</a></li>');
+        }
             
     }else if ($(this).attr("id") == 'player-active' ) {
         $.each(pokemonActive.attacks, function(i, attack) {
             $('#menu-card').append('<li><a idAttack="' + i + '" id="attackActive" href="#">"' + attack.title + '"</a></li>');
         });
-        $('#menu-card').append('<li><a id="withdraw" href="#">Retrait</a></li>');
+        $('#menu-card').append('<li><a id="withdraw" href="#"><b>&or; Retrait</b></a></li>');
         $.each(tabBench, function(i, card){
-            $('#menu-card').append('<li class="withdraw" ><a idPokemon="'+i+'" href="#">&gt; Echanger avec '+card.name+'</a></li>');
+            $('#menu-card').append('<li class="withdraw" ><a idPokemon="'+i+'" href="#">Envoyer '+card.name+'</a></li>');
         });
     }
     $('#menu-card').append('<li><a href="#" id="cancel">Annuler</a></li>');
@@ -182,16 +184,38 @@ $(document).on('click','#cancel',function() {
     $('#zoomed-card').hide();
 });
 
-$('.withdraw').hide();
 $(document).on('click','#withdraw',function() {
-    $('.withdraw').show();
+    if($('.withdraw').is(':visible')){
+        $('.withdraw').slideUp(250);
+    }
+    else {
+        $('.withdraw').slideDown(250);
+    }
+});
+
+$(document).on('click','#showActive',function() {
+    if($('.show-active').is(':visible')){
+        $('.show-active').slideUp(250);
+    }
+    else {
+        $('.show-active').slideDown(250);
+    }
+});
+
+$(document).on('click','#showBench',function() {
+    if($('.show-bench').is(':visible')){
+        $('.show-bench').slideUp(250);
+    }
+    else {
+        $('.show-bench').slideDown(250);
+    }
 });
 
 $(document).on('click','.withdraw',function() {
     socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });
-$(document).on('click','#endTurn',function() {
+$(document).on('click','#end-turn',function() {
     console.log("FIN DE TOUR");
     socket.emit("endTurn");
 });

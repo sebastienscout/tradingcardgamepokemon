@@ -12,11 +12,44 @@ $(document).ready(function() {
     var verif = $("#donnees");
     var bool_energies = true;
     var bool_trainer = true;
-    var bool_total = true
+    var bool_total = true;
     var ok = false;
     var envoi = new Array();
+
     var indice = 0;
     var nbCarteValide = 60;
+
+    $("#recupCarte").children().each(function () {
+
+        var compteurCartes = 0;
+        var idCartes = $(this).attr("expansion").split( '_' );
+        var expansion = $(this).attr("expansion");
+        total++;
+        if(idCartes[1]==9){
+            energies++;
+        }else{
+            pokemons++;
+        }
+
+        $('div[expansion='+expansion+']').each(function() {
+
+            compteurCartes++;
+        });
+        if(idCartes[1]!=9)
+            var idCarte = "#p"+idCartes[0];
+        else
+            var idCarte = "#e"+idCartes[0];
+
+        console.log(idCarte);
+        $(idCarte).val(compteurCartes);
+        $(idCarte).parent().children(".rond").html(compteurCartes);
+        $(idCarte).parent().children(".rond").show();
+        $(idCarte).parent().children(".rond").css("background-color","red");
+        $(idCarte).parent().children(".rond").css("border","2px solid white");
+
+        verif2();
+    });
+
 
 
     $("li").on('click', function () {
@@ -60,9 +93,7 @@ $(document).ready(function() {
 
     //clic gauche => ajouter carte
     $(".cardContent").click(function (event) {
-
         $('#sonClic')[0].play(); //Son au clic d'une carte
-
         var $input = $(this).children("input");
 
 
@@ -94,7 +125,7 @@ $(document).ready(function() {
         verif2();
 
         // Active/Desactive bouton enregistrement
-        console.log(total);
+
         if (total == nbCarteValide) { // Si 60 cartes sont selectionnees, on active le bouton de validation
             $("#envoiDeck").prop('disabled', false);
             //$("#envoiDeck").
@@ -135,7 +166,7 @@ $(document).ready(function() {
         verif2();
 
         // Active/Desactive bouton enregistrement
-        console.log(total);
+
         if (total == nbCarteValide) { // Si 60 cartes sont selectionnees, on active le bouton de validation
             $("#envoiDeck").prop('disabled', false);
             //$("#envoiDeck").
@@ -193,9 +224,6 @@ $(document).ready(function() {
                 bool_energies = true;
                 verif.append("<span style='color:green;'> Cartes énergies OK:  (" + (energies) + ") (18~22) </span><br><br>");
             }
-
-
-            console.log(bool_total + " " + bool_energies);
 
             if ((60 - total) < (18 - energies)) {
 
@@ -273,7 +301,6 @@ $(document).ready(function() {
         });
         window.location.replace("/menu");
     });
-
 
     $("#reload").click(function () {
         location.reload();

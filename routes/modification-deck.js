@@ -65,52 +65,27 @@ router.get('/', function(req, res, next) {
           }
       });
 
+      if(req.session._id && req.session.username && req.session.mail) {
+          var i;
+          var tab_cartes = [];
 
+          // Cree le document du type Deck
+          var newDeck = {
+              id_joueur: req.session._id
+          };
 
+          req.app.db.models.Deck.findOne({id_joueur:req.session._id},function(enn,deck){
+              req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
+                  console.log(cartes);
+                  res.render('modification-deck', {cards: tabPokemon, energies: tabEnergy, bdd: cartes});
+              });
+          });
+          //res.render('modification-deck', { cards: tabPokemon, energies: tabEnergy });
+      }
 
-
-    res.render('creation-deck', { cards: tabPokemon, energies: tabEnergy });
 
   }
 });
-
-
-
-router.put('', function(req, res) {
-    if(req.session._id && req.session.username && req.session.mail) {
-        var i;
-        var tab_cartes = [];
-
-        // Cree le document du type Deck
-        var newDeck = {
-            id_joueur: req.session._id
-        };
-
-        req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
-            req.app.db.models.Deck.remove(null);
-            req.app.db.models.Carte.remove(null);
-        });
-
-        // Insert le deck et recupere l'id du Deck insere
-        req.app.db.models.Deck.create(newDeck, function (err, deck) {
-            // Cree le tableau de documents de type carte
-            for (i = 0; i < 60; i++) {
-                tab_cartes[i] = {
-                    num_carte: req.body["tab[" + i + "][num_carte]"],
-                    id_deck: deck._id,
-                    id_generation: req.body["tab[" + i + "][id_generation]"]
-
-                };
-            }
-            // Insertion des cartes
-            req.app.db.models.Carte.insertMany(tab_cartes);
-        });
-    }
-    res.redirect('/menu');
-});
-
-
-
 
 
 
