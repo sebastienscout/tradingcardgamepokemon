@@ -12,14 +12,18 @@ block content
     div(id="formMenu" class="menu")
         if deck == 0
             button(id='createDeck') Créer un nouveau Deck
+            button(id='playGame' class='enabled' disabled='disabled') Lancer une partie
         else
             button(id='editDeck') Modifier le Deck
-        button(id='playGame') Lancer une partie
+            button(id='playGame') Lancer une partie
         button(id='logOut') Deconnexion
 
     //Liste du Deck actuel
     div(id="listDeck")
-
+        if(deck == 0)
+            h1 Vous devez créer un Deck pour jouer
+        else
+            h1 Voici votre Deck
 
     script(src="/js/menu.js")
     script(src="/routes/menu.js")

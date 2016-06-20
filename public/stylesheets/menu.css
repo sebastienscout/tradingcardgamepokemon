@@ -30,6 +30,14 @@ button{
 }
 
 .cards{
-    display:inline-block;;
+    display:inline-block;
     width:100px;
+}
+
+.enabled{
+    opacity:0.25;
+}
+
+.enabled:hover{
+    cursor:default;
 }

@@ -14,8 +14,9 @@ router.get('/', function(req, res, next) {
         var has_deck = 0;
         req.app.db.models.Deck.count({'id_joueur':req.session._id}, function(err, deck){
             if(deck > 0){
-
                 has_deck = 1;
+            }else{
+
             }
 
             res.render('menu', {
