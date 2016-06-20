@@ -5,86 +5,45 @@ var core = require('../core');
 var fs = require('fs');
 
 router.get('/', function(req, res, next) {
-    /*
-     var id_deck;
+    console.log("dsrghtryjtugfds");
+
+    var tab = [];
 
     //Initialisation des Generations
-    var newGenerationGenerations = {
+    tab[0] = {
         num_generation: 83,
         nom_generation: 'Generations'
     };
 
-    var newGenerationXY = {
+    tab[1] = {
         num_generation: 146,
         nom_generation: 'XY'
     };
 
-    var newGenerationPoings_Furieux = {
+    tab[2] = {
         num_generation: 111,
-        nom_generation: 'Poings_Furieux'
+        nom_generation: 'Poings Furieux'
     };
 
-    var newGenerationOrigines_Antiques = {
+    tab[3] = {
         num_generation: 98,
-        nom_generation: 'Origines_Antiques'
+        nom_generation: 'Origines Antiques'
     };
 
-    var newGenerationImpact_Des_Destins = {
+    tab[4] = {
         num_generation: 124,
-        nom_generation: 'Impact_Des_Destins'
+        nom_generation: 'Impact Des Destins'
     };
 
-    var newGenerationEnergies = {
+    tab[5] = {
         num_generation: 9,
         nom_generation: 'energy'
     };
-
-    req.app.db.models.Generation.create(
-        [
-            newGenerationGenerations,
-            newGenerationXY,
-            newGenerationOrigines_Antiques,
-            newGenerationImpact_Des_Destins,
-            newGenerationEnergies
-        ], function(err, deck) {
-
-        }
-    );
-    */
-
-    /*
-    //Creation Deck
-    var newDeck = {
-        id_joueur: '575ff912d2cd67201b5b0e8c'
-    };
+    console.log("dsrghtryjtugfds");
+    console.log(tab);
+    req.app.db.models.Generation.insertMany(tab);
 
 
-    req.app.db.models.Deck.create(newDeck, function(err, deck) {
-        if (err){
-            console.log('Error in Saving user: '+err);
-            throw err;
-        }
-        console.log('Deck Registration succesful');
-        id_deck = deck._id;
-    });
-    */
-
-    //Ajout des Cartes dans le Deck
-
-
-    /*
-    req.app.db.models.Carte.insertMany(
-        [
-
-
-
-        ]
-    );
-*/
-
-
-
-    console.log("GET");
     res.render('test');
 });
 
