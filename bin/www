@@ -48,23 +48,7 @@ filesEnergy.forEach(function (file) {
     energy.push(card);
     energy.push(card);
     energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
+
   }
 });
 filesImpactDesDestins.forEach(function (file) {
@@ -76,7 +60,8 @@ filesImpactDesDestins.forEach(function (file) {
 filesOriginesAntiques.forEach(function (file) {
   if (path.extname(file) === '.json') {
     var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Origines_Antiques/' + file, 'utf8'));
-
+    pokemons.push(new core.Pokemon(card));
+    pokemons.push(new core.Pokemon(card));
     pokemons.push(new core.Pokemon(card));
   }
 });
@@ -125,7 +110,6 @@ io.sockets.on('connection', function (socket) {
   socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
   socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
   socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
-
   //Gestion du pokémon actif : mise a jour player et opponent
   if (players[indexPlayer].activePokemon() !=null) {
     socket.emit("pokemonActive", players[indexPlayer].activePokemon());
@@ -142,13 +126,15 @@ io.sockets.on('connection', function (socket) {
   //Ajouter pokémon dans le banc
   socket.on("toBench",function(id) {
     var indexPlayer = tabClient.indexOf(socket.client.id);
-    if(players[indexPlayer].bench().length < 5) {
-      players[indexPlayer].addBench(id);
-      players[indexPlayer].takeCardInHand(id);
-      socket.emit("bench", players[indexPlayer].bench());
-      socket.emit("hand", players[indexPlayer].hand());
-      socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-      socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+    if (indexPlayer == board.attackIndex()){
+      if(players[indexPlayer].bench().length < 5) {
+        players[indexPlayer].addBench(id);
+        players[indexPlayer].takeCardInHand(id);
+        socket.emit("bench", players[indexPlayer].bench());
+        socket.emit("hand", players[indexPlayer].hand());
+        socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+        socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+    }
     }
   });
 
@@ -156,22 +142,24 @@ io.sockets.on('connection', function (socket) {
   socket.on("toActive",function(id) {
 
     var indexPlayer = tabClient.indexOf(socket.client.id);
-    players[indexPlayer].benchToActive(id);
 
-    socket.emit("bench", players[indexPlayer].bench());
+    if (indexPlayer == board.attackIndex()) {
+      players[indexPlayer].benchToActive(id);
 
-    socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
-    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+      socket.emit("bench", players[indexPlayer].bench());
 
-    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
-    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+      socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+      socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
 
+      socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+      socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+    }
   });
 
   socket.on("attack",function(idAttack) {
     // TEST SI l'attaque fait des degats
-    if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined) {
+    if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
       // TEST SI POK ADV EST LA
       if (players[(indexPlayer+1) % 2].activePokemon() != null) {
         var damage = players[indexPlayer].activePokemon().attacks[idAttack].value.value;
@@ -196,6 +184,7 @@ io.sockets.on('connection', function (socket) {
           socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
           socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
 
+          // REINIT LES NB CARTE RECOMPENSES
           socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
           socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
           socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
@@ -205,39 +194,46 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on("withdraw",function(idPokemonBench) {
     var indexPlayer = tabClient.indexOf(socket.client.id);
-    players[indexPlayer].withdraw(idPokemonBench);
+    if (indexPlayer == board.attackIndex()) {
+      players[indexPlayer].withdraw(idPokemonBench);
 
-    socket.emit("bench", players[indexPlayer].bench());
+      socket.emit("bench", players[indexPlayer].bench());
 
-    socket.emit("pokemonActive",players[indexPlayer].activePokemon());
-    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+      socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
 
-    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
-    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+      socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+
+      socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+    }
   });
 
 
   socket.on("energyToPokemon",function(idPokemon, idEnergy) {
     var indexPlayer = tabClient.indexOf(socket.client.id);
+    if (indexPlayer == board.attackIndex()) {
+      if (idPokemon == "active") {
+        players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
+        players[indexPlayer].takeCardInHand(idEnergy);
 
-    if(idPokemon == "active") {
-      players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
-      players[indexPlayer].takeCardInHand(idEnergy);
+        socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+        socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+      }
+      else {
+        players[indexPlayer].addEnergyToPokemon(false, idPokemon, idEnergy);
+        players[indexPlayer].takeCardInHand(idEnergy);
 
-      socket.emit("pokemonActive",players[indexPlayer].activePokemon());
-      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+        socket.emit("bench", players[indexPlayer].bench());
+        socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+      }
+      socket.emit("hand", players[indexPlayer].hand());
+      socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
     }
-    else {
-      players[indexPlayer].addEnergyToPokemon(false, idPokemon, idEnergy);
-      players[indexPlayer].takeCardInHand(idEnergy);
-
-      socket.emit("bench", players[indexPlayer].bench());
-      socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-    }
-    socket.emit("hand", players[indexPlayer].hand());
-    socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
   });
-
+  // FIN DE TOUR
+  socket.on("endTurn",function() {
+    board.turn();
+  });
   //Déconnexion d'un client
   socket.on('disconnect', function(){
     var indexPlayer = tabClient.indexOf(socket.client.id);

@@ -191,3 +191,7 @@ $(document).on('click','.withdraw',function() {
     socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });
+$(document).on('click','#endTurn',function() {
+    console.log("FIN DE TOUR");
+    socket.emit("endTurn");
+});

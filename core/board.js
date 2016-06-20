@@ -12,7 +12,9 @@ module.exports = ( function (self) {
     var players;
     var attacker_index;
     var defender_index;
-
+    this.attackIndex = function() {
+      return attacker_index;
+    }
     this.attacker = function () {
       return players[attacker_index];
     };
@@ -45,7 +47,7 @@ module.exports = ( function (self) {
     };
 
     this.turn = function () {
-      players[attacker_index].attacks()[0].action().run(this);
+      //players[attacker_index].attacks()[0].action().run(this);
       changeAttackerDefenser();
     };
 
