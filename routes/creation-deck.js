@@ -87,9 +87,9 @@ router.put('', function(req, res) {
         };
 
         req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
-            req.app.db.models.Deck.remove(null);
-            req.app.db.models.Carte.remove(null);
+
         });
+
 
         // Insert le deck et recupere l'id du Deck insere
         req.app.db.models.Deck.create(newDeck, function (err, deck) {

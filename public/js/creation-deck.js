@@ -18,6 +18,55 @@ $(document).ready(function() {
     var indice = 0;
     var nbCarteValide = 60;
 
+    function randomIntFromInterval(min,max)
+    {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
+    $("#random").click(function () {
+        if(energies<18)
+            var randEnergies = randomIntFromInterval(18-energies,22-energies);
+        else
+            var randEnergies = randomIntFromInterval(0,22-energies);
+
+        if((energies<22)&&(total<60)) {
+            for (var i = 0; i < randEnergies; i++) {
+
+                var randEnergy = randomIntFromInterval(1, 9);
+                var idCarte = "#e" + randEnergy;
+                $(idCarte).get(0).value++;
+                $(idCarte).parent().children(".rond").html($(idCarte).val());
+                $(idCarte).parent().children(".rond").show();
+                $(idCarte).parent().children(".rond").css("background-color", "red");
+                $(idCarte).parent().children(".rond").css("border", "2px solid white");
+                total += 1;
+                energies += 1;
+                verif2();
+            }
+        }
+        if(total<60) {
+            for (var i = total; i < 60; i++) {
+
+                var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
+                var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
+                while($(idCarte).val()==4){
+                    var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
+                    var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
+                }
+                console.log(randEnergies + " " + total);
+                $(idCarte).get(0).value++;
+                $(idCarte).parent().children(".rond").html($(idCarte).val());
+                $(idCarte).parent().children(".rond").show();
+                $(idCarte).parent().children(".rond").css("background-color", "red");
+                $(idCarte).parent().children(".rond").css("border", "2px solid white");
+                total += 1;
+                pokemons += 1;
+                verif2();
+            }
+        }
+
+    });
+
 
     $("li").on('click', function () {
 
