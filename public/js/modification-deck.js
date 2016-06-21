@@ -45,7 +45,6 @@ $(document).ready(function() {
         else
             var idCarte = $("#energies").find("#"+idCartes[0]);
 
-        console.log(idCarte);
         $(idCarte).val(compteurCartes);
         $(idCarte).parent().children(".rond").html(compteurCartes);
         $(idCarte).parent().children(".rond").show();
@@ -86,7 +85,6 @@ $(document).ready(function() {
                     var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
                     var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
                 }
-                console.log(randEnergies + " " + total);
                 $(idCarte).get(0).value++;
                 $(idCarte).parent().children(".rond").html($(idCarte).val());
                 $(idCarte).parent().children(".rond").show();
@@ -331,7 +329,6 @@ $(document).ready(function() {
                     else
                         envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 9}; //Cartes énergies
                     indice++;
-                    console.log(envoi);
                 }
             }
         });

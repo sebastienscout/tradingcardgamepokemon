@@ -28,7 +28,6 @@ router.get('/', function(req, res, next) {
 
 
                 req.app.db.models.Deck.findOne({'id_joueur':req.session._id}, function(err, deck) {
-                    console.log(deck._id);
                     req.app.db.models.Carte.aggregate(
                     [
                         {
@@ -58,15 +57,11 @@ router.get('/', function(req, res, next) {
 
                         var parcour_tableau_carte;
                         for(parcour_tableau_carte = 0; parcour_tableau_carte < carte.length; parcour_tableau_carte++){
-                            //console.log(parcour_tableau_carte);
 
-                            //console.log(deck._id);
-                            //console.log(carte[parcour_tableau_carte]._id.num_d);
                             if(deck._id == carte[parcour_tableau_carte]._id.num_d) {
                                 cartes_deck[cartes_deck.length] = carte[parcour_tableau_carte];
                             }
                         }
-                        //console.log(cartes_deck);
                         res.render('menu', {
                             _id: req.session._id,
                             username: req.session.username,

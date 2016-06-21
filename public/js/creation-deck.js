@@ -53,7 +53,6 @@ $(document).ready(function() {
                     var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
                     var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
                 }
-                console.log(randEnergies + " " + total);
                 $(idCarte).get(0).value++;
                 $(idCarte).parent().children(".rond").html($(idCarte).val());
                 $(idCarte).parent().children(".rond").show();
@@ -144,7 +143,6 @@ $(document).ready(function() {
         verif2();
 
         // Active/Desactive bouton enregistrement
-        console.log(total);
         if (total == nbCarteValide) { // Si 60 cartes sont selectionnees, on active le bouton de validation
             $("#envoiDeck").prop('disabled', false);
             //$("#envoiDeck").
@@ -185,7 +183,6 @@ $(document).ready(function() {
         verif2();
 
         // Active/Desactive bouton enregistrement
-        console.log(total);
         if (total == nbCarteValide) { // Si 60 cartes sont selectionnees, on active le bouton de validation
             $("#envoiDeck").prop('disabled', false);
             //$("#envoiDeck").
@@ -245,7 +242,6 @@ $(document).ready(function() {
             }
 
 
-            console.log(bool_total + " " + bool_energies);
 
             if ((60 - total) < (18 - energies)) {
 
@@ -301,7 +297,6 @@ $(document).ready(function() {
                     else
                         envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 9}; //Cartes énergies
                     indice++;
-                    console.log(envoi);
                 }
             }
         });

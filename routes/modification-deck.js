@@ -76,7 +76,6 @@ router.get('/', function(req, res, next) {
 
           req.app.db.models.Deck.findOne({id_joueur:req.session._id},function(enn,deck){
               req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
-                  console.log(cartes);
                   res.render('modification-deck', {cards: tabPokemon, energies: tabEnergy, bdd: cartes});
               });
           });

@@ -81,14 +81,35 @@ router.put('', function(req, res) {
         var i;
         var tab_cartes = [];
 
+        // Supprime le deck de l'utilisateur s'il existe
+        req.app.db.models.Deck.count({'id_joueur':req.session._id}, function(err, nb_deck) {
+            console.log("-------------->" + nb_deck);
+            if( nb_deck > 0 ) {
+                req.app.db.models.Deck.findOne({'id_joueur': req.session._id}, function (err, deck) {
+                    console.log("-->"+deck._id);
+
+                    req.app.db.models.Deck.remove({'_id': deck._id}, function (err, supp_deck) {
+                        console.log("Deck a supp : ");
+                        //console.log(supp_deck);
+                    });
+
+                    req.app.db.models.Carte.remove({'id_deck': deck._id}, function (err, supp_cartes) {
+                        console.log("Cartes a supp : ");
+                        //console.log(supp_cartes);
+                    });
+                });
+            }
+        });
+
+
         // Cree le document du type Deck
         var newDeck = {
             id_joueur: req.session._id
         };
 
-
         // Insert le deck et recupere l'id du Deck insere
         req.app.db.models.Deck.create(newDeck, function (err, deck) {
+            console.log("CREATION");
             // Cree le tableau de documents de type carte
             for (i = 0; i < 60; i++) {
                 tab_cartes[i] = {
@@ -99,8 +120,11 @@ router.put('', function(req, res) {
                 };
             }
             // Insertion des cartes
+            console.log(tab_cartes);
+
             req.app.db.models.Carte.insertMany(tab_cartes);
         });
+
     }
     res.redirect('/menu');
 });
