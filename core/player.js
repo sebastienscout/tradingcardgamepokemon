@@ -13,6 +13,11 @@ module.exports = ( function (self) {
     var price_cards=[]; // cartes Récompense
     var discard_pile; // pile de défausse
     var hand = []; // main
+    var initialize;
+
+    this.takeFirstCard = function (){
+      hand.push(deck.takeFirstCard());
+    };
 
     this.hand = function () {
       if (!hand.empty) {
@@ -27,14 +32,13 @@ module.exports = ( function (self) {
 
     this.initPriceCard = function(card) {
       for (var i =0 ; i < 6 ; i++) {
-        price_cards[i]=deck.takeFirstCard();
+        price_cards.push(deck.takeFirstCard());
       }
     };
     this.priceCardLength = function() {
       return price_cards.length;
     };
     this.addPriceToHand = function(id) {
-      console.log(price_cards[id]);
       hand.push(price_cards[id]);
       price_cards.splice(id, 1);
     };
@@ -141,9 +145,18 @@ module.exports = ( function (self) {
     this.activePokemonToDefausse = function() {
       active_pokemon = null;
     }
+    this.setDeck = function(myDeck) {
+      deck = myDeck;
+      deck.mix();
+      initialize = true;
+    };
+    this.isInit = function(){
+      return initialize;
+    };
     var init = function (_deck) {
       deck = _deck;
       deck.mix();
+      initialize = false;
     };
 
     init(_deck);

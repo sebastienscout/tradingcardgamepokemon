@@ -29,211 +29,250 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 var tabClient=[];
-// PROBLEME DE RAFRAICHISSEMENT
 
-var pokemons = [];
-var energy = [];
+// Creation des Decks vide
+var deck = new core.Deck([], [], []);
 
-var filesGeneration = fs.readdirSync('../data/XY/Generations/');
-var filesPoingsFurieux = fs.readdirSync('../data/XY/Poings_Furieux/');
-
-var filesXY = fs.readdirSync('../data/XY/XY/');
-var filesImpactDesDestins = fs.readdirSync('../data/XY/Impact_Des_Destins/');
-var filesOriginesAntiques = fs.readdirSync('../data/XY/Origines_Antiques/');
-var filesEnergy = fs.readdirSync('../data/XY/energy/');
-
-filesEnergy.forEach(function (file) {
-  if (path.extname(file) === '.json') {
-    var card = new core.Builder().createEnergyFromJSON(fs.readFileSync('../data/XY/energy/' + file, 'utf8'));
-    energy.push(card);
-    energy.push(card);
-    energy.push(card);
-
-  }
-});
-filesImpactDesDestins.forEach(function (file) {
-  if (path.extname(file) === '.json') {
-    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Impact_Des_Destins/' + file, 'utf8'));
-    pokemons.push(new core.Pokemon(card));
-  }
-});
-filesOriginesAntiques.forEach(function (file) {
-  if (path.extname(file) === '.json') {
-    var card = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/Origines_Antiques/' + file, 'utf8'));
-    pokemons.push(new core.Pokemon(card));
-    pokemons.push(new core.Pokemon(card));
-    pokemons.push(new core.Pokemon(card));
-  }
-});
-
-var deck1 = new core.Deck(pokemons, energy, []);
-var deck2 = new core.Deck(pokemons, energy, []);
-
-var players = [new core.Player(deck1),new core.Player(deck2)];
+var players = [new core.Player(deck), new core.Player(deck)];
 
 var board = new core.Board([players[0], players[1]]);
-// INIT HAND
-board.selectInitialHands();
 
-// INIT CARTE RECOMPENSE
-board.initPriceCard();
 io.sockets.on('connection', function (socket) {
-  if (tabClient.length <= 2) {
+
     if (tabClient[0] == null) {
       tabClient[0] = socket.client.id;
     }else if (tabClient[1] == null) {
       tabClient[1] = socket.client.id;
     }
-    console.log("Nb Client "+tabClient.length);
-    var fileCard = '../data/XY/XY/42.json';
-    var cardJson = new core.Builder().createFromJSON(fs.readFileSync(fileCard, 'utf8'));
-    var cardPokemon = new core.Pokemon(cardJson);
-  }
 
-  var indexPlayer = tabClient.indexOf(socket.client.id);
+    if (tabClient.length <= 2) {
 
-  //Gestion de la main : mise a jour player et opponent
-  socket.emit("hand", players[indexPlayer].hand());
-  socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
-  socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+      console.log("Nb Client "+tabClient.length);
 
-  //Gestion du banc : mise a jour player et opponent
-  socket.emit("bench", players[indexPlayer].bench());
-  socket.emit("bench-opponent",players[(indexPlayer+1)%2].bench().length);
-  socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+      socket.on('start-game', function(deck){
 
-  //Gestion du nombre de cartes : mise a jour player et opponent
-  socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
-  socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
-  socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
+      var indexPlayer = tabClient.indexOf(socket.client.id);
 
-  socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
-  socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
-  socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
-  //Gestion du pokémon actif : mise a jour player et opponent
-  if (players[indexPlayer].activePokemon() !=null) {
-    socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-    socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+      // Si le joueur n'est pas initialisé, on lui attribut son Deck et initialise sa main
+      // et ses cartes récompenses
+      if(typeof players[indexPlayer] != 'undefined' && !players[indexPlayer].isInit()) {
 
-  if ( players[(indexPlayer + 1) % 2].activePokemon() != null) {
-    socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
-    socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemon().remaining_life_points);
-  }
+        var pokemons = [];
+        var energy = [];
 
-    socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-    socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
-  }
-  //Ajouter pokémon dans le banc
-  socket.on("toBench",function(id) {
-    var indexPlayer = tabClient.indexOf(socket.client.id);
-    if (indexPlayer == board.attackIndex()){
-      if(players[indexPlayer].bench().length < 5) {
-        players[indexPlayer].addBench(id);
-        players[indexPlayer].takeCardInHand(id);
-        socket.emit("bench", players[indexPlayer].bench());
-        socket.emit("hand", players[indexPlayer].hand());
-        socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-        socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
-    }
-    }
-  });
+        deck.forEach(function (card) {
+          var expansionName;
+          switch (card.expansion) {
+            case "83":
+              expansionName = "Generations";
+              break;
+            case "146":
+              expansionName = "XY";
+              break;
+            case "111":
+              expansionName = "Poings_Furieux";
+              break;
+            case "98":
+              expansionName = "Origines_Antiques";
+              break;
+            case "124":
+              expansionName = "Impact_Des_Destins";
+              break;
+            case "9":
+              expansionName = "energy";
+              break;
+          }
 
-  //Ajouter pokémon actif
-  socket.on("toActive",function(id) {
+          if (expansionName == "energy") {
+            var cardDeck = new core.Builder().createEnergyFromJSON(fs.readFileSync('../data/XY/' + expansionName + '/' + card.card_number + '.json', 'utf8'));
+            energy.push(cardDeck);
+          } else {
+            var cardDeck = new core.Builder().createFromJSON(fs.readFileSync('../data/XY/' + expansionName + '/' + card.card_number + '.json', 'utf8'));
+            pokemons.push(new core.Pokemon(cardDeck));
+          }
+        });
 
-    var indexPlayer = tabClient.indexOf(socket.client.id);
+        var deck = new core.Deck(pokemons, energy, []);
 
-    if (indexPlayer == board.attackIndex()) {
-      players[indexPlayer].benchToActive(id);
+        players[indexPlayer].setDeck(deck);
 
+        players[indexPlayer].selectInitialHand();
+        players[indexPlayer].initPriceCard();
+
+      }
+
+        if (indexPlayer == board.attackIndex()) {
+            socket.emit("turn", true);
+            socket.broadcast.emit("turn", false);
+        }
+        else{
+            socket.emit("turn", false);
+            socket.broadcast.emit("turn", true);
+        }
+
+      //Gestion de la main : mise a jour player et opponent
+      socket.emit("hand", players[indexPlayer].hand());
+      socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
+      socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+
+      //Gestion du banc : mise a jour player et opponent
       socket.emit("bench", players[indexPlayer].bench());
-
+      socket.emit("bench-opponent",players[(indexPlayer+1)%2].bench().length);
       socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-      socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
 
-      socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
-      socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
-    }
-  });
+      //Gestion du nombre de cartes : mise a jour player et opponent
+      socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
+      socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
+      socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
 
-  socket.on("attack",function(idAttack) {
-    // TEST SI l'attaque fait des degats
-    if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
-      // TEST SI POK ADV EST LA
-      if (players[(indexPlayer+1) % 2].activePokemon() != null) {
-        var damage = players[indexPlayer].activePokemon().attacks[idAttack].value.value;
-        var pv = players[(indexPlayer+1) % 2].activePokemonNotObject().life_point();
+      socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
+      socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
+      socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
+      //Gestion du pokémon actif : mise a jour player et opponent
+      if (players[indexPlayer].activePokemon() != null) {
+        socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+        socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
 
-        players[(indexPlayer+1) % 2].activePokemonNotObject().applyDamage(damage);
-        if ( players[(indexPlayer+1) % 2].activePokemonNotObject().life_point() > 0) {
-          socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
-          socket.broadcast.emit("life-points", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
+        if ( players[(indexPlayer + 1) % 2].activePokemon() != null) {
+          socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
+          socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemon().remaining_life_points);
+        }
 
-        // POKEMON KO
-        }else {
-          players[(indexPlayer+1) %2].activePokemonToDefausse();
-          socket.emit("pokemonActive-opponent",null);
-          socket.broadcast.emit("pokemonActive", null);
-          socket.emit("life-points-opponent", 0);
-          socket.broadcast.emit("life-points", 0);
+        socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+        socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+      }
+      //Ajouter pokémon dans le banc
+      socket.on("toBench",function(id) {
+        if (indexPlayer == board.attackIndex()){
+          if(players[indexPlayer].bench().length < 5) {
+            players[indexPlayer].addBench(id);
+            players[indexPlayer].takeCardInHand(id);
+            socket.emit("bench", players[indexPlayer].bench());
+            socket.emit("hand", players[indexPlayer].hand());
+            socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+            socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+          }
+        }
+      });
 
-          // PIOCHE UNE CARTE RECOMPENSE
-          players[indexPlayer].addPriceToHand( players[indexPlayer].priceCardLength()-1);
+      //Ajouter pokémon actif
+      socket.on("toActive",function(id) {
+
+        if (indexPlayer == board.attackIndex()) {
+          players[indexPlayer].benchToActive(id);
+
+          socket.emit("bench", players[indexPlayer].bench());
+
+          socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+          socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+          socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+
+          socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+          socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+        }
+      });
+
+      socket.on("attack",function(idAttack) {
+        // TEST SI l'attaque fait des degats
+        if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
+          // TEST SI POK ADV EST LA
+          if (players[(indexPlayer+1) % 2].activePokemon() != null) {
+            var damage = players[indexPlayer].activePokemon().attacks[idAttack].value.value;
+            var pv = players[(indexPlayer+1) % 2].activePokemonNotObject().life_point();
+
+            players[(indexPlayer+1) % 2].activePokemonNotObject().applyDamage(damage);
+            if ( players[(indexPlayer+1) % 2].activePokemonNotObject().life_point() > 0) {
+              socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
+              socket.broadcast.emit("life-points", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
+
+            // POKEMON KO
+            }
+            else {
+              players[(indexPlayer+1) %2].activePokemonToDefausse();
+              socket.emit("pokemonActive-opponent",null);
+              socket.broadcast.emit("pokemonActive", null);
+              socket.emit("life-points-opponent", 0);
+              socket.broadcast.emit("life-points", 0);
+
+              // PIOCHE UNE CARTE RECOMPENSE
+              players[indexPlayer].addPriceToHand( players[indexPlayer].priceCardLength()-1);
+              socket.emit("hand", players[indexPlayer].hand());
+              socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
+              socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+
+              // REINIT LES NB CARTE RECOMPENSES
+              socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
+              socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
+              socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
+            }
+
+              board.turn();
+              if (indexPlayer == board.attackIndex()) {
+                  socket.emit("turn", true);
+                  socket.broadcast.emit("turn", false);
+              }
+              else{
+                  socket.emit("turn", false);
+                  socket.broadcast.emit("turn", true);
+              }
+          }
+        }
+      });
+      socket.on("withdraw",function(idPokemonBench) {
+        if (indexPlayer == board.attackIndex()) {
+          players[indexPlayer].withdraw(idPokemonBench);
+
+          socket.emit("bench", players[indexPlayer].bench());
+
+          socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+          socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+
+          socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
+
+          socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
+        }
+      });
+
+      socket.on("energyToPokemon",function(idPokemon, idEnergy) {
+        if (indexPlayer == board.attackIndex()) {
+          if (idPokemon == "active") {
+            players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
+            players[indexPlayer].takeCardInHand(idEnergy);
+
+            socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+            socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+          }
+          else {
+            players[indexPlayer].addEnergyToPokemon(false, idPokemon, idEnergy);
+            players[indexPlayer].takeCardInHand(idEnergy);
+
+            socket.emit("bench", players[indexPlayer].bench());
+            socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
+          }
           socket.emit("hand", players[indexPlayer].hand());
-          socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
+          socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+        }
+      });
+      // FIN DE TOUR
+      socket.on("endTurn",function() {
+        board.turn();
+          if (indexPlayer == board.attackIndex()) {
+              socket.emit("turn", true);
+              socket.broadcast.emit("turn", false);
+          }
+          else{
+              socket.emit("turn", false);
+              socket.broadcast.emit("turn", true);
+          }
+          socket.emit("hand", players[indexPlayer].hand());
           socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
 
-          // REINIT LES NB CARTE RECOMPENSES
-          socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
-          socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
-          socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
-        }
-      }
-    }
-  });
-  socket.on("withdraw",function(idPokemonBench) {
-    var indexPlayer = tabClient.indexOf(socket.client.id);
-    if (indexPlayer == board.attackIndex()) {
-      players[indexPlayer].withdraw(idPokemonBench);
-
-      socket.emit("bench", players[indexPlayer].bench());
-
-      socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-
-      socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
-
-      socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
-    }
-  });
-
-
-  socket.on("energyToPokemon",function(idPokemon, idEnergy) {
-    var indexPlayer = tabClient.indexOf(socket.client.id);
-    if (indexPlayer == board.attackIndex()) {
-      if (idPokemon == "active") {
-        players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
-        players[indexPlayer].takeCardInHand(idEnergy);
-
-        socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-        socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-      }
-      else {
-        players[indexPlayer].addEnergyToPokemon(false, idPokemon, idEnergy);
-        players[indexPlayer].takeCardInHand(idEnergy);
-
-        socket.emit("bench", players[indexPlayer].bench());
-        socket.broadcast.emit("bench-opponent", players[indexPlayer].bench().length);
-      }
-      socket.emit("hand", players[indexPlayer].hand());
-      socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
-    }
-  });
-  // FIN DE TOUR
-  socket.on("endTurn",function() {
-    board.turn();
-  });
+          socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
+          socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
+          socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
+      });
+    });
+  }
   //Déconnexion d'un client
   socket.on('disconnect', function(){
     var indexPlayer = tabClient.indexOf(socket.client.id);

@@ -50,5 +50,8 @@ block content
             img(src="#", class="interaction")
             ul#menu-card
         button#end-turn Fin de tour
+    div#recup-card
+        each card in cards
+            div(expansion="#{card.id_generation}" num="#{card.num_carte}")
     script(src="http://localhost:3000/socket.io/socket.io.js")
     script(src="js/jeu.js")
