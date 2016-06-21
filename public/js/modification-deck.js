@@ -317,7 +317,7 @@ $(document).ready(function() {
                 for (var i = 0; i < nb; i++) {
 
                     if ($(this).parent().attr("expansion") == "XY")
-                        envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 143};
+                        envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 146};
                     else if ($(this).parent().attr("expansion") == "Generations")
                         envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 83};
                     else if ($(this).parent().attr("expansion") == "Poings Furieux")
