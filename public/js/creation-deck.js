@@ -330,7 +330,6 @@ $(document).ready(function() {
             $(this).val(0);
 
             $(this).parent().children(".rond").html($(this).val());
-            alert($(this).val());
             $(this).parent().children(".rond").text("");
             $(this).parent().children(".rond").css("border", "0");
             $(this).parent().children(".rond").css("background-color", "");

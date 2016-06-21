@@ -19,6 +19,11 @@ $(document).ready(function() {
     var indice = 0;
     var nbCarteValide = 60;
 
+    function randomIntFromInterval(min,max)
+    {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
+
     $("#recupCarte").children().each(function () {
 
         var compteurCartes = 0;
