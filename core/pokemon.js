@@ -24,7 +24,39 @@ module.exports = ( function (self) {
     this.attacks = function () {
       return card.attacks();
     };
+    this.testEnergieAttack= function(tabEnergieAttack) {
+        var test;
+        var energiesPokemon=[];
+        energies.forEach(function(energie) {
+            energiesPokemon.push(energie);
+        });
+        var nbIncolore=0;
+        if (tabEnergieAttack.length >= energies.length) {
+        tabEnergieAttack.forEach(function(energieAttack,index) {
+            test = false;
+            energiesPokemon.forEach(function(energiePokemon) {
+              if (energieAttack == "COLORLESS") {
+                nbIncolore++;
+                test = true;
+              }else if (energieAttack == energiePokemon.to_object().type) {
+                test = true;
+              }
+              energiesPokemon.splice(index,1);
+            });
+            if (!test) {
+              return false;
+            }
+        });
+    }
+      if (nbIncolore > energies.length) {
+        return false;
+      }
+      return true;
+    }
 
+    this.attack = function(idAttack) {
+      return attacks()[idAttack].value.value;
+    }
     this.applyDamage = function (points) {
       life_point -= points;
     };

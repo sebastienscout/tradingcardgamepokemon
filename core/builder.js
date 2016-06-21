@@ -21,7 +21,7 @@ module.exports = function (self) {
         var value = new core.Value(attack.value.operator, attack.value.value, attack.value.supplement);
 
         attack.energies.forEach(function (energy) {
-          energies.push(core.EnergyType[energy.type]);
+          energies.push(core.EnergyType[energy]);
         });
         attacks.push(new core.Attack(energies, attack.title, attack.text, new core.Action(attack.action), value));
       });

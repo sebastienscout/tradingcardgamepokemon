@@ -48,6 +48,9 @@ filesEnergy.forEach(function (file) {
     energy.push(card);
     energy.push(card);
     energy.push(card);
+    energy.push(card);
+    energy.push(card);
+    energy.push(card);
 
   }
 });
@@ -161,9 +164,10 @@ io.sockets.on('connection', function (socket) {
     // TEST SI l'attaque fait des degats
     if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
       // TEST SI POK ADV EST LA
-      if (players[(indexPlayer+1) % 2].activePokemon() != null) {
+      var tabEnergieAttack = players[indexPlayer].activePokemon().attacks[idAttack].energies;
+
+      if (players[(indexPlayer+1) % 2].activePokemon() != null  && players[indexPlayer].activePokemonNotObject().testEnergieAttack(tabEnergieAttack)) {
         var damage = players[indexPlayer].activePokemon().attacks[idAttack].value.value;
-        var pv = players[(indexPlayer+1) % 2].activePokemonNotObject().life_point();
 
         players[(indexPlayer+1) % 2].activePokemonNotObject().applyDamage(damage);
         if ( players[(indexPlayer+1) % 2].activePokemonNotObject().life_point() > 0) {
