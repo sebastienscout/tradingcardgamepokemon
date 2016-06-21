@@ -54,7 +54,7 @@ $(document).ready(function() {
         if(energies<18)
             var randEnergies = randomIntFromInterval(18-energies,22-energies);
         else
-            var randEnergies = randomIntFromInterval(0,22-energies);
+            var randEnergies = randomIntFromInterval(22-energies);
 
         if((energies<22)&&(total<60)) {
             for (var i = 0; i < randEnergies; i++) {
@@ -298,6 +298,8 @@ $(document).ready(function() {
         }
         else {
             verif.hide();
+            ok = false;
+            bool_total = true;
         }
     }
 
@@ -347,7 +349,20 @@ $(document).ready(function() {
     });
 
     $("#reload").click(function () {
-        location.reload();
+        $("input").each(function (){
+
+           $(this).val(0);
+
+            $(this).parent().children(".rond").html($(this).val());
+            alert($(this).val());
+            $(this).parent().children(".rond").text("");
+            $(this).parent().children(".rond").css("border", "0");
+            $(this).parent().children(".rond").css("background-color", "");
+        });
+        total =0;
+        energies = 0;
+        pokemons = 0;
+        verif2();
     });
 
 });
