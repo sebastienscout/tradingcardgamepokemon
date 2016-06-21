@@ -17,18 +17,17 @@ router.get('/?deconnexion=true', function(req, res, next) {
 
 /* GET connexion page. */
 router.get('/', function(req, res, next) {
-    console.log("test");
-
-    var p1 = req.param("deconnexion");
-    if(p1 == "true"){   // Si le client veut se deconnecter
-        req.session.destroy();
-    }else if(req.session._id && req.session.username && req.session.mail){  // Si connecte, le client est redirige vers le menu
-        res.redirect('/menu');
-    }else { // Sinon
+    if(req.session._id && req.session.username && req.session.mail) {  // Si connecte
+        var connecte = req.param("deconnexion");
+        if (connecte == "true") {   // Si le client veut se deconnecter
+            req.session.destroy();
+            res.render('connexion');
+        }else {
+            res.redirect('/menu');
+        }
+    } else {
         res.render('connexion');
     }
-
-    res.redirect('connexion');
 
 });
 

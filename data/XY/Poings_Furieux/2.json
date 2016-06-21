@@ -27,7 +27,7 @@
       ],
       "title": "Crache-Venin",
       "text": "Le Pokémon Actif de votre adversaire est maintenant Empoisonné.",
-      "action": "",
+      "action": "board.defender().addState(core.State.POISONED);",
       "value": {
         "operator": "-",
         "value": 40,

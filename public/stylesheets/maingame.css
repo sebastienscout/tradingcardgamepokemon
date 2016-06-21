@@ -89,6 +89,9 @@ html, body {
 #end-turn:hover {
     background: #376caf;
 }
+#recup-card {
+    display:none;
+}
 
 /******************/
 /*  Carte zoomée  */

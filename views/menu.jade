@@ -3,22 +3,42 @@ block title
     title JCC pokémon
 block append stylesheets
     link(rel='stylesheet', href='/stylesheets/inscriptionConnexion.css')
+    link(rel='stylesheet', href='/stylesheets/menu.css')
 block content
-    img(src="/images/pokemon_logo.png")
     audio(preload="auto" id="sonMenu", src="/sound/menu.mp3", type="audio/mp3")
 
-    a(href='' style='display:block;text-align:center;') #{username}
+    //a(href='' style='display:block;text-align:center;') #{username}
     //Menu
-    div(id="formConnect" class="menu")
-        h2 Menu Pokémon JCC
-        button(id='createDeck') Créer un nouveau Deck
-        button(id='editDeck') Modifier le Deck
-        button(id='playGame') Lancer une partie
+    div(id="formMenu" class="menu")
+        if deck == 0
+            button(id='createDeck') Créer un nouveau Deck
+            button(id='playGame' class='enabled' disabled='disabled') Lancer une partie
+        else
+            button(id='editDeck') Modifier le Deck
+            button(id='playGame') Lancer une partie
         button(id='logOut') Deconnexion
 
     //Liste du Deck actuel
     div(id="listDeck")
-        //Intérrogation de la BDD pour le Deck
+        if(deck == 0)
+            h1 Vous devez créer un Deck pour jouer
+        else
+            each carte in tab_deck
+                if carte._id.num_g == 9
+                    img(src="images/cards/energy/" + carte._id.num_c + ".png")
+                else if carte._id.num_g == 83
+                    img(src="images/cards/pokemon/XY/Generations/" + carte._id.num_c + ".png" generation="carte._id.num_g")
+                else if carte._id.num_g == 146
+                    img(src="images/cards/pokemon/XY/XY/" + carte._id.num_c + ".png" generation="carte._id.num_g")
+                else if carte._id.num_g == 111
+                    img(src="images/cards/pokemon/XY/Poings Furieux/" + carte._id.num_c + ".png" generation="carte._id.num_g")
+                else if carte._id.num_g == 98
+                    img(src="images/cards/pokemon/XY/Origines Antiques/" + carte._id.num_c + ".png" generation="carte._id.num_g")
+                else if carte._id.num_g == 124
+                    img(src="images/cards/pokemon/XY/Impact Des Destins/" + carte._id.num_c + ".png" generation="carte._id.num_g")
+                div.occurence #{carte.total_cartes}
+
+
 
     script(src="/js/menu.js")
     script(src="/routes/menu.js")

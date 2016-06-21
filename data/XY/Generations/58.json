@@ -14,7 +14,7 @@
       ],
       "title": "Pression Torpide",
       "text": "Soignez 20 dégâts à ce Pokémon. Ce Pokémon est maintenant Endormi.",
-      "action": "",
+      "action": "board.attacker().applyHeal(20); board.attacker().addState(core.State.ASLEEP);",
       "value": {
         "operator": "-",
         "value": 120,

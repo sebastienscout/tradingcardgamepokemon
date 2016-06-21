@@ -12,7 +12,7 @@
       ],
       "title": "Rafale Psy",
       "text": "Le Pokémon Actif de votre adversaire est maintenant Confus.",
-      "action": "board.Defender().addState(core.State.COUNFUSED);",
+      "action": "board.Defender().addState(core.State.CONFUSED);",
       "value": {
         "operator": "-",
         "value": 20,

@@ -11,7 +11,7 @@
       ],
       "title": "Poison Dodo",
       "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre Adversaire est maintenant Endormi et Empoisonné",
-      "action": "",
+      "action": "if (board.flipCoin() === core.Coin.HEADS){ board.defender().addState(core.State.POISONED); }",
       "value": {}
     }
   ],

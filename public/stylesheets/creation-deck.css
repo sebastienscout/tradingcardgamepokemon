@@ -92,10 +92,8 @@ div{
     background-color: #B08930;
     background: rgba(0,0,0,0);
 }
-
-#envoiDeck{
+button{
     position: absolute;
-    right: 15px;
     background-color: #C59934;
     color: white;
     border: 0;
@@ -103,23 +101,21 @@ div{
     font-size: 25px;
     padding: 5px 20px;
     top:15px;
+}
+#envoiDeck{
+    right: 15px;
 }
 
 #envoiDeck:disabled{
     opacity: 0.25;
 }
 #reload{
-    position: absolute;
     right: 200px;
-    background-color: #C59934;
-    color: white;
-    border: 0;
-    cursor: pointer;
-    font-size: 25px;
-    padding: 5px 20px;
-    top:15px;
 }
 
+#random{
+    right: 385px;
+}
 .cartes{
     margin-top: 1%;
     display:inline-block;

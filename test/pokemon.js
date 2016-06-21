@@ -49,6 +49,24 @@ describe('Pokemon card loading', function () {
 
   });
 
+  //test règles
+  it('Paras & Pikachu', function () {
+    var card_paras = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/XY/33.json', 'utf8'));
+    var card_pikachu = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/XY/42.json', 'utf8'));
+    var paras= new core.Pokemon(card_paras);
+    var pikachu = new core.Pokemon(card_pikachu);
+    var board = new core.Board([paras, pikachu]);
+
+    expect(paras.life_point()).to.equal(60);
+
+    board.turn();
+    expect(paras.life_point()).to.equal(50);
+
+    board.attacker().applyDamage(30);
+    expect(pikachu.life_point()).to.equal(30);
+
+  });
+
   //test combat kokiyas et Ponyta
   it('Kokiyas & Ponyta', function () {
     var card_kokiyas = new core.Builder().createFromJSON(fs.readFileSync('./data/XY/Generations/19.json', 'utf8'));
@@ -65,6 +83,7 @@ describe('Pokemon card loading', function () {
     expect(kokiyas.life_point()).to.equal(60);
   });
 
+  
   it('All XY cards', function () {
     var cards = [];
     var files = fs.readdirSync('./data/XY/XY/');

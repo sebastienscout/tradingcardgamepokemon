@@ -49,7 +49,7 @@ module.exports = ( function (self) {
     };
 
     this.turn = function () {
-      //players[attacker_index].attacks()[0].action().run(this);
+      players[attacker_index].takeFirstCard();
       changeAttackerDefenser();
     };
 

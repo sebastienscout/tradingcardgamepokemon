@@ -11,7 +11,7 @@
       ],
       "title": "Bluff",
       "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant est maintenant Paralysé.",
-      "action": "",
+      "action": "if(board.flipCoin === core.Coin.HEADS){board.defender().addState(core.State.PARALYSED);}",
       "value": {
         "operator": "-",
         "value": 30,
@@ -25,11 +25,11 @@
       ],
       "title": "Embuscade",
       "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires.",
-      "action": "",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(30); } ",
       "value": {
         "operator": "-",
         "value": 40,
-        "supplement": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }"
+        "supplement": "+"
       }
     }
   ],

@@ -11,7 +11,7 @@
       ],
       "title": "Tit'Sieste",
       "text": "Soignez 20 dégâts à ce Pokemon.",
-      "action": "",
+      "action": "board.attacker().applyHeal(20);",
       "value": {}
     },
     {

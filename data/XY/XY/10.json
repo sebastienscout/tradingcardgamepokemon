@@ -25,7 +25,7 @@
       ],
       "title": "Vampigraine",
       "text": "Soignez 10 dégâts à ce Pokémon.",
-      "action": "if (board.attacker().life_point < 60) { board.attacker().applyHeal(10); }",
+      "action": "board.attacker().applyHeal(10)",
       "value": {
         "operator": "-",
         "value": 20,

@@ -11,8 +11,8 @@
         "COLORLESS"
       ],
       "title": "Pince Broyeuse",
-      "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant Paralysé, et vous défaussez une Energie lui étant attachée",
-      "action": "",
+      "text": "Lancez une piÃ¨ce. Si c'est face, le PokÃ©mon Actif de votre adversaire est maintenant ParalysÃ©, et vous dÃ©faussez une Energie lui Ã©tant attachÃ©e",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().addState(core.State.PARALYSED);",
       "value": {
         "operator": "-",
         "value": 30,
@@ -26,8 +26,8 @@
         "COLORLESS"
       ],
       "title": "Picanon",
-      "text": "Lancez 5 pièces. Cette attaque inflige 30 dégâts multipliés par le nombre de côtés face.",
-      "action": "for (var i =0;i<5;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }}",
+      "text": "Lancez 5 piÃ¨ces. Cette attaque inflige 30 dÃ©gÃ¢ts multipliÃ©s par le nombre de cÃ´tÃ©s face.",
+      "action": "for (var i =0;i<5;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(30); }}",
       "value": {
         "operator": "-",
         "value": 0,
