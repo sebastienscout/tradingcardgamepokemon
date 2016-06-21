@@ -24,9 +24,17 @@ button{
 }
 
 #listDeck{
+    margin-left:auto;
+    margin-right:auto;
     display:block;
-    width:100%;
+    width:90%;
     height:100%;
+    text-align: center;
+}
+
+#listDeck img{
+    width:150px;
+    margin:10px;
 }
 
 .cards{
@@ -40,4 +48,20 @@ button{
 
 .enabled:hover{
     cursor:default;
+}
+
+.occurence{
+    text-align:center;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    margin-top:-8px;
+    margin-left:-135px;
+    font-weight: bold;
+    background-color:red;
+    width:100px;
+    height:50px;
+    z-index:-1;
+    color:white;
+
 }
