@@ -87,7 +87,6 @@ router.put('', function(req, res) {
         };
 
 
-
         // Insert le deck et recupere l'id du Deck insere
         req.app.db.models.Deck.create(newDeck, function (err, deck) {
             // Cree le tableau de documents de type carte

@@ -65,12 +65,12 @@ $(document).ready(function() {
             for (var i = 0; i < randEnergies; i++) {
 
                 var randEnergy = randomIntFromInterval(1, 9);
-                var idCarte = "#e" + randEnergy;
-                $(idCarte).get(0).value++;
-                $(idCarte).parent().children(".rond").html($(idCarte).val());
-                $(idCarte).parent().children(".rond").show();
-                $(idCarte).parent().children(".rond").css("background-color", "red");
-                $(idCarte).parent().children(".rond").css("border", "2px solid white");
+                var idCarte = "#" + randEnergy +".parent().attr()=" + $(this).parent().attr("expansion");
+                $(idCarte).children("#" + randEnergy).get(0).value++;
+                $(idCarte).children(".rond").html($(idCarte).val());
+                $(idCarte).children(".rond").show();
+                $(idCarte).children(".rond").css("background-color", "red");
+                $(idCarte).children(".rond").css("border", "2px solid white");
                 total += 1;
                 energies += 1;
                 verif2();
@@ -359,7 +359,6 @@ $(document).ready(function() {
            $(this).val(0);
 
             $(this).parent().children(".rond").html($(this).val());
-            alert($(this).val());
             $(this).parent().children(".rond").text("");
             $(this).parent().children(".rond").css("border", "0");
             $(this).parent().children(".rond").css("background-color", "");

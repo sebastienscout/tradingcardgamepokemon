@@ -33,7 +33,7 @@ $(document).ready(function() {
             for (var i = 0; i < randEnergies; i++) {
 
                 var randEnergy = randomIntFromInterval(1, 9);
-                var idCarte = "#e" + randEnergy;
+                var idCarte = $("#energies").find("#"+randEnergy);
                 $(idCarte).get(0).value++;
                 $(idCarte).parent().children(".rond").html($(idCarte).val());
                 $(idCarte).parent().children(".rond").show();
@@ -64,6 +64,7 @@ $(document).ready(function() {
                 verif2();
             }
         }
+        $("#envoiDeck").prop('disabled', false);
 
     });
 
