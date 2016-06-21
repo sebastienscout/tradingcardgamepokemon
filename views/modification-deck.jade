@@ -29,7 +29,7 @@ block content
                 div(class="cardContent hvr-grow", expansion='#{card.expansion.name}')
                     img(src="images/cards/pokemon/XY/"+card.expansion.name+"/" + card.card_number + ".png")
                     div.rond
-                    input(type="number", id= 'p'+card.card_number, step="1" readonly)
+                    input(type="number", id=card.card_number, step="1" readonly)
 
 
 
@@ -38,7 +38,7 @@ block content
                 div(class="cardContent hvr-grow", expansion='#{energy.expansion.name}')
                     img(src="images/cards/" + energy.expansion.name + "/" + energy.card_number + ".png")
                     div.rond
-                    input(type="number", id= 'e'+energy.card_number, step="1" readonly)
+                    input(type="number", id=energy.card_number, step="1" readonly)
 
     div#donnees
 

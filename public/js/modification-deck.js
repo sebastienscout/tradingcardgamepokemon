@@ -41,9 +41,9 @@ $(document).ready(function() {
             compteurCartes++;
         });
         if(idCartes[1]!=9)
-            var idCarte = "#p"+idCartes[0];
+            var idCarte = $("#pokemons").find("#"+idCartes[0]);
         else
-            var idCarte = "#e"+idCartes[0];
+            var idCarte = $("#energies").find("#"+idCartes[0]);
 
         console.log(idCarte);
         $(idCarte).val(compteurCartes);
@@ -53,6 +53,7 @@ $(document).ready(function() {
         $(idCarte).parent().children(".rond").css("border","2px solid white");
 
         verif2();
+        $("#envoiDeck").prop('disabled', false);
     });
 
     $("#random").click(function () {
@@ -65,12 +66,12 @@ $(document).ready(function() {
             for (var i = 0; i < randEnergies; i++) {
 
                 var randEnergy = randomIntFromInterval(1, 9);
-                var idCarte = "#" + randEnergy +".parent().attr()=" + $(this).parent().attr("expansion");
-                $(idCarte).children("#" + randEnergy).get(0).value++;
-                $(idCarte).children(".rond").html($(idCarte).val());
-                $(idCarte).children(".rond").show();
-                $(idCarte).children(".rond").css("background-color", "red");
-                $(idCarte).children(".rond").css("border", "2px solid white");
+                var idCarte = $("#energies").find("#"+randEnergy);
+                $(idCarte).get(0).value++;
+                $(idCarte).parent().children(".rond").html($(idCarte).val());
+                $(idCarte).parent().children(".rond").show();
+                $(idCarte).parent().children(".rond").css("background-color", "red");
+                $(idCarte).parent().children(".rond").css("border", "2px solid white");
                 total += 1;
                 energies += 1;
                 verif2();
