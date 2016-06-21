@@ -132,7 +132,7 @@ html, body {
 #zoomed-card #menu-card li a:hover{
     color:#99cb4c;
 }
-#zoomed-card #menu-card li.withdraw, #zoomed-card #menu-card li.show-active, #zoomed-card #menu-card li.show-bench {
+#zoomed-card #menu-card li.withdraw, #zoomed-card #menu-card li.show-active, #zoomed-card #menu-card li.show-bench, #zoomed-card #menu-card li.attack {
     margin-left: 20px;
     display:none;
 }

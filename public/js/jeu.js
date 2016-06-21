@@ -133,9 +133,11 @@ socket.on("turn", function(turn){
         $('#end-turn').html("Tour adverse...");
     }
 });
+
 socket.on("nbCardPrice", function(nbCartePrice) {
     boardPlayer.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
 });
+
 socket.on("nbCardPrice-opponent", function(nbCartePrice) {
     boardOpponent.children('div.numbered-cards').children('div.rewards').children('div.number-cards').html(nbCartePrice);
 });
@@ -146,49 +148,6 @@ socket.on('nbCardDeck',function(nbCarteDeck) {
 
 socket.on('nbCardDeck-opponent',function(nbCarteDeck) {
     boardOpponent.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);
-});
-
-$(document).on('click','.interaction',function(event){
-    event.stopPropagation();
-    var id = $(this).attr('id');
-    var src = $(this).attr('src');
-    $('#zoomed-card img').attr('src', src);
-    $('#zoomed-card').show();
-
-    $('#menu-card').html('');
-
-    if(turnPlayer) {
-        if ($(this).hasClass("hand")) {
-            $('#menu-card').append('<li><a idPokemon="' + id + '" id="toBench" href="#">Placer sur le banc</a></li>');
-
-        } else if ($(this).hasClass("energy")) {
-            if (pokemonActive != null) {
-                $('#menu-card').append('<li><a id="showActive" href="#"><b>&or; Actif</b></a></li>');
-                $('#menu-card').append('<li class="show-active"><a idEnergy="' + id + '" idPokemon="active" id="energyToPokemon" href="#">' + pokemonActive.name + '</a></li>');
-            }
-            if (tabBench.length > 0) {
-                $('#menu-card').append('<li><a id="showBench" href="#"><b>&or; Banc</b></a></li>');
-                $.each(tabBench, function (i, card) {
-                    $('#menu-card').append('<li class="show-bench"><a idEnergy="' + id + '" idPokemon="' + i + '" id="energyToPokemon" href="#">' + card.name + '</a></li>');
-                });
-            }
-
-        } else if ($(this).hasClass("bench")) {
-            if (pokemonActive == null) {
-                $('#menu-card').append('<li><a idPokemon="' + id + '" id="toActive" href="#">Placer en actif</a></li>');
-            }
-
-        } else if ($(this).attr("id") == 'player-active') {
-            $.each(pokemonActive.attacks, function (i, attack) {
-                $('#menu-card').append('<li><a idAttack="' + i + '" id="attackActive" href="#">"' + attack.title + '"</a></li>');
-            });
-            $('#menu-card').append('<li><a id="withdraw" href="#"><b>&or; Retrait</b></a></li>');
-            $.each(tabBench, function (i, card) {
-                $('#menu-card').append('<li class="withdraw" ><a idPokemon="' + i + '" href="#">Envoyer ' + card.name + '</a></li>');
-            });
-        }
-    }
-    $('#menu-card').append('<li><a href="#" id="cancel">Annuler</a></li>');
 });
 
 $(document).on('click','#toActive',function() {
@@ -224,6 +183,15 @@ $(document).on('click','#withdraw',function() {
     }
 });
 
+$(document).on('click','#attacks',function() {
+    if($('.attack').is(':visible')){
+        $('.attack').slideUp(250);
+    }
+    else {
+        $('.attack').slideDown(250);
+    }
+});
+
 $(document).on('click','#showActive',function() {
     if($('.show-active').is(':visible')){
         $('.show-active').slideUp(250);
@@ -246,6 +214,54 @@ $(document).on('click','.withdraw',function() {
     socket.emit("withdraw", $(this).children('a').attr("idPokemon"));
     $('#zoomed-card').hide();
 });
+
 $(document).on('click','#end-turn',function() {
     socket.emit("endTurn");
+});
+
+$(document).on('click','.interaction',function(event){
+    event.stopPropagation();
+    var id = $(this).attr('id');
+    var src = $(this).attr('src');
+    $('#zoomed-card img').attr('src', src);
+    $('#zoomed-card').show();
+
+    $('#menu-card').html('');
+
+    if(turnPlayer) {
+        if ($(this).hasClass("hand")) {
+            $('#menu-card').append('<li><a idPokemon="' + id + '" id="toBench" href="#">Placer sur le banc</a></li>');
+
+        } else if ($(this).hasClass("energy")) {
+            if (pokemonActive != null) {
+                $('#menu-card').append('<li><a id="showActive" href="#"><b>&or; Actif</b></a></li>');
+                $('#menu-card').append('<li class="show-active"><a idEnergy="' + id + '" idPokemon="active" id="energyToPokemon" href="#">' + pokemonActive.name + '</a></li>');
+            }
+            if (tabBench.length > 0) {
+                $('#menu-card').append('<li><a id="showBench" href="#"><b>&or; Banc</b></a></li>');
+                $.each(tabBench, function (i, card) {
+                    $('#menu-card').append('<li class="show-bench"><a idEnergy="' + id + '" idPokemon="' + i + '" id="energyToPokemon" href="#">' + card.name + '</a></li>');
+                });
+            }
+
+        } else if ($(this).hasClass("bench")) {
+            if (pokemonActive == null) {
+                $('#menu-card').append('<li><a idPokemon="' + id + '" id="toActive" href="#">Placer en actif</a></li>');
+            }
+
+        } else if ($(this).attr("id") == 'player-active') {
+            $('#menu-card').append('<li><a id="attacks" href="#"><b>&or; Attaques</b></a></li>');
+            $.each(pokemonActive.attacks, function (i, attack) {
+                $('#menu-card').append('<li class="attack"><a idAttack="' + i + '" id="attackActive" href="#">' + attack.title + '</a></li>');
+            });
+
+            if (tabBench.length > 0) {
+                $('#menu-card').append('<li><a id="withdraw" href="#"><b>&or; Retrait</b></a></li>');
+                $.each(tabBench, function (i, card) {
+                    $('#menu-card').append('<li class="withdraw" ><a idPokemon="' + i + '" href="#">Envoyer ' + card.name + '</a></li>');
+                });
+            }
+        }
+    }
+    $('#menu-card').append('<li><a href="#" id="cancel">Annuler</a></li>');
 });
