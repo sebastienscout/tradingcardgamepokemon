@@ -11,7 +11,7 @@
       ],
       "title": "Attaque Imprudente",
       "text": "Ce Pokémon s'inflige 10 dégâts.",
-      "action": "",
+      "action": "board.attacker().applyHeal(10);",
       "value": {
         "operator": "-",
         "value": 20,

@@ -11,7 +11,7 @@
       ],
       "title": "Vol-Vie",
       "text": "Soignez 20 dégâts à ce Pokémon.",
-      "action": "board.attacker().applyHeal(20)",
+      "action": "board.attacker().applyHeal(20);",
       "value": {
       "operator": "-",
       "value": 20

@@ -11,7 +11,7 @@
       ],
       "title": "Mange-Feuille",
       "text": "Si le Pokémon Actif de votre adversaire est un Pokémon Plante, cette attaque inflige 20 dégâts supplémentaires.",
-      "action": "if (board.defender().type == 'PLANT') { board.defender().applyDamage(20); }",
+      "action": "if (board.defender().to_object().type === 'PLANT') { board.defender().applyDamage(20); }",
       "value": {
         "operator": "-",
         "value": 10,

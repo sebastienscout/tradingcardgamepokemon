@@ -11,22 +11,12 @@
       ],
       "title": "Furie",
       "text": "Lancez 3 pièces. Cette attaque inflige 40 dégâts multipliés par le nombre de côtés face.",
-      "action": "for (var i =0;i<3;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
+      "action": "for (var i=0;i<3;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(40); }}",
       "value": {
         "operator": "-",
-        "value": 0,
+        "value": 40,
         "supplement": "+"
       }
-    },
-    {
-      "energies": [
-        "COLORLESS",
-        "COLORLESS"
-      ],
-      "title": "Livraison Doduo",
-      "text": "Piochez 2 cartes",
-      "action": "",
-      "value": {}
     }
   ],
   "weakness": {

@@ -12,7 +12,7 @@
       ],
       "title": "Poing Ecrasant",
       "text": "Lancez une pièce. Si c'est pile, cette attaque ne fait rien.",
-      "action": "",
+      "action": "if (board.flipCoin() === core.Coin.TAILS) { null; }",
       "value": {
         "operator" : "-",
         "value" : 30,

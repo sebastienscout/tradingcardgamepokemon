@@ -13,7 +13,7 @@
       ],
       "title": "Spirale Epuisante",
       "text": "Soignez 30 dégâts à ce Pokémon.",
-      "action": "",
+      "action": "board.attacker().applyHeal(30);",
       "value": {
         "operator": "-",
         "value": 60,

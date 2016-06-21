@@ -9,8 +9,8 @@
       "energies": [
         "FIRE"
       ],
-      "title": "H‚te",
-      "text": "Lancez une piËce. Si c'est face, Èvitez tous les effets d'attaques, y compris les dÈg‚ts, infligÈs ‡ ce PokÈmon pendant le prochain tour de votre adversaire. ",
+      "title": "H√¢te",
+      "text": "Lancez une pi√®ce. Si c'est face, √©vitez tous les effets d'attaques, y compris les d√©g√¢ts, inflig√©s √† ce Pok√©mon pendant le prochain tour de votre adversaire. ",
       "action": "",
       "value": {
         "operator": "-",
@@ -23,8 +23,8 @@
         "COLORLESS",
         "COLORLESS"
       ],
-      "title": "DÈpassement",
-      "text": "Cette attaque inflige 20 dÈg‚ts ‡ l'un des PokÈmon de Banc de votre adversaire. (N'appliquez ni la Faiblesse ni la RÈsistance aux PokÈmon de Banc.)",
+      "title": "D√©passement",
+      "text": "Cette attaque inflige 20 d√©g√¢ts √† l'un des Pok√©mon de Banc de votre adversaire. (N'appliquez ni la Faiblesse ni la R√©sistance aux Pok√©mon de Banc.)",
       "action": "",
       "value": {
         "operator": "-",

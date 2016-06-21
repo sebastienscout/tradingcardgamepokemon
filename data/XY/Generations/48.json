@@ -12,7 +12,7 @@
       ],
       "title": "Pisto-Poing",
       "text": "Lancez 2 pièces. Cette attaque inflige 20 dégâts supplémentaires pour chaque côté face.",
-      "action": "",
+      "action": "for(var i=0;i<2;i++){if (board.flipCoin() === core.Coin.HEADS) { board.defender()applyDamage(20);}",
       "value": {
         "operator": "-",
         "value": 20,

@@ -12,7 +12,7 @@
       ],
       "title": "Aéropique",
       "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires.",
-      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(30); }",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(30); }",
       "value": {
         "operator": "-",
         "value": 10,

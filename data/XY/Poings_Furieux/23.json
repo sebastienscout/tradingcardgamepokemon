@@ -11,7 +11,7 @@
       ],
       "title": "Ecume",
       "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant Paralysé.",
-      "action": "",
+      "action": "if(board.flipCoin()===core.Coin.HEADS){board.defender().addState(core.State.PARALYSED);}",
       "value": {
         "operator": "",
         "value": "",

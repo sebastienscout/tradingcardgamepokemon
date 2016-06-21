@@ -11,7 +11,7 @@
       ],
       "title": "Senteur apaisante",
       "text": "Le Pokémon Actif de votre adversaire est maintenant Endormi.",
-      "action": "",
+      "action": "board.defender().addState(core.State.PARALYSED);",
       "value": {
         "operator": "-",
         "value": 30,
@@ -26,11 +26,11 @@
       ],
       "title": "Feuille Magik",
       "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts supplémentaires et vous soignez 30 dégâts à ce Pokémon.",
-      "action": "",
+      "action": "if (board.flipCoin() === core.Coin.HEADS){ board.defender().applyDamage(30); board.attacker().applyHeal(10);}",
       "value": {
-        "operator": "+",
+        "operator": "-",
         "value": 50,
-        "supplement": ""
+        "supplement": "+"
       }
     }
   ],

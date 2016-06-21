@@ -27,7 +27,7 @@
       ],
       "title": "Souffle de Feu",
       "text": "Lancez 2 pièces. Cette attaque inflige 40 dégâts supplémentaires pour chaque côté face.",
-      "action": "for (var i =0;i<2;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defenser().applyDamage(40); }}",
+      "action": "for (var i =0;i<2;i++){ if (board.flipCoin() === core.Coin.HEADS) { board.defender().applyDamage(40); }}",
       "value": {
         "operator": "-",
         "value": 80,

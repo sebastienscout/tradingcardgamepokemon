@@ -29,6 +29,14 @@ module.exports = ( function (self) {
       life_point -= points;
     };
 
+    this.applyHeal = function (points) {
+      if(card.life_point() < life_point+points){
+        life_point = card.life_point();
+      }else{
+        life_point += points;
+      }
+    };
+
     this.life_point = function () {
       return life_point;
     };

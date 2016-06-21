@@ -11,7 +11,7 @@
       ],
       "title": "Tacle Epuisé",
       "text": "Lancez une pièce. Si c'est face, cette attaque inflige 30 dégâts au Pokémon Actif de votre adversaire. Si c'est pile, ce Pokémon s'infige 30 dégâts.",
-      "action": "",
+      "action": "if(board.flipCoin() === core.Coin.HEADS){board.defender().applyDamage(30);}else{ board.attacker().applyDamage(30); }",
       "value": {}
     }
   ],

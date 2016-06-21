@@ -11,7 +11,7 @@
       ],
       "title": "Combo-Griffe",
       "text": "Lancez 3 pièces. Cette attaque infige 10 dégâts multipliés par le nombre de côtés face.",
-      "action": "",
+      "action": "for(var i=0;i<3;i++){board.defender().applyDamage(10);}",
       "value": {
         "operator": "-",
         "value": 10,

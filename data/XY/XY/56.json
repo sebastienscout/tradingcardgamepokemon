@@ -11,7 +11,7 @@
       ],
       "title": "Onde Folie",
       "text": "Le Pokémon Actif de votre adversaire est maintenant Confus.",
-      "action": "board.defenser().addState(core.State.CONFUSED);",
+      "action": "board.defender().addState(core.State.CONFUSED);",
       "value": {}
     }
   ],

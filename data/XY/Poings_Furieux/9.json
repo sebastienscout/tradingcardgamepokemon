@@ -13,9 +13,9 @@
       "text": "Si ce Pokémon a évolué d'Escargaumme pendant ce tour, cette attaque inflige 40 dégâts supplémentaires.",
       "action": "",
       "value": {
-        "operator": "+",
+        "operator": "-",
         "value": 20,
-        "supplement": ""
+        "supplement": "+"
       }
     },
     {

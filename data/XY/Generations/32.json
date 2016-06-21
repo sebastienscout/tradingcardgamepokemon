@@ -11,7 +11,7 @@
       ],
       "title": "Trou d'Mémoire",
       "text": "Lancez une pièce. Si c'est face, soignez 10 dégâts à ce Pokémon",
-      "action": "",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.attacker().applyHeal(10);",
       "value": {}
     },
     {
