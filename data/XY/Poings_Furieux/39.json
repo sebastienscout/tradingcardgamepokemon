@@ -25,7 +25,7 @@
       ],
       "title": "Choc Mental",
       "text": "Lancez une pièce. Si c'est face, le Pokémon Actif de votre adversaire est maintenant Paralysé.",
-      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defenser().addState(core.State.PARALYSED); }",
+      "action": "if (board.flipCoin() === core.Coin.HEADS) { board.defender().addState(core.State.PARALYSED); }",
       "value": {
         "operator": "-",
         "value": 10,

@@ -1,5 +1,5 @@
 {
-  "name": "LÈviator",
+  "name": "L√©viator",
   "type": "WATER",
   "stage": "STAGE_1",
   "life_point": 130,
@@ -10,7 +10,7 @@
         "WATER","COLORLESS","COLORLESS"
       ],
       "title": "Folle Eclaboussure",
-      "text": "Cette attaque inflige 10 dÈg‚ts ‡ chacun des PokÈmon de Banc (les vÙtres et ceux de votre adversaire) (N'appliquez ni la Faiblesse ni la RÈsistance aux PokÈmon de Banc.)",
+      "text": "Cette attaque inflige 10 d√©g√¢ts √† chacun des Pok√©mon de Banc (les v√¥tres et ceux de votre adversaire) (N'appliquez ni la Faiblesse ni la R√©sistance aux Pok√©mon de Banc.)",
       "action": "",
       "value": {
         "operator": "-",
@@ -23,7 +23,7 @@
         "WATER","COLORLESS","COLORLESS","COLORLESS"
       ],
       "title": "Hyfroqueue",
-      "text": "Lancez une piËce pour chaque Energie EAU attachÈe ‡ ce PokÈmon. Cette attaque inflige 30 dÈg‚ts supplÈmentaires pour chaque cÙtÈ face.",
+      "text": "Lancez une pi√®ce pour chaque Energie EAU attach√©e √† ce Pok√©mon. Cette attaque inflige 30 d√©g√¢ts suppl√©mentaires pour chaque c√¥t√© face.",
       "action": "",
       "value": {
         "operator": "-",

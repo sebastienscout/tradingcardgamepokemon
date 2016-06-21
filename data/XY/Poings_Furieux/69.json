@@ -11,7 +11,7 @@
       ],
       "title": "Rayon Lune",
       "text": "Soignez 30 dégâts à ce Pokémon.",
-      "action": "",
+      "action": "board.attacker().applyHeal(30);",
       "value": {}
     },
     {

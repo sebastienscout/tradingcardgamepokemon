@@ -25,7 +25,7 @@
       ],
       "title": "Embuscade",
       "text": "Lancez une pièce. Si c'est face, cette attaque inflige 20 dégâts supplémentaires",
-      "action": "",
+      "action": "if(board.flipCoin()===core.Coin.HEADS){board.defender().applyDamage(20);}",
       "value": {
         "operator": "-",
         "value": 20,
