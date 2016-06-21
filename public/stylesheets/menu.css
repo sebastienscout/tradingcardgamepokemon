@@ -37,9 +37,9 @@ button{
     margin:10px;
 }
 
-.cards{
-    display:inline-block;
-    width:100px;
+
+.cards:hover {
+    width:150px;
 }
 
 .enabled{
@@ -52,6 +52,7 @@ button{
 
 .occurence{
     text-align:center;
+    border: 2px solid white;
     border-radius: 50%;
     display: inline-block;
     position: absolute;
@@ -63,5 +64,4 @@ button{
     height:50px;
     z-index:-1;
     color:white;
-
 }
