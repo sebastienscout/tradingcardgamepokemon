@@ -25,48 +25,39 @@ module.exports = ( function (self) {
       return card.attacks();
     };
     this.testEnergieAttack= function(tabEnergieAttack) {
-        var test=false;
-        var energiesPokemon=[];
-        energies.forEach(function(energie) {
-            energiesPokemon.push(energie);
-        });
-        var nbIncolore=0;
-        var energieAttack;
-        var energiePokemon;
-        if (tabEnergieAttack.length <= energies.length){
-          console.log(" ENERG POK LENGTH"+energiesPokemon.length);
-          console.log(" ENERG ATT LENGTH"+tabEnergieAttack.length);
-          for (var j = 0 ; j < energiesPokemon.length;j++) {
-            energiePokemon = energiesPokemon[j];
-
-          for (var index = 0 ; index < tabEnergieAttack.length;index++) {
-            energieAttack = tabEnergieAttack[index];
-            console.log("ENERG POK : "+ energiePokemon.to_object().type + " ENERG ATT "+energieAttack );
-              test = false;
-              if(energieAttack == "COLORLESS") {
-                nbIncolore++;
+      var test=false;
+      var energiesPokemon=[];
+      energies.forEach(function(energie) {
+        energiesPokemon.push(energie);
+      });
+      var energieAttack;
+      var energiePokemon;
+      // TEST SI ENERGIE DE L'ATTAQUE INF AUX ENERGIES DU POKEMON
+      if (tabEnergieAttack.length <= energiesPokemon.length){
+        for (var index = 0; index < tabEnergieAttack.length; index++) {
+          energieAttack = tabEnergieAttack[index];
+          if (energieAttack != "COLORLESS") {
+            for (var j = 0 ; j < energiesPokemon.length;j++) {
+              energiePokemon = energiesPokemon[j];
+              if (energieAttack == energiePokemon.to_object().type) {
                 test = true;
-
-              }else if (energieAttack == energiePokemon.to_object().type) {
-                test = true;
-                energiesPokemon.splice(j,1);
+                energiesPokemon.splice(j, 1);
+                tabEnergieAttack.splice(j, 1);
                 index = tabEnergieAttack.length;
               }
-
             }
             if (test == false) {
               return false;
             }
           }
-          console.log("NB INCOLORE : "+nbIncolore +" POK ENERG"+ energiesPokemon.length);
-          if (nbIncolore > energiesPokemon.length) {
-              return false;
-          }
-        }else {
-          return false;
         }
-    return true;
-    }
+       if (energiesPokemon.length >= tabEnergieAttack.length) {
+        return true;
+       }
+      }else {
+        return false;
+      }
+}
 
     this.attack = function(idAttack) {
       return attacks()[idAttack].value.value;
