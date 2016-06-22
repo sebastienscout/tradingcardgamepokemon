@@ -286,6 +286,9 @@ html, body {
     pointer-events: none;
 
 }
+.energies-icones {
+    top: 300px;
+}
 #board-player .cards-bench .energies-icones {
     top: 2px;
     left: 62px;
