@@ -25,36 +25,49 @@ module.exports = ( function (self) {
       return card.attacks();
     };
     this.testEnergieAttack= function(tabEnergieAttack) {
-        var test;
+        var test=false;
         var energiesPokemon=[];
         energies.forEach(function(energie) {
             energiesPokemon.push(energie);
         });
         var nbIncolore=0;
-        console.log(tabEnergieAttack.length + " <= " + energies.length  );
-        if (tabEnergieAttack.length <= energies.length) {
-        tabEnergieAttack.forEach(function(energieAttack,index) {
-            test = false;
-            energiesPokemon.forEach(function(energiePokemon) {
-              if (energieAttack == "COLORLESS") {
+        var energieAttack;
+        var energiePokemon;
+        if (tabEnergieAttack.length <= energies.length){
+
+        //tabEnergieAttack.every(function(energieAttack,index) {
+
+          for (var index = 0 ; index < tabEnergieAttack.length;index++) {
+            energieAttack = tabEnergieAttack[index];
+
+           // energiesPokemon.every(function(energiePokemon) {
+            for (var j = 0 ; j < energiesPokemon.length;j++) {
+              energiePokemon = energiesPokemon[j];
+              test = false;
+              console.log("TEST : "+test+ " " +energieAttack+ " = "+ energiePokemon.to_object().type);
+              if(energieAttack == "COLORLESS") {
                 nbIncolore++;
                 test = true;
+                console.log("TEST : COLORLESS"+test);
               }else if (energieAttack == energiePokemon.to_object().type) {
                 test = true;
+                console.log("TEST :ENERGIE EGAL"+test);
               }
+
               energiesPokemon.splice(index,1);
-            });
-            if (!test) {
+            }
+            console.log("TEST "+test);
+            if (test == false) {
+              console.log("TRY");
               return false;
             }
-          });
+          }
           if (nbIncolore > energies.length) {
               return false;
-        }
+          }
         }else {
           return false;
         }
-
     return true;
     }
 

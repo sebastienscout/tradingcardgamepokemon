@@ -59,13 +59,14 @@ module.exports = ( function (self) {
       hand = [];
       deck.mix();
     };
-
-    this.getFirstBasePokemonCardIndex = function () {
+    // TEST SI UN POKEMON DANS LA MAIN AU DEBUT
+    // TEST SI il y a au moins un pokemon dans la main ou dans le banc
+    this.getFirstBasePokemonCardIndex = function (tab) {
       var ok = false;
       var index = 0;
 
-      while (index < hand.length && !ok) {
-        if (hand[index].card_type() === core.CardType.POKEMON && hand[index].card().stage() === core.Stage.BASE) {
+      while (index < tab.length && !ok) {
+        if (tab[index].card_type() === core.CardType.POKEMON && tab[index].card().stage() === core.Stage.BASE) {
             ok = true;
         } else {
           ++index;
@@ -89,7 +90,7 @@ module.exports = ( function (self) {
     };
 
     this.isValidInitialHand = function () {
-      return this.getFirstBasePokemonCardIndex() !== -1;
+      return this.getFirstBasePokemonCardIndex(hand) !== -1;
     };
 
     this.mixDeck = function () {
