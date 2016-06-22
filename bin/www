@@ -252,6 +252,7 @@ io.sockets.on('connection', function (socket) {
             players[indexPlayer].takeCardInHand(idEnergy);
 
             socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+            socket.emit("pokemonActive-opponent",players[(indexPlayer+1)%2].activePokemon());
             socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
           }
           else {

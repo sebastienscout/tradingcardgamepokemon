@@ -279,7 +279,7 @@ html, body {
 /**********/
 /* Icones */
 /**********/
-#board-player  .energies-icones {
+.energies-icones {
     position: absolute;
     display: inline;
     top: 120px;

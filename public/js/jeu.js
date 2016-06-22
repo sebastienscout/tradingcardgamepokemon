@@ -112,6 +112,12 @@ socket.on('pokemonActive',function(pokActive) {
 socket.on('pokemonActive-opponent',function(pokActive) {
     if (pokActive != null) {
         $('#opponent-active').attr('src', 'images/cards/pokemon/XY/' + pokActive.expansion.name + '/' + pokActive.card_number + '.png');
+        if(pokActive.energies != null) {
+            $('#opponent-active').parent().children('div.energies-icones').html('');
+            $.each(pokActive.energies, function (i, energy) {
+                $('#opponent-active').parent().children('div.energies-icones').append('<div class="ico' + energy.type + '"></div>');
+            });
+        }
         $('#opponent-active').parent().css('visibility', 'visible');
     }else {
         $('#opponent-active').parent().css('visibility', 'hidden');
