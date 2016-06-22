@@ -334,6 +334,7 @@ $(document).ready(function() {
         energies = 0;
         pokemons = 0;
         verif2();
+        $("#envoiDeck").prop('disabled', true);
     });
 
 });
