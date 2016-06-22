@@ -24,8 +24,23 @@ $( document ).ready(function() {
 
     $("#logOut").click(function () {
         $('#sonMenu')[0].play(); //Son au clic sur menu
-        console.log("test");
-        window.location.replace("/connexion?deconnexion=true");
+        //window.location.replace("/connexion?deconnexion=true");
+
+        $.ajax({
+            type: 'PUT',
+            url: '/connexion',
+            data: {
+                type: "logOut"
+            },
+            sucess: function (sucess) {
+                alert('sucess');
+            },
+            err: function (err) {
+                alert('err');
+            }
+        });
+        window.location.replace("/connexion");
+
     });
 
 

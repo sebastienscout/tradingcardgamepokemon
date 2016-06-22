@@ -18,6 +18,7 @@ router.get('/?deconnexion=true', function(req, res, next) {
 /* GET connexion page. */
 router.get('/', function(req, res, next) {
     if(req.session._id && req.session.username && req.session.mail) {  // Si connecte
+        /*
         var connecte = req.param("deconnexion");
         if (connecte == "true") {   // Si le client veut se deconnecter
             req.session.destroy();
@@ -25,6 +26,9 @@ router.get('/', function(req, res, next) {
         }else {
             res.redirect('/menu');
         }
+        */
+        res.redirect('/menu');
+
     } else {
         res.render('connexion');
     }
@@ -33,30 +37,38 @@ router.get('/', function(req, res, next) {
 
 /* POST connexion page. */
 router.post('/', function(req, res, next) {
-    // Codes erreurs
-    // 3 = existe pas
-    // 4 = non valide
+    if (req.session._id && req.session.username && req.session.mail) {  // Si connecte, redirige vers menu
+        res.redirect('/menu')
+    } else {
+        // Codes erreurs
+        // 3 = existe pas
+        // 4 = non valide
 
-    req.app.db.models.User.count({'username':req.param('username')}, function(err, username) {
-        if(username <= 0){ // Pseudo existe pas
-            res.render('connexion', {pseudo: 3});
-        }else{ // Pseudo existe
-            req.app.db.models.User.findOne({'username':req.param('username')}, function(err, user){
-                if(user.password != req.param('password')){ // Mot de passe invalide
-                    res.render('connexion', {password: 4});
-                }else{ // Mot de passe valide
-                    req.session._id = user._id;
-                    req.session.username = user.username;
-                    req.session.mail = user.mail;
+        req.app.db.models.User.count({'username': req.param('username')}, function (err, username) {
+            if (username <= 0) { // Pseudo existe pas
+                res.render('connexion', {pseudo: 3});
+            } else { // Pseudo existe
+                req.app.db.models.User.findOne({'username': req.param('username')}, function (err, user) {
+                    if (user.password != req.param('password')) { // Mot de passe invalide
+                        res.render('connexion', {password: 4});
+                    } else { // Mot de passe valide
+                        req.session._id = user._id;
+                        req.session.username = user.username;
+                        req.session.mail = user.mail;
 
-                    res.redirect('/menu');
-                    //console.log(req.session);
-                }
-            });
-        }
-    });
+                        res.redirect('/menu');
+                        //console.log(req.session);
+                    }
+                });
+            }
+        });
+    }
 });
 
-
+router.put('/', function(req, res, next) {
+    if (req.session._id && req.session.username && req.session.mail) {  // Si connecte, redirige vers menu
+        req.session.destroy();
+    }
+});
 
 module.exports = router;

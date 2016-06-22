@@ -3,8 +3,6 @@ var router = express.Router();
 var core = require('../core');
 var fs = require('fs');
 
-var test;
-
 router.post('/', function(req, res, next) {
     res.render('menu');
 });
@@ -51,7 +49,6 @@ router.get('/', function(req, res, next) {
                         }
                     ],
                     function (err, carte) {
-                        var i;
                         if (err) return handleError(err);
 
 
@@ -62,6 +59,9 @@ router.get('/', function(req, res, next) {
                                 cartes_deck[cartes_deck.length] = carte[parcour_tableau_carte];
                             }
                         }
+
+
+
                         res.render('menu', {
                             _id: req.session._id,
                             username: req.session.username,
@@ -69,52 +69,9 @@ router.get('/', function(req, res, next) {
                             deck: has_deck,
                             tab_deck: cartes_deck
                         });
-
                     });
                 });
-
-
-
-
-
-
-                /*
-                var i = 0;
-                var obj;
-                req.app.db.models.Deck.findOne({'id_joueur':req.session._id}, function(err, deck) {
-                    req.app.db.models.Carte.find({id_deck: deck._id}, function(err, cartes) {
-                        cartes.forEach(function (c) {
-                            req.app.db.models.Generation.findOne({num_generation: c.id_generation}, function(err, generation){
-                                obj = generation.toObject();
-                                obj.nom_generation = generation.nom_generation;
-                                //cartes[i].nom_generation = generation.nom_generation;
-                                //console.log(cartes[i].nom_generation);
-                                c.nom_generation = generation.nom_generation;
-
-                                //console.log(cartes[i]);
-
-                                //console.log(i);
-                                i++;
-
-                            });
-                        });
-                        console.log(cartes);
-                        res.render('menu', {
-                            _id: req.session._id,
-                            username: req.session.username,
-                            mail: req.session.mail,
-                            cartes: cartes,
-                            deck: has_deck
-                        });
-
-                    });
-                });
-                */
-
-
             }
-
-
         });
     }
 });
