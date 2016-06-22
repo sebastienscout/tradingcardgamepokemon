@@ -157,6 +157,11 @@ io.sockets.on('connection', function (socket) {
               socket.emit("hand-opponent",players[(indexPlayer+1)%2].hand().length);
               socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
 
+                if(testVictoire(indexPlayer)){
+                    socket.emit("victory");
+                    socket.broadcast.emit("defeat");
+                }
+
               // REINIT LES NB CARTE RECOMPENSES
               socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
               socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
@@ -278,21 +283,14 @@ io.sockets.on('connection', function (socket) {
 
 });
 
-function testVictoire() {
-  
-  var indexPlayer = board.attackIndex();
+function testVictoire(indexPlayer) {
+
   if (players[indexPlayer].priceCardLength() == 0 ) {
-    console.log("VICTOIRE : CARTE RECOMP 0 ");
     return true;
   }
-  if (players[indexPlayer.deckLengh() == 0]) {
-    console.log("VICTOIRE : DECK VIDE ");
-    return true;
-  }
-  // TEST POKEMON DANS BANC OU MAIN
-  if (players[indexPlayer].getFirstBasePokemonCardIndex(players[indexPlayer].bench()) == 0 && players[indexPlayer].getFirstBasePokemonCardIndex(players[indexPlayer].hand()) == 0  ) {
-    return true;
-  }
+  if (players[indexPlayer].deckLengh() == 0){
+        return true;
+    }
 }
 
 /**

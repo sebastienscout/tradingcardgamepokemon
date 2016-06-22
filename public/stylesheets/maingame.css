@@ -92,6 +92,35 @@ html, body {
 #recup-card {
     display:none;
 }
+#result {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: calc(100% - 100px);
+    text-align: center;
+    vertical-align: middle;
+    background: rgba(0,0,0,.55);
+    color: white;
+    font-size: 150px;
+    z-index: 5;
+    padding-top: 100px;
+}
+#result a {
+    background: #275794;
+    padding: 10px 25px;
+    color: white;
+    border-radius: 3px;
+    cursor: url(/images/icons/gam1282.cur), progress !important;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+#result a:hover {
+    background: #376caf;
+}
 
 /******************/
 /*  Carte zoomée  */

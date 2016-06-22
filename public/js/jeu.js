@@ -149,13 +149,12 @@ socket.on('nbCardDeck',function(nbCarteDeck) {
 socket.on('nbCardDeck-opponent',function(nbCarteDeck) {
     boardOpponent.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);
 });
-socket.on('victoire',function(nbCarteDeck) {
-    
+socket.on('victory',function() {
+   $('body').append('<div id="result">Victoire !<a href="/menu">Retour au menu</a></div>');
 });
-socket.on('defaite',function(nbCarteDeck) {
-   
+socket.on('defeat',function() {
+    $('body').append('<div id="result">Defaite !<a href="/menu">Retour au menu</a></div>');
 });
-
 $(document).on('click','#toActive',function() {
     socket.emit("toActive",$(this).attr('idPokemon'));
     $('#zoomed-card').hide();
@@ -222,7 +221,12 @@ $(document).on('click','.withdraw',function() {
 });
 
 $(document).on('click','#end-turn',function() {
-    socket.emit("endTurn");
+    if(pokemonActive != null){
+        socket.emit("endTurn");
+    }
+    else{
+        alert("Vous devez avoir un pokémon actif !");
+    }
 });
 
 $(document).on('click','.interaction',function(event){
