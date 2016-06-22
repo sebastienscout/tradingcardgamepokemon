@@ -60,7 +60,7 @@ input{
 
 button:hover{
     background: #C59934;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
+    cursor: url(/images/icons/gam1282.cur), progress !important;
 }
 
 fieldset{
