@@ -34,33 +34,32 @@ module.exports = ( function (self) {
         var energieAttack;
         var energiePokemon;
         if (tabEnergieAttack.length <= energies.length){
-
-        //tabEnergieAttack.every(function(energieAttack,index) {
-
+          console.log(" ENERG POK LENGTH"+energiesPokemon.length);
+          console.log(" ENERG ATT LENGTH"+tabEnergieAttack.length);
           for (var j = 0 ; j < energiesPokemon.length;j++) {
             energiePokemon = energiesPokemon[j];
+
           for (var index = 0 ; index < tabEnergieAttack.length;index++) {
             energieAttack = tabEnergieAttack[index];
-           // energiesPokemon.every(function(energiePokemon) {
+            console.log("ENERG POK : "+ energiePokemon.to_object().type + " ENERG ATT "+energieAttack );
               test = false;
-              console.log("TEST : "+test+ " " +energieAttack+ " = "+ energiePokemon.to_object().type);
               if(energieAttack == "COLORLESS") {
                 nbIncolore++;
                 test = true;
-                console.log("TEST : COLORLESS"+test);
+
               }else if (energieAttack == energiePokemon.to_object().type) {
                 test = true;
-                console.log("TEST :ENERGIE EGAL"+test);
+                energiesPokemon.splice(j,1);
+                index = tabEnergieAttack.length;
               }
-              energiesPokemon.splice(index,1);
+
             }
-            console.log("TEST "+test);
             if (test == false) {
-              console.log("TRY");
               return false;
             }
           }
-          if (nbIncolore > energies.length) {
+          console.log("NB INCOLORE : "+nbIncolore +" POK ENERG"+ energiesPokemon.length);
+          if (nbIncolore > energiesPokemon.length) {
               return false;
           }
         }else {
