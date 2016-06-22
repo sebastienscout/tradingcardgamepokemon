@@ -37,11 +37,21 @@ $(document).ready(function() {
         }
 
         $('div[expansion='+expansion+']').each(function() {
-
             compteurCartes++;
         });
-        if(idCartes[1]!=9)
-            var idCarte = $("#pokemons").find("#"+idCartes[0]);
+
+        if(idCartes[1]!=9) {
+            if(idCartes[1]==83)
+                var idCarte = $('#pokemons > div[expansion=Generations]').find("#" + idCartes[0]);
+            if(idCartes[1]==111)
+                var idCarte = $('#pokemons > div[expansion="Poings Furieux"]').find("#" + idCartes[0]);
+            if(idCartes[1]==146)
+                var idCarte = $('#pokemons > div[expansion=XY]').find("#" + idCartes[0]);
+            if(idCartes[1]==98)
+                var idCarte = $('#pokemons > div[expansion="Origines Antiques"]').find("#" + idCartes[0]);
+            if(idCartes[1]==124)
+                var idCarte = $('#pokemons > div[expansion="Impact Des Destins"]').find("#" + idCartes[0]);
+        }
         else
             var idCarte = $("#energies").find("#"+idCartes[0]);
 
@@ -74,13 +84,15 @@ $(document).ready(function() {
                 total += 1;
                 energies += 1;
                 verif2();
+
             }
         }
         if(total<60) {
-            for (var i = total; i < 60; i++) {
-
+            var total2 = total;
+            for (var i = total2; i < 60; i++) {
                 var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
                 var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
+
                 while($(idCarte).val()==4){
                     var randEnergy = randomIntFromInterval(1, $('#pokemons').children().length);
                     var idCarte = $('#pokemons > :nth-child(' + randEnergy + ') input');
@@ -95,7 +107,7 @@ $(document).ready(function() {
                 verif2();
             }
         }
-
+        $("#envoiDeck").prop('disabled', false);
     });
 
 
@@ -222,7 +234,6 @@ $(document).ready(function() {
             $("#envoiDeck").prop('disabled', true);
         }
 
-
         return false;
     });
 
@@ -310,9 +321,11 @@ $(document).ready(function() {
 
     $("#envoiDeck").click(function () {
         var indice = 0;
+        var nb2= 0;
         $("input").each(function () {
             var nb = $(this).val();
 
+            nb2 += nb;
             if (nb > 0) {
                 for (var i = 0; i < nb; i++) {
 
@@ -329,6 +342,7 @@ $(document).ready(function() {
                     else
                         envoi[indice] = {"num_carte": parseInt($(this).attr("id")), "id_deck": 1, "id_generation": 9}; //Cartes énergies
                     indice++;
+
                 }
             }
         });
