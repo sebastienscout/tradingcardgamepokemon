@@ -37,12 +37,11 @@ module.exports = ( function (self) {
 
         //tabEnergieAttack.every(function(energieAttack,index) {
 
+          for (var j = 0 ; j < energiesPokemon.length;j++) {
+            energiePokemon = energiesPokemon[j];
           for (var index = 0 ; index < tabEnergieAttack.length;index++) {
             energieAttack = tabEnergieAttack[index];
-
            // energiesPokemon.every(function(energiePokemon) {
-            for (var j = 0 ; j < energiesPokemon.length;j++) {
-              energiePokemon = energiesPokemon[j];
               test = false;
               console.log("TEST : "+test+ " " +energieAttack+ " = "+ energiePokemon.to_object().type);
               if(energieAttack == "COLORLESS") {
@@ -53,7 +52,6 @@ module.exports = ( function (self) {
                 test = true;
                 console.log("TEST :ENERGIE EGAL"+test);
               }
-
               energiesPokemon.splice(index,1);
             }
             console.log("TEST "+test);

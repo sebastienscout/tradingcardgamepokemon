@@ -29,7 +29,7 @@ $('#recup-card div').each(function() {
 socket.emit("start-game", deck);
 
 socket.on('life-points',function(pv) {
-    if (pv != 0) {
+    if (pv != 0 && pv != null && pv != undefined) {
         lifePointsPlayer.html(pv);
         lifePointsPlayer.css('visibility','visible');
     }else {

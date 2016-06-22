@@ -128,6 +128,18 @@ io.sockets.on('connection', function (socket) {
       socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
       socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
 
+      socket.emit("pokemonActive", players[indexPlayer].activePokemon());
+      socket.emit("pokemonActive-opponent", players[(indexPlayer+1) %2].activePokemon());
+      socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
+
+      if( players[indexPlayer].activePokemonNotObject() != undefined) {
+        socket.emit("life-points", players[indexPlayer].activePokemonNotObject().life_point());
+        socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemonNotObject().life_point());
+      }
+      if( players[(indexPlayer+1) %2].activePokemonNotObject() != undefined) {
+        socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
+      }
+
       socket.on("attack",function(idAttack) {
         // TEST SI l'attaque fait des degats
         if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
