@@ -29,6 +29,7 @@ $(document).ready(function() {
         var compteurCartes = 0;
         var idCartes = $(this).attr("expansion").split( '_' );
         var expansion = $(this).attr("expansion");
+
         total++;
         if(idCartes[1]==9){
             energies++;
@@ -346,6 +347,9 @@ $(document).ready(function() {
                 }
             }
         });
+
+        console.log(envoi);
+
 
         $.ajax({
             type: 'PUT',

@@ -31,7 +31,8 @@ module.exports = ( function (self) {
             energiesPokemon.push(energie);
         });
         var nbIncolore=0;
-        if (tabEnergieAttack.length >= energies.length) {
+        console.log(tabEnergieAttack.length + " <= " + energies.length  );
+        if (tabEnergieAttack.length <= energies.length) {
         tabEnergieAttack.forEach(function(energieAttack,index) {
             test = false;
             energiesPokemon.forEach(function(energiePokemon) {
@@ -46,12 +47,15 @@ module.exports = ( function (self) {
             if (!test) {
               return false;
             }
-        });
-    }
-      if (nbIncolore > energies.length) {
-        return false;
-      }
-      return true;
+          });
+          if (nbIncolore > energies.length) {
+              return false;
+        }
+        }else {
+          return false;
+        }
+
+    return true;
     }
 
     this.attack = function(idAttack) {
