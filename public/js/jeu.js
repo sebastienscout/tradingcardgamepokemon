@@ -149,6 +149,12 @@ socket.on('nbCardDeck',function(nbCarteDeck) {
 socket.on('nbCardDeck-opponent',function(nbCarteDeck) {
     boardOpponent.children('div.numbered-cards').children('div.deck').children('div.number-cards').html(nbCarteDeck);
 });
+socket.on('victoire',function(nbCarteDeck) {
+    
+});
+socket.on('defaite',function(nbCarteDeck) {
+   
+});
 
 $(document).on('click','#toActive',function() {
     socket.emit("toActive",$(this).attr('idPokemon'));

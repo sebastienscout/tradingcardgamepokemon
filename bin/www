@@ -29,7 +29,7 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 var tabClient=[];
-
+var client3 = false;
 // Creation des Decks vide
 var deck = new core.Deck([], [], []);
 
@@ -41,12 +41,15 @@ io.sockets.on('connection', function (socket) {
 
     if (tabClient[0] == null) {
       tabClient[0] = socket.client.id;
+      client3 = false;
     }else if (tabClient[1] == null) {
       tabClient[1] = socket.client.id;
+      client3 = false;
+    }else {
+      // CONNEXION D'un 3eme client
+      client3 = true;
     }
-
-    if (tabClient.length <= 2) {
-
+    if (tabClient.length <= 2 && !client3) {
       console.log("Nb Client "+tabClient.length);
 
       socket.on('start-game', function(deck){
@@ -125,55 +128,6 @@ io.sockets.on('connection', function (socket) {
       socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
       socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
 
-/*  socket.on("attack",function(idAttack) {
-    // TEST SI l'attaque fait des degats
-    if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
-      // TEST SI POK ADV EST LA
-      var tabEnergieAttack = players[indexPlayer].activePokemon().attacks[idAttack].energies;
-
-      if (players[(indexPlayer + 1) % 2].activePokemon() != null && players[indexPlayer].activePokemonNotObject().testEnergieAttack(tabEnergieAttack)) {
-        var damage = players[indexPlayer].activePokemon().attacks[idAttack].value.value;
-
-        players[(indexPlayer + 1) % 2].activePokemonNotObject().applyDamage(damage);
-        if (players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point() > 0) {
-          socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
-          socket.broadcast.emit("life-points", players[(indexPlayer + 1) % 2].activePokemonNotObject().life_point());
-
-          // POKEMON KO
-        } else {
-          players[(indexPlayer + 1) % 2].activePokemonToDefausse();
-          socket.emit("pokemonActive-opponent", null);
-          socket.broadcast.emit("pokemonActive", null);
-          socket.emit("life-points-opponent", 0);
-          socket.broadcast.emit("life-points", 0);
-
-          // PIOCHE UNE CARTE RECOMPENSE
-          players[indexPlayer].addPriceToHand(players[indexPlayer].priceCardLength() - 1);
-          socket.emit("hand", players[indexPlayer].hand());
-          socket.emit("hand-opponent", players[(indexPlayer + 1) % 2].hand().length);
-          socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
-
-           socket.emit("nbCardPrice", players[indexPlayer].priceCardLength());
-           socket.emit("nbCardPrice-opponent",players[(indexPlayer+1)%2].priceCardLength());
-           socket.broadcast.emit("nbCardPrice-opponent", players[indexPlayer].priceCardLength());
-           //Gestion du pokémon actif : mise a jour player et opponent
-           if (players[indexPlayer].activePokemon() != null) {
-           socket.emit("pokemonActive", players[indexPlayer].activePokemon());
-           socket.emit("life-points", players[indexPlayer].activePokemon().remaining_life_points);
-
-
-          if (players[(indexPlayer + 1) % 2].activePokemon() != null) {
-            socket.emit("pokemonActive-opponent", players[(indexPlayer + 1) % 2].activePokemon());
-            socket.emit("life-points-opponent", players[(indexPlayer + 1) % 2].activePokemon().remaining_life_points);
-          }
-
-          socket.broadcast.emit("pokemonActive-opponent", players[indexPlayer].activePokemon());
-          socket.broadcast.emit("life-points-opponent", players[indexPlayer].activePokemon().remaining_life_points);
-        }
-      }
-    }
-  });
-*/
       socket.on("attack",function(idAttack) {
         // TEST SI l'attaque fait des degats
         if (players[indexPlayer].activePokemon().attacks[idAttack].value.value != undefined && indexPlayer == board.attackIndex()) {
@@ -324,6 +278,23 @@ io.sockets.on('connection', function (socket) {
 
 });
 
+function testVictoire() {
+  
+  var indexPlayer = board.attackIndex();
+  if (players[indexPlayer].priceCardLength() == 0 ) {
+    console.log("VICTOIRE : CARTE RECOMP 0 ");
+    return true;
+  }
+  if (players[indexPlayer.deckLengh() == 0]) {
+    console.log("VICTOIRE : DECK VIDE ");
+    return true;
+  }
+  // TEST POKEMON DANS BANC OU MAIN
+  if (players[indexPlayer].getFirstBasePokemonCardIndex(players[indexPlayer].bench()) == 0 && players[indexPlayer].getFirstBasePokemonCardIndex(players[indexPlayer].hand()) == 0  ) {
+    return true;
+  }
+}
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -374,6 +345,7 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
+
 
 function onListening() {
   var addr = server.address();
