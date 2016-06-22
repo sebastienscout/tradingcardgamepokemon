@@ -109,7 +109,6 @@ router.put('', function(req, res) {
 
         // Insert le deck et recupere l'id du Deck insere
         req.app.db.models.Deck.create(newDeck, function (err, deck) {
-            console.log("CREATION");
             // Cree le tableau de documents de type carte
             for (i = 0; i < 60; i++) {
                 tab_cartes[i] = {
@@ -119,9 +118,8 @@ router.put('', function(req, res) {
 
                 };
             }
-            // Insertion des cartes
-            console.log(tab_cartes);
 
+            // Insertion des cartes
             req.app.db.models.Carte.insertMany(tab_cartes);
         });
 

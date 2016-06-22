@@ -66,20 +66,12 @@ router.get('/', function(req, res, next) {
       });
 
       if(req.session._id && req.session.username && req.session.mail) {
-          var i;
-          var tab_cartes = [];
-
-          // Cree le document du type Deck
-          var newDeck = {
-              id_joueur: req.session._id
-          };
 
           req.app.db.models.Deck.findOne({id_joueur:req.session._id},function(enn,deck){
               req.app.db.models.Carte.find({id_deck:deck._id},function(enn,cartes){
                   res.render('modification-deck', {cards: tabPokemon, energies: tabEnergy, bdd: cartes});
               });
           });
-          //res.render('modification-deck', { cards: tabPokemon, energies: tabEnergy });
       }
 
 
