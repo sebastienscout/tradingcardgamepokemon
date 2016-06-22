@@ -2,7 +2,7 @@
   "name": "Papillusion",
   "type": "PLANT",
   "stage": "STAGE_2",
-  "life_point": 70,
+  "life_point": 130,
   "abilities": [],
   "attacks": [
     {
