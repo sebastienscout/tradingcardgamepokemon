@@ -14,6 +14,15 @@ module.exports = ( function (self) {
     var discard_pile; // pile de défausse
     var hand = []; // main
     var initialize;
+    var energyCardTurn = false;
+
+    this.energyCardTurnAlready = function(){
+      return energyCardTurn;
+    };
+
+    this.setEnergyCardTurnAlready = function(val){
+      energyCardTurn = val;
+    };
 
     this.takeFirstCard = function (){
       hand.push(deck.takeFirstCard());
@@ -76,6 +85,7 @@ module.exports = ( function (self) {
       else {
         bench[idPokemon].addEnergy(hand[idEnergy]);
       }
+      energyCardTurn = true;
     };
 
     this.isValidInitialHand = function () {

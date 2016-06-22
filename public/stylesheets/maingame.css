@@ -160,9 +160,6 @@ html, body {
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
 }
-.numbered-cards p {
-    font-weight:bold;
-}
 #board-opponent .numbered-cards p {
     color:white;
 }

@@ -218,6 +218,13 @@ io.sockets.on('connection', function (socket) {
                   socket.emit("turn", false);
                   socket.broadcast.emit("turn", true);
               }
+
+              socket.emit("hand", players[indexPlayer].hand());
+              socket.broadcast.emit("hand-opponent", players[indexPlayer].hand().length);
+
+              socket.emit("nbCardDeck", players[indexPlayer].deckLengh());
+              socket.emit("nbCardDeck-opponent",players[(indexPlayer+1)%2].deckLengh());
+              socket.broadcast.emit("nbCardDeck-opponent", players[indexPlayer].deckLengh());
           }
         }
       });
@@ -268,7 +275,7 @@ io.sockets.on('connection', function (socket) {
       });
 
       socket.on("energyToPokemon",function(idPokemon, idEnergy) {
-        if (indexPlayer == board.attackIndex()) {
+        if (indexPlayer == board.attackIndex() && !players[indexPlayer].energyCardTurnAlready()) {
           if (idPokemon == "active") {
             players[indexPlayer].addEnergyToPokemon(true, 0, idEnergy);
             players[indexPlayer].takeCardInHand(idEnergy);

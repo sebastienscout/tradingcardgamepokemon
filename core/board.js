@@ -50,6 +50,7 @@ module.exports = ( function (self) {
 
     this.turn = function () {
       players[attacker_index].takeFirstCard();
+      players[attacker_index].setEnergyCardTurnAlready(false);
       changeAttackerDefenser();
     };
 
