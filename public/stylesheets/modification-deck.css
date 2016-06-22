@@ -69,7 +69,7 @@ div{
 }
 /*
 .cardContent:hover {
-    cursor:pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
     width: 20%;
 }
 */
@@ -96,7 +96,7 @@ button{
     background-color: #C59934;
     color: white;
     border: 0;
-    cursor: pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
     font-size: 25px;
     padding: 5px 20px;
     top:15px;
@@ -178,7 +178,7 @@ button{
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
     -webkit-transform: scale(1.09);
     transform: scale(1.09);
-    cursor:pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
 }
 
 #energies{
@@ -193,7 +193,7 @@ ul:hover li {
 
 ul li:hover {
     opacity: 1;
-    cursor : pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
 }
 
 li{

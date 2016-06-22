@@ -31,7 +31,7 @@ html, body {
     position: relative;
 }
 #board img.interaction {
-    cursor: pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
 }
 .cards-hand ul,
 .cards-bench ul {
@@ -84,7 +84,7 @@ html, body {
     color: white;
     border: none;
     border-radius: 3px;
-    cursor:pointer;
+    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1282.cur), progress !important;
 }
 #end-turn:hover {
     background: #376caf;
