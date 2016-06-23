@@ -300,10 +300,7 @@ function testVictoire(indexPlayer) {
     if (players[indexPlayer].priceCardLength() == 0 ) {
         return true;
     }
-    if (players[indexPlayer].deckLengh() == 0){
-        return true;
-    }
-    if(players[indexPlayer].activePokemon() != null && players[indexPlayer].bench().length == 0){
+    if(players[indexPlayer].bench().length == 0){
         return true;
     }
 }
