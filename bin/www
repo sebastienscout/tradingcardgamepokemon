@@ -300,7 +300,7 @@ function testVictoire(indexPlayer) {
     if (players[indexPlayer].priceCardLength() == 0 ) {
         return true;
     }
-    if(players[indexPlayer].bench().length == 0){
+    if(players[(indexPlayer+1)%2].bench().length == 0){
         return true;
     }
 }
